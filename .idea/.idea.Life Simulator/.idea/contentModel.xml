@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ContentModelStore">
+    <e p="$USER_HOME$/Library/Caches/Rider2018.2/extResources" t="IncludeRecursive" />
+    <e p="$USER_HOME$/Library/Caches/Rider2018.2/resharper-host/local/Transient/ReSharperHost/v182/SolutionCaches/_Life Simulator.-971665866.00" t="ExcludeRecursive" />
+    <e p="$PROJECT_DIR$" t="IncludeRecursive">
+      <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
+      <e p="Assets" t="Include">
+        <e p="Scripts" t="Include">
+          <e p="_core" t="Include">
+            <e p="Hero.cs" t="Include" />
+            <e p="ITickerSubscriber.cs" t="Include" />
+            <e p="Scenes.cs" t="Include" />
+            <e p="World.cs" t="Include" />
+          </e>
+          <e p="_scenes" t="Include">
+            <e p="HomeL1.cs" t="Include" />
+            <e p="MainMenuController.cs" t="Include" />
+            <e p="SplashSceneController.cs" t="Include" />
+          </e>
+          <e p="_slum_scene" t="Include">
+            <e p="_facilities" t="Include">
+              <e p="TeaStall.cs" t="Include" />
+            </e>
+            <e p="Facility.cs" t="Include" />
+            <e p="FacilityDescriptionBtn.cs" t="Include" />
+            <e p="FacilityDescriptionPanel.cs" t="Include" />
+            <e p="SlumUIController.cs" t="Include" />
+          </e>
+          <e p="_ui" t="Include">
+            <e p="AttributeUI.cs" t="Include" />
+            <e p="ITabMenuListener.cs" t="Include" />
+            <e p="TabbedMenu.cs" t="Include" />
+          </e>
+          <e p="CityMapController.cs" t="Include" />
+          <e p="FollowPlayer.cs" t="Include" />
+          <e p="GameController.cs" t="Include" />
+          <e p="Hero3d.cs" t="Include" />
+          <e p="HUD.cs" t="Include" />
+          <e p="SlumWorld.cs" t="Include" />
+        </e>
+        <e p="TextMesh Pro" t="Include">
+          <e p="Resources" t="Include">
+            <e p="LineBreaking Following Characters.txt" t="Include" />
+            <e p="LineBreaking Leading Characters.txt" t="Include" />
+            <e p="Shaders" t="Include">
+              <e p="TMP_Bitmap-Custom-Atlas.shader" t="Include" />
+              <e p="TMP_Bitmap-Mobile.shader" t="Include" />
+              <e p="TMP_Bitmap.shader" t="Include" />
+              <e p="TMP_SDF Overlay.shader" t="Include" />
+              <e p="TMP_SDF-Mobile Masking.shader" t="Include" />
+              <e p="TMP_SDF-Mobile Overlay.shader" t="Include" />
+              <e p="TMP_SDF-Mobile.shader" t="Include" />
+              <e p="TMP_SDF-Surface-Mobile.shader" t="Include" />
+              <e p="TMP_SDF-Surface.shader" t="Include" />
+              <e p="TMP_SDF.shader" t="Include" />
+              <e p="TMP_Sprite.shader" t="Include" />
+              <e p="TMPro.cginc" t="Include" />
+              <e p="TMPro_Properties.cginc" t="Include" />
+              <e p="TMPro_Surface.cginc" t="Include" />
+            </e>
+          </e>
+          <e p="Sprites" t="Include">
+            <e p="EmojiOne Attribution.txt" t="Include" />
+          </e>
+        </e>
+      </e>
+      <e p="Library" t="ExcludeRecursive" />
+      <e p="Life Simulator.sln" t="IncludeFlat" />
+      <e p="obj" t="ExcludeRecursive" />
+      <e p="packages" t="ExcludeRecursive" />
+      <e p="Temp" t="ExcludeRecursive">
+        <e p="bin" t="ExcludeRecursive" />
+      </e>
+    </e>
+  </component>
+</project>
