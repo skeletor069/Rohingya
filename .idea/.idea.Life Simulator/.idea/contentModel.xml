@@ -20,11 +20,14 @@
           </e>
           <e p="_slum_scene" t="Include">
             <e p="_facilities" t="Include">
+              <e p="Dhaba.cs" t="Include" />
               <e p="TeaStall.cs" t="Include" />
             </e>
             <e p="Facility.cs" t="Include" />
             <e p="FacilityDescriptionBtn.cs" t="Include" />
             <e p="FacilityDescriptionPanel.cs" t="Include" />
+            <e p="Pedestrian.cs" t="Include" />
+            <e p="PublicPlaces.cs" t="Include" />
             <e p="SlumUIController.cs" t="Include" />
           </e>
           <e p="_ui" t="Include">
@@ -39,6 +42,7 @@
           <e p="HUD.cs" t="Include" />
           <e p="SlumWorld.cs" t="Include" />
         </e>
+        <e p="test.txt" t="Include" />
         <e p="TextMesh Pro" t="Include">
           <e p="Resources" t="Include">
             <e p="LineBreaking Following Characters.txt" t="Include" />
