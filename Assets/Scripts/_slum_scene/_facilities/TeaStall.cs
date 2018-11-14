@@ -21,16 +21,22 @@ public class TeaStall : Facility {
 	}
 
 	public override void Action2() {
-		Debug.Log("Action 2");
+		List<AttributeToken> tokens = new List<AttributeToken>();
+		tokens.Add(new AttributeToken(HeroAttributes.FOOD, 20));
+		tokens.Add(new AttributeToken(HeroAttributes.MONEY, -12));
+		GameController.GetInstance().World.ActionPerformed(tokens, 4);
 	}
 
 	public override void Action3() {
-		Debug.Log("Action 3");
+		List<AttributeToken> tokens = new List<AttributeToken>();
+		tokens.Add(new AttributeToken(HeroAttributes.FOOD, 5));
+		tokens.Add(new AttributeToken(HeroAttributes.MONEY, -3));
+		GameController.GetInstance().World.ActionPerformed(tokens, 4);
 	}
 
 	public override void DoJob() {
 		List<AttributeToken> tokens = new List<AttributeToken>();
-		tokens.Add(new AttributeToken(HeroAttributes.MONEY, 5));
+		tokens.Add(new AttributeToken(HeroAttributes.MONEY, 3));
 		tokens.Add(new AttributeToken(HeroAttributes.ENERGY, -30));
 		GameController.GetInstance().World.ActionPerformed(tokens, 60);
 	}
