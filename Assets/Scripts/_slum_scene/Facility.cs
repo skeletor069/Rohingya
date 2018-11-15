@@ -6,14 +6,16 @@ public abstract class Facility : MonoBehaviour {
 	protected string facilityName;
 	protected string facilityDescription;
 	protected string[] optionNames = new string[3];
+
+	private bool jobActive;
 	// Use this for initialization
 	void Awake () {
 		InitiateData();
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		
+
+	public bool JobActive {
+		get { return jobActive; }
+		set { jobActive = value; }
 	}
 
 	private void OnTriggerEnter(Collider other) {

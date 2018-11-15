@@ -9,17 +9,24 @@ public class World
 	private float accum = 0;
 
 	private Hero hero;
+	private Inventory inventory;
 	List<ITickerSubscriber> sceneTickerSubscribers;
 	private DataHUD dataHud;
 	
 	
 	public World () {
 		hero = new Hero();
+		inventory = new Inventory();
 		sceneTickerSubscribers = new List<ITickerSubscriber>();
 		dataHud = new DataHUD();
 		minutesGone = 600;
 	}
-	
+
+	public Inventory Inventory {
+		get { return inventory; }
+		set { inventory = value; }
+	}
+
 	public void Update (float deltaTime)
 	{
 		UpdateClock(deltaTime);

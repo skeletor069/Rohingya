@@ -12,6 +12,7 @@ public class SlumWorld : MonoBehaviour {
 	public GameObject actionBtn;
 	public FollowPlayer cameraController;
 	public FacilityDescriptionPanel facilityDescriptionPanel;
+	public SimulationPanel simulationPanel;
 	
 	void Awake () {
 		instance = this;
@@ -53,5 +54,21 @@ public class SlumWorld : MonoBehaviour {
 		actionBtn.SetActive(true);
 		cameraController.SetTarget(player.transform);
 		heroMovementActive = true;
+	}
+	
+	public void ActionPerformed(List<AttributeToken> tokens, float minutes) {
+		StartCoroutine(ActionPerformedRoutine(tokens, minutes));
+	}
+
+	IEnumerator ActionPerformedRoutine(List<AttributeToken> tokens, float minutes) {
+		GameController.GetInstance().WorldRunning = false;
+		yield return StartCoroutine(simulationPanel.ShowSimulationDisplay(GetSimulationDisplayText()));
+		GameController.GetInstance().World.ActionPerformed(tokens, minutes);
+		GameController.GetInstance().WorldRunning = true;
+		facilityDescriptionPanel.ClosePanel();
+	}
+
+	string GetSimulationDisplayText() {
+		return "";
 	}
 }

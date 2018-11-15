@@ -9,6 +9,8 @@
         <e p="Scripts" t="Include">
           <e p="_core" t="Include">
             <e p="Hero.cs" t="Include" />
+            <e p="Inventory.cs" t="Include" />
+            <e p="Item.cs" t="Include" />
             <e p="ITickerSubscriber.cs" t="Include" />
             <e p="Scenes.cs" t="Include" />
             <e p="World.cs" t="Include" />
@@ -20,7 +22,10 @@
           </e>
           <e p="_slum_scene" t="Include">
             <e p="_facilities" t="Include">
+              <e p="BottleSellShop.cs" t="Include" />
               <e p="Dhaba.cs" t="Include" />
+              <e p="PaperSellShop.cs" t="Include" />
+              <e p="SellShop.cs" t="Include" />
               <e p="TeaStall.cs" t="Include" />
             </e>
             <e p="Facility.cs" t="Include" />
@@ -28,6 +33,8 @@
             <e p="FacilityDescriptionPanel.cs" t="Include" />
             <e p="Pedestrian.cs" t="Include" />
             <e p="PublicPlaces.cs" t="Include" />
+            <e p="SimulationPanel.cs" t="Include" />
+            <e p="SleepingArea.cs" t="Include" />
             <e p="SlumUIController.cs" t="Include" />
           </e>
           <e p="_ui" t="Include">

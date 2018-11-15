@@ -27,7 +27,7 @@ public class Hero
 //	private float energy = 100;
 //	private float food = 100;
 	private HeroSkills heroSkill = HeroSkills.ENTRY_LEVEL;
-	private float hungerPerTick = 100f / 720;
+	private float hungerPerTick = 100f / 360;
 	private float healthReducePerTick = 100f / 3000;
 	private Dictionary<HeroSkills, string> heroSkillsName;
 	Dictionary<HeroAttributes, float> heroAttributes;
@@ -87,8 +87,13 @@ public class Hero
 		heroAttributes[HeroAttributes.FOOD] -= hungerPerTick * deltaTime;
 		if (heroAttributes[HeroAttributes.FOOD] < 0)
 		{
-			ReduceHealth(deltaTime);
+			ReduceHealth(-heroAttributes[HeroAttributes.FOOD] / hungerPerTick);
 			heroAttributes[HeroAttributes.FOOD] = 0;
+		}
+
+		if (heroAttributes[HeroAttributes.ENERGY] <= 0) {
+			ReduceHealth(-heroAttributes[HeroAttributes.ENERGY] / hungerPerTick);
+			heroAttributes[HeroAttributes.ENERGY] = 0;
 		}
 	}
 
@@ -100,6 +105,10 @@ public class Hero
 	public void UpdateAttributes(List<AttributeToken> tokens) {
 		for (int i = 0; i < tokens.Count; i++) {
 			heroAttributes[tokens[i].attribute] += tokens[i].amount;
+
+			if (tokens[i].attribute != HeroAttributes.MONEY && heroAttributes[tokens[i].attribute] > 100) {
+				heroAttributes[tokens[i].attribute] = 100;
+			}
 		}
 	}
 

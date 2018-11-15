@@ -13,26 +13,38 @@ public class FacilityDescriptionPanel : MonoBehaviour {
 	private Facility facility = null;
 	public List<FacilityDescriptionBtn> actionBtns = new List<FacilityDescriptionBtn>();
 	private int selectedIndex = 0;
+	private FacilityDescriptionBtn jobBtn;
 	
 
 	private void Start() {
+		jobBtn = actionBtns[1];
 		panel.SetActive(false);
 	}
 
 	public void ShowDescription(Facility facility) {
+		if (actionBtns.Count == 4) {
+			actionBtns.Insert(1, jobBtn);
+			jobBtn.gameObject.SetActive(true);
+		}
+			
+		if (!facility.JobActive) {
+			actionBtns.RemoveAt(1);
+			jobBtn.gameObject.SetActive(false);
+		}
+			
 		interactionActive = true;
 		this.facility = facility;
 		facilityNameTxt.text = facility.GetFacilityName();
 		facilityDescriptionTxt.text = facility.GetFacilityDescription();
-		PopulateBtnNames(facility.GetOptionNames());
+		PopulateBtnNames(facility.GetOptionNames(), facility.JobActive);
 		ResetSelection();
 		panel.SetActive(true);	
 		
 	}
 
-	void PopulateBtnNames(string[] optionNames) {
+	void PopulateBtnNames(string[] optionNames, bool jobActive) {
 		for(int i = 0 ; i < optionNames.Length; i++)
-			actionBtns[i+2].SetBtnName(optionNames[i]);
+			actionBtns[i+2 - ((jobActive)?0:1)].SetBtnName(optionNames[i]);
 	}
 
 	void Update() {
@@ -43,16 +55,28 @@ public class FacilityDescriptionPanel : MonoBehaviour {
 						ClosePanel();
 						break;
 					case 1:
-						facility.DoJob();
+						if(facility.JobActive)
+							facility.DoJob();
+						else 
+							facility.ExecuteAction(0);
+						
 						break;
 					case 2:
-						facility.ExecuteAction(0);
+						if(facility.JobActive)
+							facility.ExecuteAction(0);
+						else 
+							facility.ExecuteAction(1);
 						break;
 					case 3:
-						facility.ExecuteAction(1);
+						if(facility.JobActive)
+							facility.ExecuteAction(1);
+						else 
+							facility.ExecuteAction(2);
 						break;
 					case 4:
-						facility.ExecuteAction(2);
+						if(facility.JobActive)
+							facility.ExecuteAction(2);
+						
 						break;
 				}
 				
@@ -68,7 +92,7 @@ public class FacilityDescriptionPanel : MonoBehaviour {
 		}
 	}
 
-	private void ClosePanel() {
+	public void ClosePanel() {
 		StartCoroutine(SlumWorld.GetInstance().DescriptionPanelClosed());
 		interactionActive = false;
 		facility = null;

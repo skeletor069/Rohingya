@@ -31,6 +31,11 @@ public class GameController : MonoBehaviour {
 		set { world = value; }
 	}
 
+	public bool WorldRunning {
+		get { return worldRunning; }
+		set { worldRunning = value; }
+	}
+
 	public void GoToSplashScene() {
 		SceneManager.LoadScene(Scenes.SPLASH);
 	}
@@ -57,6 +62,8 @@ public class GameController : MonoBehaviour {
 		worldRunning = true;
 		GoToSlumScene();
 	}
+	
+	
 
 
 }
