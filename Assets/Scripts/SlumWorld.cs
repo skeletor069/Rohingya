@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class SlumWorld : MonoBehaviour {
 	private static SlumWorld instance;
@@ -13,6 +14,7 @@ public class SlumWorld : MonoBehaviour {
 	public FollowPlayer cameraController;
 	public FacilityDescriptionPanel facilityDescriptionPanel;
 	public SimulationPanel simulationPanel;
+	public PickupItemController pickupItemController;
 	
 	void Awake () {
 		instance = this;
@@ -70,5 +72,11 @@ public class SlumWorld : MonoBehaviour {
 
 	string GetSimulationDisplayText() {
 		return "";
+	}
+
+	public void ItemPicked(PickupItem pickItem) {
+		Item item = pickupItemController.ProcessPickupGetItem(pickItem);
+		GameController.GetInstance().World.Inventory.AddItem(item);
+		
 	}
 }

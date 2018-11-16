@@ -8,6 +8,7 @@ public abstract class Facility : MonoBehaviour {
 	protected string[] optionNames = new string[3];
 
 	private bool jobActive;
+	private bool showInventory;
 	// Use this for initialization
 	void Awake () {
 		InitiateData();
@@ -16,6 +17,11 @@ public abstract class Facility : MonoBehaviour {
 	public bool JobActive {
 		get { return jobActive; }
 		set { jobActive = value; }
+	}
+
+	public bool ShowInventory {
+		get { return showInventory; }
+		set { showInventory = value; }
 	}
 
 	private void OnTriggerEnter(Collider other) {

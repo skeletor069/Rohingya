@@ -28,6 +28,7 @@ public class Item {
 	public void Add(int amount) {
 		count += amount;
 		count = Mathf.Min(count, MAX_COUNT);
+		Debug.LogError(typeName.ToString() + count);
 	}
 
 	public bool Reduce(int amount) {

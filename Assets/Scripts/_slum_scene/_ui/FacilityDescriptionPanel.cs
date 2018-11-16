@@ -40,6 +40,8 @@ public class FacilityDescriptionPanel : MonoBehaviour {
 		ResetSelection();
 		panel.SetActive(true);	
 		
+		if(facility.ShowInventory)
+			InventoryUI.GetInstance().ShowInventoryPanel();
 	}
 
 	void PopulateBtnNames(string[] optionNames, bool jobActive) {
@@ -93,6 +95,10 @@ public class FacilityDescriptionPanel : MonoBehaviour {
 	}
 
 	public void ClosePanel() {
+		if (facility.ShowInventory) {
+			InventoryUI.GetInstance().CloseInventoryPanel();
+		}
+
 		StartCoroutine(SlumWorld.GetInstance().DescriptionPanelClosed());
 		interactionActive = false;
 		facility = null;

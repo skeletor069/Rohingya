@@ -11,6 +11,7 @@
             <e p="Hero.cs" t="Include" />
             <e p="Inventory.cs" t="Include" />
             <e p="Item.cs" t="Include" />
+            <e p="ItemSlot.cs" t="Include" />
             <e p="ITickerSubscriber.cs" t="Include" />
             <e p="Scenes.cs" t="Include" />
             <e p="World.cs" t="Include" />
@@ -28,12 +29,19 @@
               <e p="SellShop.cs" t="Include" />
               <e p="TeaStall.cs" t="Include" />
             </e>
+            <e p="_ui" t="Include">
+              <e p="FacilityDescriptionBtn.cs" t="Include" />
+              <e p="FacilityDescriptionPanel.cs" t="Include" />
+              <e p="InventoryUI.cs" t="Include" />
+              <e p="NewBehaviourScript.cs" t="Include" />
+              <e p="SimulationPanel.cs" t="Include" />
+              <e p="SlotUI.cs" t="Include" />
+            </e>
             <e p="Facility.cs" t="Include" />
-            <e p="FacilityDescriptionBtn.cs" t="Include" />
-            <e p="FacilityDescriptionPanel.cs" t="Include" />
             <e p="Pedestrian.cs" t="Include" />
+            <e p="PickupItem.cs" t="Include" />
+            <e p="PickupItemController.cs" t="Include" />
             <e p="PublicPlaces.cs" t="Include" />
-            <e p="SimulationPanel.cs" t="Include" />
             <e p="SleepingArea.cs" t="Include" />
             <e p="SlumUIController.cs" t="Include" />
           </e>

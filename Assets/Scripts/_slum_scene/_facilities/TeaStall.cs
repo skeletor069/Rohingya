@@ -11,6 +11,7 @@ public class TeaStall : Facility {
 		optionNames[1] = "1pc banana (-৳12)";
 		optionNames[2] = "1pc biscuit (-৳3)";
 		JobActive = true;
+		ShowInventory = false;
 	}
 
 	public override void Action1() {

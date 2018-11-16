@@ -8,9 +8,10 @@ public class PaperSellShop : Facility {
 		facilityName = "Scrap Paper Shop";
 		facilityDescription = "A guy buying scrap papers. He makes packets out of it and sells later.";
 		optionNames[0] = "Sell 10 papers";
-		optionNames[0] = "Sell 20 papers";
-		optionNames[0] = "Sell 40 papers";
+		optionNames[1] = "Sell 20 papers";
+		optionNames[2] = "Sell 40 papers";
 		JobActive = true;
+		ShowInventory = true;
 	}
 
 	public override void Action1() {
