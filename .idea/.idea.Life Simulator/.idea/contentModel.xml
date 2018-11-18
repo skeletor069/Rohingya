@@ -6,6 +6,21 @@
     <e p="$PROJECT_DIR$" t="IncludeRecursive">
       <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
       <e p="Assets" t="Include">
+        <e p="BrokenVector" t="Include">
+          <e p="LowPolyShaders" t="Include">
+            <e p="Shaders" t="Include">
+              <e p="LowPolyPBRShader.shader" t="Include" />
+              <e p="LowPolyUnlitShader.shader" t="Include" />
+            </e>
+          </e>
+          <e p="LowPolySurvivalEssentials" t="Include">
+            <e p="Example" t="Include">
+              <e p="Scripts" t="Include">
+                <e p="AnimatedFire.cs" t="Include" />
+              </e>
+            </e>
+          </e>
+        </e>
         <e p="Scripts" t="Include">
           <e p="_core" t="Include">
             <e p="Hero.cs" t="Include" />

@@ -52,6 +52,10 @@ public class World
 		return ((hour%12 < 10)?"0":"")+(hour%12) + ":" +((minute < 10)?"0":"")+ minute + " " + ((hour < 12) ? "am" : "pm");
 	}
 
+	public float GetHour() {
+		return minutesGone / 60;
+	}
+
 	void UpdateClock(float deltaTime)
 	{
 		minutesGone += deltaTime;

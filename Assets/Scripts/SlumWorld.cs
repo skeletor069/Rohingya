@@ -8,6 +8,7 @@ public class SlumWorld : MonoBehaviour {
 	private Facility currentFacility = null;
 	private readonly WaitForSeconds interactionActiveDelay = new WaitForSeconds(.1f);
 	private bool heroMovementActive = true;
+	private int animTime = Animator.StringToHash("time");
 
 	public Hero3d player;
 	public GameObject actionBtn;
@@ -15,6 +16,7 @@ public class SlumWorld : MonoBehaviour {
 	public FacilityDescriptionPanel facilityDescriptionPanel;
 	public SimulationPanel simulationPanel;
 	public PickupItemController pickupItemController;
+	public Animator dayNightAnim;
 	
 	void Awake () {
 		instance = this;
@@ -48,6 +50,8 @@ public class SlumWorld : MonoBehaviour {
 				heroMovementActive = false;
 			}
 		}
+
+		dayNightAnim.SetFloat(animTime, GameController.GetInstance().World.GetHour());
 	}
 
 	public IEnumerator DescriptionPanelClosed() {
