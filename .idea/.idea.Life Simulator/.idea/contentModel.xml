@@ -43,6 +43,7 @@
               <e p="PaperSellShop.cs" t="Include" />
               <e p="SellShop.cs" t="Include" />
               <e p="TeaStall.cs" t="Include" />
+              <e p="TrashCan.cs" t="Include" />
             </e>
             <e p="_ui" t="Include">
               <e p="FacilityDescriptionBtn.cs" t="Include" />
@@ -52,6 +53,7 @@
               <e p="SimulationPanel.cs" t="Include" />
               <e p="SlotUI.cs" t="Include" />
             </e>
+            <e p="Balancer.cs" t="Include" />
             <e p="Facility.cs" t="Include" />
             <e p="Pedestrian.cs" t="Include" />
             <e p="PickupItem.cs" t="Include" />
@@ -59,6 +61,7 @@
             <e p="PublicPlaces.cs" t="Include" />
             <e p="SleepingArea.cs" t="Include" />
             <e p="SlumUIController.cs" t="Include" />
+            <e p="TrashItemsGenerator.cs" t="Include" />
           </e>
           <e p="_ui" t="Include">
             <e p="AttributeUI.cs" t="Include" />
@@ -96,6 +99,12 @@
           </e>
           <e p="Sprites" t="Include">
             <e p="EmojiOne Attribution.txt" t="Include" />
+          </e>
+        </e>
+        <e p="TSF" t="Include">
+          <e p="Shaders" t="Include">
+            <e p="TSF.shader" t="Include" />
+            <e p="TSFOutline.shader" t="Include" />
           </e>
         </e>
       </e>

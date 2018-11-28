@@ -53,6 +53,10 @@ public class InventoryUI : MonoBehaviour {
 		}
 	}
 
+	public bool IsInventoryOpen() {
+		return panel.activeInHierarchy;
+	}
+
 	public void CloseInventoryPanel() {
 		panel.SetActive(false);
 	}

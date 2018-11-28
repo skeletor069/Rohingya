@@ -49,6 +49,13 @@ public class SlumWorld : MonoBehaviour {
 				facilityDescriptionPanel.ShowDescription(currentFacility);
 				heroMovementActive = false;
 			}
+
+			if (Input.GetKeyDown(KeyCode.I) && heroMovementActive) {
+				if(InventoryUI.GetInstance().IsInventoryOpen())
+					InventoryUI.GetInstance().CloseInventoryPanel();
+				else
+					InventoryUI.GetInstance().ShowInventoryPanel();
+			}
 		}
 
 		dayNightAnim.SetFloat(animTime, GameController.GetInstance().World.GetHour());

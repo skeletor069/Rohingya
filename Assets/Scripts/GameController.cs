@@ -14,7 +14,8 @@ public class GameController : MonoBehaviour {
 
 	void Start() {
 		DontDestroyOnLoad(gameObject);
-		GoToSplashScene();
+		//GoToSplashScene();
+		GoToMainMenu();
 	}
 
 	private void Update() {

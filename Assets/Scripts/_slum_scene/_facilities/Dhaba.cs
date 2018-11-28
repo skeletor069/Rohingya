@@ -14,7 +14,7 @@ public class Dhaba : Facility {
 
 	public override void Action1() {
 		List<AttributeToken> tokens = new List<AttributeToken>();
-		tokens.Add(new AttributeToken(HeroAttributes.FOOD, 60));
+		tokens.Add(new AttributeToken(HeroAttributes.FOOD, Balancer.GetInstance().GetFoodWithMoney(35)));
 		tokens.Add(new AttributeToken(HeroAttributes.MONEY, -35));
 		SlumWorld.GetInstance().ActionPerformed(tokens, 15);
 	}
@@ -28,7 +28,7 @@ public class Dhaba : Facility {
 
 	public override void Action3() {
 		List<AttributeToken> tokens = new List<AttributeToken>();
-		tokens.Add(new AttributeToken(HeroAttributes.FOOD, 50));
+		tokens.Add(new AttributeToken(HeroAttributes.FOOD, Balancer.GetInstance().GetFoodWithMoney(30)));
 		tokens.Add(new AttributeToken(HeroAttributes.MONEY, -30));
 		SlumWorld.GetInstance().ActionPerformed(tokens, 15);
 	}

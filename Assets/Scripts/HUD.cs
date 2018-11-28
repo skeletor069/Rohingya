@@ -9,7 +9,7 @@ public struct DataHUD
 	public int health;
 	public int energy;
 	public int food;
-	public int wallet;
+	public float wallet;
 	public string heroSkill;
 	public string timeText;
 	public string daysText;

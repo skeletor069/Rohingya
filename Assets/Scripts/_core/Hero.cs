@@ -65,9 +65,9 @@ public class Hero
 		set { heroAttributes[HeroAttributes.FOOD] = value; }
 	}
 	
-	public int Money
+	public float Money
 	{
-		get { return (int)heroAttributes[HeroAttributes.MONEY]; }
+		get { return heroAttributes[HeroAttributes.MONEY]; }
 		set { heroAttributes[HeroAttributes.MONEY] = value; }
 	}
 

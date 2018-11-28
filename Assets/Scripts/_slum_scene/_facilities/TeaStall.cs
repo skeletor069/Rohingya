@@ -17,21 +17,21 @@ public class TeaStall : Facility {
 	public override void Action1() {
 		Debug.Log("Action 1");
 		List<AttributeToken> tokens = new List<AttributeToken>();
-		tokens.Add(new AttributeToken(HeroAttributes.FOOD, 10));
+		tokens.Add(new AttributeToken(HeroAttributes.FOOD, Balancer.GetInstance().GetFoodWithMoney(6)));
 		tokens.Add(new AttributeToken(HeroAttributes.MONEY, -6));
 		SlumWorld.GetInstance().ActionPerformed(tokens, 8);
 	}
 
 	public override void Action2() {
 		List<AttributeToken> tokens = new List<AttributeToken>();
-		tokens.Add(new AttributeToken(HeroAttributes.FOOD, 20));
+		tokens.Add(new AttributeToken(HeroAttributes.FOOD, Balancer.GetInstance().GetFoodWithMoney(12)));
 		tokens.Add(new AttributeToken(HeroAttributes.MONEY, -12));
 		SlumWorld.GetInstance().ActionPerformed(tokens, 4);
 	}
 
 	public override void Action3() {
 		List<AttributeToken> tokens = new List<AttributeToken>();
-		tokens.Add(new AttributeToken(HeroAttributes.FOOD, 5));
+		tokens.Add(new AttributeToken(HeroAttributes.FOOD, Balancer.GetInstance().GetFoodWithMoney(3)));
 		tokens.Add(new AttributeToken(HeroAttributes.MONEY, -3));
 		SlumWorld.GetInstance().ActionPerformed(tokens, 4);
 	}
