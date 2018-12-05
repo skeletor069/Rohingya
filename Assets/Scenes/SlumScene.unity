@@ -6337,6 +6337,7 @@ GameObject:
   m_Component:
   - component: {fileID: 956095042}
   - component: {fileID: 956095041}
+  - component: {fileID: 956095043}
   m_Layer: 0
   m_Name: SlumWorld
   m_TagString: Untagged
@@ -6375,6 +6376,23 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &956095043
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 956095040}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aed28ac07f30b46e7978de72a9ee696c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timeToFinishFood: 360
+  timeToFinishEnergy: 720
+  moneyToRefillFood: 60
+  bottlePrice: 0.02
+  paperPrice: 0.005
+  canPrice: 0.03
 --- !u!1001 &1006015832
 Prefab:
   m_ObjectHideFlags: 0
@@ -6692,6 +6710,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1063858424}
   - component: {fileID: 1063858425}
+  - component: {fileID: 1063858426}
   m_Layer: 0
   m_Name: TrashCan
   m_TagString: Untagged
@@ -6724,6 +6743,17 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.5, y: 1, z: 1.5}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1063858426
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1063858423}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a18bd0f17e264ff78a3bd5086d44c98, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1071750288
 GameObject:
   m_ObjectHideFlags: 0
@@ -9148,7 +9178,6 @@ GameObject:
   - component: {fileID: 1594007820}
   - component: {fileID: 1594007819}
   - component: {fileID: 1594007818}
-  - component: {fileID: 1594007817}
   m_Layer: 0
   m_Name: trash obj
   m_TagString: Untagged
@@ -9156,18 +9185,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!65 &1594007817
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1594007816}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &1594007818
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -12786,7 +12803,7 @@ NavMeshAgent:
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
-  m_Height: 2
+  m_Height: 1.72
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4

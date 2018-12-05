@@ -20,7 +20,7 @@ public class TrashCan : Facility {
 			SlumWorld.GetInstance().ActionPerformed(temp, 3);
 		}
 		else {
-			// play fail sound
+//			play fail sound
 		}
 	}
 
