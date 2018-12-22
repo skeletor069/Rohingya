@@ -73,6 +73,7 @@
           <e p="GameController.cs" t="Include" />
           <e p="Hero3d.cs" t="Include" />
           <e p="HUD.cs" t="Include" />
+          <e p="Narrator.cs" t="Include" />
           <e p="SlumWorld.cs" t="Include" />
         </e>
         <e p="test.txt" t="Include" />

@@ -10,7 +10,7 @@ public abstract class Facility : MonoBehaviour {
 	private bool jobActive;
 	private bool showInventory;
 	// Use this for initialization
-	void Awake () {
+	void Start () {
 		InitiateData();
 	}
 
