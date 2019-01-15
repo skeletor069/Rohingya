@@ -116,7 +116,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01156ae1e8707421cb333ef767b95fb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fillBar: {fileID: 114480343966359016}
+  fillBar: {fileID: 114739382155428080}
+  fill: {fileID: 114480343966359016}
+  icon: {fileID: 114675360031726914}
 --- !u!114 &114675360031726914
 MonoBehaviour:
   m_ObjectHideFlags: 1

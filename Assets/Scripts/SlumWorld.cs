@@ -22,6 +22,10 @@ public class SlumWorld : MonoBehaviour {
 		instance = this;
 	}
 
+	private void Start() {
+		//HUD.GetInstance().HideHud();
+	}
+
 	public static SlumWorld GetInstance() {
 		return instance;
 	}

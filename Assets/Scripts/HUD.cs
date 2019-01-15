@@ -16,6 +16,7 @@ public struct DataHUD
 }
 
 public class HUD : MonoBehaviour {
+	private static HUD instance;
 
 	public TextMeshProUGUI daysText;
 	public TextMeshProUGUI hoursText;
@@ -24,9 +25,19 @@ public class HUD : MonoBehaviour {
 	public AttributeUI healthBar;
 	public AttributeUI energyBar;
 	public AttributeUI foodBar;
+	public Image attributesBG;
+	public GameObject careerPanel;
 
 	private DataHUD dataHud;
-	
+
+	private void Awake() {
+		instance = this;
+	}
+
+	public static HUD GetInstance() {
+		return instance;
+	}
+
 	void Update() {
 		dataHud = GameController.GetInstance().World.GetDataHud();
 		daysText.text = dataHud.daysText;
@@ -35,5 +46,15 @@ public class HUD : MonoBehaviour {
 		energyBar.SetValue(dataHud.energy);
 		foodBar.SetValue(dataHud.food);
 		walletText.text = "$"+dataHud.wallet;
+	}
+
+	public void HideHud() {
+		daysText.enabled = false;
+		hoursText.enabled = false;
+		healthBar.Hide();
+		energyBar.Hide();
+		foodBar.Hide();
+		attributesBG.enabled = false;
+		careerPanel.SetActive(false);
 	}
 }
