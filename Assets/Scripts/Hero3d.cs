@@ -14,6 +14,9 @@ public class Hero3d : MonoBehaviour
 	private bool movementActive = true;
 	private Transform canvas;
 	private Narrator narrator;
+	WaitForSeconds waitTwo = new WaitForSeconds(2);
+	WaitForEndOfFrame endOfFrame = new WaitForEndOfFrame();
+	private bool waitForSkippingNarration = false;
 
 	void Start ()
 	{
@@ -30,6 +33,9 @@ public class Hero3d : MonoBehaviour
 		if (movementActive && Input.anyKey){
 			Move();
 		}
+
+		if (waitForSkippingNarration && Input.GetKeyDown(KeyCode.Return))
+			waitForSkippingNarration = false;
 
 		canvas.forward =  canvas.position - Camera.main.transform.position;
 	}
@@ -49,5 +55,23 @@ public class Hero3d : MonoBehaviour
 
 	public void SetMovementActive(bool movementActive){
 		this.movementActive = movementActive;
+	}
+
+	public void Speak(string text) {
+		StartCoroutine(SpeakRoutine(text, true));
+	}
+
+	public IEnumerator SpeakRoutine(string text, bool auto) {
+		narrator.ShowText(text);
+		yield return waitTwo;
+		if(auto)
+			narrator.Hide();
+		else {
+			// enable btn hint
+			waitForSkippingNarration = true;
+			while (waitForSkippingNarration)
+				yield return endOfFrame;
+			narrator.Hide();
+		}
 	}
 }
