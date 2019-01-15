@@ -81,6 +81,22 @@ public class SlumWorld : MonoBehaviour {
 		facilityDescriptionPanel.ClosePanel();
 	}
 
+	public void ItemsFound(List<Item> trashItems, float minutes) {
+		StartCoroutine(ItemsFoundRoutine(trashItems, minutes));
+
+	}
+
+	IEnumerator ItemsFoundRoutine(List<Item> trashItems, float minutes) {
+		GameController.GetInstance().WorldRunning = false;
+		yield return StartCoroutine(simulationPanel.ShowSimulationDisplay(GetSimulationDisplayText()));
+		for (int i = 0; i < trashItems.Count; i++) {
+			GameController.GetInstance().World.Inventory.AddItem(trashItems[i]);	
+		}
+		GameController.GetInstance().World.ActionPerformed(new List<AttributeToken>(), minutes);
+		GameController.GetInstance().WorldRunning = true;
+		facilityDescriptionPanel.ClosePanel();
+	}
+
 	string GetSimulationDisplayText() {
 		return "";
 	}

@@ -6,12 +6,13 @@ public class Balancer : MonoBehaviour{
 	public float timeToFinishFood = 360;
 	public float timeToFinishEnergy = 720;
 	public float moneyToRefillFood = 60;
-	float foodReductionPerMinute;
-	float energyReductionPerMinute;
-	public float moneyPerFood;
 	public float bottlePrice = .02f;
 	public float paperPrice = .005f;
 	public float canPrice = .03f;
+	
+	float foodReductionPerMinute;
+	float energyReductionPerMinute;
+	float moneyPerFood;
 	float moneyToSurvivePerMinute;
 
 	private static Balancer instance;
@@ -57,11 +58,11 @@ public class Balancer : MonoBehaviour{
 	}
 
 	public float GetBottlePrice(int count) {
-		return bottlePrice * count * count * .01f;
+		return bottlePrice * count * (1 + count * .01f);
 	}
 
 	public float GetPaperPrice(int count) {
-		return paperPrice * count * count * .01f;
+		return paperPrice * count * (1 + count * .01f);
 	}
 
 }
