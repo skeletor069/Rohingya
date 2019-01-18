@@ -5,8 +5,8 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
 
-public class Hero3d : MonoBehaviour
-{
+public class Hero3d : MonoBehaviour {
+	public Animator animator;
 	private NavMeshAgent agent;
 	private float moveSpeed = 3;
 	private Vector3 forward;
@@ -17,6 +17,8 @@ public class Hero3d : MonoBehaviour
 	WaitForSeconds waitTwo = new WaitForSeconds(2);
 	WaitForEndOfFrame endOfFrame = new WaitForEndOfFrame();
 	private bool waitForSkippingNarration = false;
+	private int animIdle = Animator.StringToHash("idle");
+	private int animWalk = Animator.StringToHash("walk");
 
 	void Start ()
 	{
@@ -32,6 +34,10 @@ public class Hero3d : MonoBehaviour
 	void Update () {
 		if (movementActive && Input.anyKey){
 			Move();
+			animator.SetFloat(animWalk,1);
+		}
+		else {
+			animator.SetFloat(animWalk,0);
 		}
 
 		if (waitForSkippingNarration && Input.GetKeyDown(KeyCode.Return))
