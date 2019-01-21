@@ -3,19 +3,21 @@ using UnityEngine;
 using UnityEngine.AI;
 
 public class Pedestrian : MonoBehaviour {
-	private NavMeshAgent agent;
+	protected NavMeshAgent agent;
 	
-	void Awake () {
+	protected void Awake () {
 		agent = GetComponent<NavMeshAgent>();
 	}
 
 	void Start() {
+		Vector3 position = PublicPlaces.GetRandomPosition();
+		transform.position = position;
 		StartCoroutine(StartRandomWalk());
 	}
 
-	IEnumerator StartRandomWalk() {
-		Vector3 position = PublicPlaces.GetRandomPosition();
-		transform.position = position;
+	public IEnumerator StartRandomWalk() {
+		
+		
 		WaitForSeconds wait2S = new WaitForSeconds(2);
 		while (true) {
 			Vector3 target = PublicPlaces.GetRandomPosition();

@@ -62,6 +62,7 @@
             <e p="PublicPlaces.cs" t="Include" />
             <e p="SleepingArea.cs" t="Include" />
             <e p="SlumUIController.cs" t="Include" />
+            <e p="SpeechPartner.cs" t="Include" />
             <e p="TrashItemsGenerator.cs" t="Include" />
             <e p="TutorialController.cs" t="Include" />
           </e>

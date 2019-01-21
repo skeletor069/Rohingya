@@ -14,6 +14,7 @@ public class Hero3d : MonoBehaviour {
 	private bool movementActive = true;
 	private Transform canvas;
 	private Narrator narrator;
+	WaitForSeconds waitOne = new WaitForSeconds(1);
 	WaitForSeconds waitTwo = new WaitForSeconds(2);
 	WaitForEndOfFrame endOfFrame = new WaitForEndOfFrame();
 	private bool waitForSkippingNarration = false;
@@ -79,5 +80,7 @@ public class Hero3d : MonoBehaviour {
 				yield return endOfFrame;
 			narrator.Hide();
 		}
+
+		yield return waitOne;
 	}
 }
