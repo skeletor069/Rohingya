@@ -1,13 +1,22 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class TutorialController : MonoBehaviour {
 
 	public Hero3d hero;
 	public SpeechPartner speechPartner;
-	public 
-	
+	public TextMeshProUGUI tutorialText;
+	private Animator textAnimator;
+	private int animShow = Animator.StringToHash("show");
+	private int animHide = Animator.StringToHash("hide");
+	public GameObject trashIcon;
+	WaitForEndOfFrame endOfFrame = new WaitForEndOfFrame();
+
+	private void Awake() {
+		textAnimator = tutorialText.GetComponent<Animator>();
+	}
+
 	void Start () {
 		hero.SetMovementActive(false);
 		StartCoroutine(TutorialRoutine());
@@ -17,6 +26,23 @@ public class TutorialController : MonoBehaviour {
 		yield return new WaitForSeconds(3);
 		yield return StartCoroutine(InitialTexts());
 		yield return StartCoroutine(ConversationWithPedestrian());
+		tutorialText.text = "Move around the area a little bit. Locate the TRASH YARD";
+		textAnimator.SetTrigger(animShow);
+		hero.SetMovementActive(true);
+		trashIcon.SetActive(true);
+
+		while (true) {
+			if(Vector3.Distance(hero.transform.position, trashIcon.transform.position) < 5)
+				break;
+			Debug.Log(Vector3.Distance(hero.transform.position, trashIcon.transform.position));
+			yield return endOfFrame;
+		}
+		
+		textAnimator.SetTrigger(animHide);
+		//trashIcon.SetActive(false);
+		yield return new WaitForSeconds(1);
+		tutorialText.text = "Search the trash area for a few minutes";
+		textAnimator.SetTrigger(animShow);
 		// show objective
 		// activate facility highlight : trash area
 		// activate hero movement
