@@ -23,7 +23,7 @@ public class SlumWorld : MonoBehaviour {
 	}
 
 	private void Start() {
-		//HUD.GetInstance().HideHud();
+		HUD.GetInstance().HideHud();
 	}
 
 	public static SlumWorld GetInstance() {
