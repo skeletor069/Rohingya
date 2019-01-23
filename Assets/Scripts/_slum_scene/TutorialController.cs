@@ -33,8 +33,8 @@ public class TutorialController : MonoBehaviour {
 		hero.SetMovementActive(false);
 		yield return new WaitForSeconds(3);
 		facilityPanel.TutorialMode(this);
-		yield return StartCoroutine(InitialTexts());
-		yield return StartCoroutine(ConversationWithPedestrian());
+//		yield return StartCoroutine(InitialTexts());
+//		yield return StartCoroutine(ConversationWithPedestrian());
 		hero.SetMovementActive(true);
 		yield return TrashLocateRoutine();
 		yield return TrashSearchroutine();
@@ -82,7 +82,7 @@ public class TutorialController : MonoBehaviour {
 		while (true) {
 			if(Vector3.Distance(hero.transform.position, trashIcon.transform.position) < 5)
 				break;
-			Debug.Log(Vector3.Distance(hero.transform.position, trashIcon.transform.position));
+			//Debug.Log(Vector3.Distance(hero.transform.position, trashIcon.transform.position));
 			yield return endOfFrame;
 		}
 		textAnimator.SetTrigger(animHide);
@@ -111,7 +111,7 @@ public class TutorialController : MonoBehaviour {
 		while (true) {
 			if(Vector3.Distance(hero.transform.position, dealerIcon.transform.position) < 5)
 				break;
-			Debug.Log(Vector3.Distance(hero.transform.position, dealerIcon.transform.position));
+			//Debug.Log(Vector3.Distance(hero.transform.position, dealerIcon.transform.position));
 			yield return endOfFrame;
 		}
 		textAnimator.SetTrigger(animHide);

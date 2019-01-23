@@ -35,6 +35,7 @@ public abstract class Facility : MonoBehaviour {
 
 	private void OnTriggerEnter(Collider other) {
 		if (facilityActive && other.tag == "Player") {
+			Debug.Log("enter");
 			SlumWorld.GetInstance().ShowInteractionIcon(this);
 		}
 	}

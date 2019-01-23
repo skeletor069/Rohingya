@@ -65,12 +65,23 @@ public class SlumWorld : MonoBehaviour {
 		dayNightAnim.SetFloat(animTime, GameController.GetInstance().World.GetHour());
 	}
 
-	public IEnumerator DescriptionPanelClosed() {
+	public IEnumerator DescriptionPanelClosed(bool tutorialMode, bool showInventory) {
+		if(showInventory)
+			InventoryUI.GetInstance().ShowInventoryPanel();
 		yield return interactionActiveDelay;
 		player.SetMovementActive(true);
-		actionBtn.SetActive(true);
+		if(!tutorialMode)
+			actionBtn.SetActive(true);
+		else {
+			HideInteractionIcon();
+		}
 		cameraController.SetTarget(player.transform);
 		heroMovementActive = true;
+
+		if (showInventory) {
+			yield return new WaitForSeconds(3);
+			InventoryUI.GetInstance().CloseInventoryPanel();
+		}
 	}
 	
 	public void ActionPerformed(List<AttributeToken> tokens, float minutes) {
@@ -83,6 +94,7 @@ public class SlumWorld : MonoBehaviour {
 		GameController.GetInstance().World.ActionPerformed(tokens, minutes);
 		GameController.GetInstance().WorldRunning = true;
 		facilityDescriptionPanel.ClosePanel();
+		//yield return StartCoroutine(DescriptionPanelClosed());
 	}
 
 	public void ItemsFound(List<Item> trashItems, float minutes) {
@@ -99,6 +111,7 @@ public class SlumWorld : MonoBehaviour {
 		GameController.GetInstance().World.ActionPerformed(new List<AttributeToken>(), minutes);
 		GameController.GetInstance().WorldRunning = true;
 		facilityDescriptionPanel.ClosePanel();
+		//yield return StartCoroutine(DescriptionPanelClosed());
 	}
 
 	string GetSimulationDisplayText() {
