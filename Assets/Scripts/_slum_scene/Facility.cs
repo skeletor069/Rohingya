@@ -7,10 +7,14 @@ public abstract class Facility : MonoBehaviour {
 	protected string facilityDescription;
 	protected string[] optionNames = new string[3];
 
+	private bool facilityActive;
 	private bool jobActive;
 	private bool showInventory;
+
+	private BoxCollider collider;
 	// Use this for initialization
 	void Start () {
+		collider = GetComponent<BoxCollider>();
 		InitiateData();
 	}
 
@@ -23,9 +27,14 @@ public abstract class Facility : MonoBehaviour {
 		get { return showInventory; }
 		set { showInventory = value; }
 	}
+	
+	public bool FacilityActive {
+		get { return facilityActive; }
+		set { facilityActive = value; }
+	}
 
 	private void OnTriggerEnter(Collider other) {
-		if (other.tag == "Player") {
+		if (facilityActive && other.tag == "Player") {
 			SlumWorld.GetInstance().ShowInteractionIcon(this);
 		}
 	}

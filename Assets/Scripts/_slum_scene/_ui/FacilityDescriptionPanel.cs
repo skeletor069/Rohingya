@@ -14,6 +14,8 @@ public class FacilityDescriptionPanel : MonoBehaviour {
 	public List<FacilityDescriptionBtn> actionBtns = new List<FacilityDescriptionBtn>();
 	private int selectedIndex = 0;
 	private FacilityDescriptionBtn jobBtn;
+	private bool tutorialMode = true;
+	private TutorialController tutorialController;
 	
 
 	private void Start() {
@@ -54,7 +56,8 @@ public class FacilityDescriptionPanel : MonoBehaviour {
 			if (Input.GetKeyDown(KeyCode.Return)) {
 				switch (selectedIndex) {
 					case 0:
-						ClosePanel();
+						if(!tutorialMode)
+							ClosePanel();
 						break;
 					case 1:
 						if(facility.JobActive)
@@ -103,6 +106,9 @@ public class FacilityDescriptionPanel : MonoBehaviour {
 		interactionActive = false;
 		facility = null;
 		panel.SetActive(false);
+		
+		if(tutorialMode)
+			tutorialController.FacilityPanelClosed();
 	}
 
 	private void ButtonSelectionDown() {
@@ -119,6 +125,15 @@ public class FacilityDescriptionPanel : MonoBehaviour {
 
 	public bool IsShowing() {
 		return interactionActive;
+	}
+
+	public void TutorialMode(TutorialController tutorialController) {
+		tutorialMode = true;
+		this.tutorialController = tutorialController;
+	}
+
+	public void NormalMode() {
+		tutorialMode = false;
 	}
 
 	void ResetSelection() {
