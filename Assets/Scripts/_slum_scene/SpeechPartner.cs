@@ -11,6 +11,8 @@ public class SpeechPartner : Pedestrian {
 	WaitForEndOfFrame endOfFrame = new WaitForEndOfFrame();
 	private bool waitForSkippingNarration = false;
 
+	private bool goingToTarget = false;
+
 	private void Awake() {
 		base.Awake();
 		narrator = new Narrator(canvas.GetChild(0).gameObject, canvas.GetChild(0).GetChild(0).GetComponent<TextMeshProUGUI>());
@@ -24,6 +26,7 @@ public class SpeechPartner : Pedestrian {
 		StopAllCoroutines();
 		transform.position = startPosition;
 		agent.SetDestination(endPosition);
+		goingToTarget = true;
 	}
 	
 	public IEnumerator SpeakRoutine(string text, bool auto) {
@@ -47,5 +50,13 @@ public class SpeechPartner : Pedestrian {
 			waitForSkippingNarration = false;
 		
 		canvas.forward =  canvas.position - Camera.main.transform.position;
+		
+		if(goingToTarget)
+			updateWalk((GetVelocity() < .5f)?0f:1f);
+	}
+
+	public void StopTargeting() {
+		goingToTarget = false;
+		updateWalk(0f);
 	}
 }

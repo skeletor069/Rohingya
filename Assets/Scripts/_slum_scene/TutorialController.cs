@@ -33,19 +33,28 @@ public class TutorialController : MonoBehaviour {
 		hero.SetMovementActive(false);
 		yield return new WaitForSeconds(3);
 		facilityPanel.TutorialMode(this);
-//		yield return StartCoroutine(InitialTexts());
-//		yield return StartCoroutine(ConversationWithPedestrian());
+		yield return StartCoroutine(InitialTexts());
+		yield return StartCoroutine(ConversationWithPedestrian());
 		hero.SetMovementActive(true);
+		HUD.GetInstance().ShowHud();
 		yield return TrashLocateRoutine();
 		yield return TrashSearchroutine();
+//		yield return StartCoroutine(energyExplainRoutine());
 		yield return LocatePaperDealerRoutine();
 		yield return PaperSellRoutine();
+		facilityPanel.NormalMode();
+		SlumWorld.GetInstance().ActivateAllFacilities();
 
 
 		// show objective
 		// activate facility highlight : trash area
 		// activate hero movement
 	}
+
+//	IEnumerator energyExplainRoutine() {
+//		tutorialText.text = "This is your ENERGY. It reduces as you ";
+//		textAnimator.SetTrigger(animShow);
+//	}
 
 	IEnumerator InitialTexts() {
 		yield return StartCoroutine(hero.SpeakRoutine("Mom!!...Dad!!!......", false));
@@ -56,8 +65,8 @@ public class TutorialController : MonoBehaviour {
 	}
 
 	void CallPedestrianNearby() {
-		Vector3 partnerPosition = hero.transform.position + new Vector3(2, 0, 0);
-		speechPartner.GoToTarget(partnerPosition + new Vector3(2,0,6), partnerPosition);
+		Vector3 partnerPosition = hero.transform.position + new Vector3(0, 0, 2);
+		speechPartner.GoToTarget(hero.transform.position + new Vector3(0,0,4), partnerPosition);
 	}
 
 	IEnumerator ConversationWithPedestrian() {

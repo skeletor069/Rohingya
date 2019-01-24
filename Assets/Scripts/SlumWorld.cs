@@ -9,7 +9,9 @@ public class SlumWorld : MonoBehaviour {
 	private readonly WaitForSeconds interactionActiveDelay = new WaitForSeconds(.1f);
 	private bool heroMovementActive = true;
 	private int animTime = Animator.StringToHash("time");
+	private Facility[] facilities;
 
+	public GameObject facilityHolder;
 	public Hero3d player;
 	public GameObject actionBtn;
 	public FollowPlayer cameraController;
@@ -20,6 +22,7 @@ public class SlumWorld : MonoBehaviour {
 	
 	void Awake () {
 		instance = this;
+		facilities = facilityHolder.GetComponentsInChildren<Facility>();
 	}
 
 	private void Start() {
@@ -39,6 +42,12 @@ public class SlumWorld : MonoBehaviour {
 	public void HideInteractionIcon() {
 		actionBtn.SetActive(false);
 		currentFacility = null;
+	}
+
+	public void ActivateAllFacilities() {
+		for (int i = 0; i < facilities.Length; i++) {
+			facilities[i].FacilityActive = true;
+		}
 	}
 
 	private void Update() {

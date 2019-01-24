@@ -12,9 +12,12 @@ public abstract class Facility : MonoBehaviour {
 	private bool showInventory;
 
 	private BoxCollider collider;
+
+	private GameObject facilityIcon;
 	// Use this for initialization
 	void Start () {
 		collider = GetComponent<BoxCollider>();
+		facilityIcon = transform.GetChild(0).gameObject;
 		InitiateData();
 	}
 
@@ -30,7 +33,10 @@ public abstract class Facility : MonoBehaviour {
 	
 	public bool FacilityActive {
 		get { return facilityActive; }
-		set { facilityActive = value; }
+		set {
+			facilityActive = value;
+			facilityIcon.SetActive(value);
+		}
 	}
 
 	private void OnTriggerEnter(Collider other) {
