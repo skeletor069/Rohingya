@@ -8,7 +8,7 @@ using UnityEngine.UI;
 public class Hero3d : MonoBehaviour {
 	public Animator animator;
 	private NavMeshAgent agent;
-	private float moveSpeed = 3;
+	private float moveSpeed = 4;
 	private Vector3 forward;
 	private Vector3 right;
 	private bool movementActive = true;
@@ -33,11 +33,11 @@ public class Hero3d : MonoBehaviour {
 	}
 	
 	void Update () {
-		if (movementActive && Input.anyKey){
+		if (movementActive && IsMovementKeyPressed()){
 			Move();
 			animator.SetFloat(animWalk,1);
 		}
-		else {
+		else if(movementActive){
 			animator.SetFloat(animWalk,0);
 		}
 
@@ -45,6 +45,11 @@ public class Hero3d : MonoBehaviour {
 			waitForSkippingNarration = false;
 
 		canvas.forward =  canvas.position - Camera.main.transform.position;
+	}
+
+	bool IsMovementKeyPressed() {
+		return Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.RightArrow) ||
+		       Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.DownArrow);
 	}
 
 	void Move(){
@@ -62,6 +67,8 @@ public class Hero3d : MonoBehaviour {
 
 	public void SetMovementActive(bool movementActive){
 		this.movementActive = movementActive;
+		if(!movementActive)
+			animator.SetFloat(animWalk, 0);
 	}
 
 	public void Speak(string text) {
@@ -82,5 +89,17 @@ public class Hero3d : MonoBehaviour {
 		}
 
 		yield return waitOne;
+	}
+	
+	public IEnumerator GoToTarget(Vector3 targetPosition) {
+		agent.SetDestination(targetPosition);
+		while (Vector3.Distance(transform.position, targetPosition) > .8f) {
+			animator.SetFloat(animWalk,1);
+			Debug.Log(Vector3.Distance(transform.position, targetPosition));
+			yield return endOfFrame;
+		}
+		animator.SetFloat(animWalk,0);
+		agent.SetDestination(transform.position);
+		agent.velocity = Vector3.zero;
 	}
 }

@@ -101,8 +101,8 @@ public class FacilityDescriptionPanel : MonoBehaviour {
 //		if (facility.ShowInventory) {
 //			InventoryUI.GetInstance().CloseInventoryPanel();
 //		}
-
-		StartCoroutine(SlumWorld.GetInstance().DescriptionPanelClosed(tutorialMode, facility.ShowInventory));
+		
+		StartCoroutine(SlumWorld.GetInstance().DescriptionPanelClosed(tutorialMode, (facility != null)?facility.ShowInventory:false));
 		interactionActive = false;
 		facility = null;
 		panel.SetActive(false);

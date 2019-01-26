@@ -54,7 +54,7 @@ public class HUD : MonoBehaviour {
 		healthBar.Hide();
 		energyBar.Hide();
 		foodBar.Hide();
-		attributesBG.enabled = false;
+		//attributesBG.enabled = false;
 		careerPanel.SetActive(false);
 	}
 
@@ -64,7 +64,13 @@ public class HUD : MonoBehaviour {
 		healthBar.Show();
 		energyBar.Show();
 		foodBar.Show();
-		attributesBG.enabled = true;
+		//attributesBG.enabled = true;
 		careerPanel.SetActive(true);
 	}
+
+	public void ShowTime() {
+		daysText.enabled = true;
+		hoursText.enabled = true;
+	}
+
 }

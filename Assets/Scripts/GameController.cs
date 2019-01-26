@@ -58,7 +58,7 @@ public class GameController : MonoBehaviour {
 
 	public void NewGame() {
 		world = new World();
-		worldRunning = true;
+		worldRunning = false;
 		GoToSlumScene();
 	}
 	

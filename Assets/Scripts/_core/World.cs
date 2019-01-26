@@ -19,7 +19,7 @@ public class World
 		inventory = new Inventory();
 		sceneTickerSubscribers = new List<ITickerSubscriber>();
 		dataHud = new DataHUD();
-		minutesGone = 600;
+		minutesGone = 0;
 	}
 
 	public Inventory Inventory {
@@ -54,6 +54,10 @@ public class World
 
 	public float GetHour() {
 		return minutesGone / 60;
+	}
+
+	public void SetMinutesGone(float minutesGone) {
+		this.minutesGone = minutesGone;
 	}
 
 	void UpdateClock(float deltaTime)
