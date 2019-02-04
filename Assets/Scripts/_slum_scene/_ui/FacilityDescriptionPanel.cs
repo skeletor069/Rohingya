@@ -16,6 +16,7 @@ public class FacilityDescriptionPanel : MonoBehaviour {
 	private FacilityDescriptionBtn jobBtn;
 	private bool tutorialMode = true;
 	private TutorialController tutorialController;
+	private bool jobLocked = false;
 	
 
 	private void Start() {
@@ -25,6 +26,7 @@ public class FacilityDescriptionPanel : MonoBehaviour {
 
 	public void ShowDescription(Facility facility) {
 		if (actionBtns.Count == 4) {
+			
 			actionBtns.Insert(1, jobBtn);
 			jobBtn.gameObject.SetActive(true);
 		}
@@ -33,6 +35,18 @@ public class FacilityDescriptionPanel : MonoBehaviour {
 			actionBtns.RemoveAt(1);
 			jobBtn.gameObject.SetActive(false);
 		}
+		else {
+			if (facility.IsRelationMax()) {
+				// job active
+				jobLocked = false;
+			}
+			else {
+				// try later
+				jobLocked = true;
+			}
+		}
+
+		Debug.Log("Relation " + facility.GetRelationStatus());
 			
 		interactionActive = true;
 		this.facility = facility;
@@ -44,6 +58,8 @@ public class FacilityDescriptionPanel : MonoBehaviour {
 		
 		if(facility.ShowInventory)
 			InventoryUI.GetInstance().ShowInventoryPanel();
+		
+		
 	}
 
 	void PopulateBtnNames(string[] optionNames, bool jobActive) {
@@ -60,8 +76,10 @@ public class FacilityDescriptionPanel : MonoBehaviour {
 							ClosePanel();
 						break;
 					case 1:
-						if(facility.JobActive)
-							facility.DoJob();
+						if (facility.JobActive) {
+							if(!jobLocked)
+								facility.DoJob();
+						}
 						else 
 							facility.ExecuteAction(0);
 						

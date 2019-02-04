@@ -203,6 +203,7 @@
           <e p="_slum_scene" t="Include">
             <e p="_facilities" t="Include">
               <e p="BottleSellShop.cs" t="Include" />
+              <e p="CanSellShop.cs" t="Include" />
               <e p="Dhaba.cs" t="Include" />
               <e p="FacilityIcon.cs" t="Include" />
               <e p="PaperSellShop.cs" t="Include" />
@@ -215,6 +216,7 @@
               <e p="FacilityDescriptionPanel.cs" t="Include" />
               <e p="InventoryUI.cs" t="Include" />
               <e p="NewBehaviourScript.cs" t="Include" />
+              <e p="PauseMenu.cs" t="Include" />
               <e p="SimulationPanel.cs" t="Include" />
               <e p="SlotUI.cs" t="Include" />
             </e>

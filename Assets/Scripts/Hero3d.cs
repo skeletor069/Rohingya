@@ -47,6 +47,10 @@ public class Hero3d : MonoBehaviour {
 		canvas.forward =  canvas.position - Camera.main.transform.position;
 	}
 
+	public bool IsMovementActive() {
+		return movementActive;
+	}
+
 	bool IsMovementKeyPressed() {
 		return Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.RightArrow) ||
 		       Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.DownArrow);

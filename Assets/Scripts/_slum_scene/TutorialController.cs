@@ -46,6 +46,7 @@ public class TutorialController : MonoBehaviour {
 		yield return LocatePaperDealerRoutine();
 		yield return PaperSellRoutine();
 		facilityPanel.NormalMode();
+		
 		SlumWorld.GetInstance().ActivateAllFacilities();
 
 
@@ -58,21 +59,24 @@ public class TutorialController : MonoBehaviour {
 		
 		hero.SetMovementActive(false);
 		yield return new WaitForSeconds(3);
-		CallPedestrianNearby();
-		facilityPanel.TutorialMode(this);
-		yield return StartCoroutine(InitialTexts());
-		yield return StartCoroutine(ConversationWithPedestrian2());
-		yield return StartCoroutine(EnergyBarShowRoutine());
-		yield return FoodBarShowRoutine();
+//		CallPedestrianNearby();
+//		facilityPanel.TutorialMode(this);
+//		yield return StartCoroutine(InitialTexts());
+//		yield return StartCoroutine(ConversationWithPedestrian2());
+//		yield return StartCoroutine(EnergyBarShowRoutine());
+//		yield return FoodBarShowRoutine();
 		StartSimulation();
 	}
 
 	private void StartSimulation() {
 		facilityPanel.NormalMode();
+		trashFacility.FacilityActive = true;
+		hero.SetMovementActive(true);
 		SlumWorld.GetInstance().ActivateAllFacilities();
 		GameController.GetInstance().World.SetMinutesGone(600);
 		HUD.GetInstance().ShowHud();
 		GameController.GetInstance().WorldRunning = true;
+		GameController.GetInstance().StartSurvival();
 	}
 
 	IEnumerator FacilityPanelCloseWait() {
@@ -85,6 +89,8 @@ public class TutorialController : MonoBehaviour {
 	IEnumerator FoodBarShowRoutine() {
 		//GameController.GetInstance().World.h
 		GameController.GetInstance().World.SetMinutesGone(600);
+		homeFacility.FacilityActive = false;
+		hero.SetMovementActive(false);
 		yield return StartCoroutine(speechPartner.SpeakRoutine("Did you have a good sleep, kiddo?", true));
 		
 		yield return StartCoroutine(hero.SpeakRoutine("Yes, thanks.", false));
