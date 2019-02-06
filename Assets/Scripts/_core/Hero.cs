@@ -21,11 +21,13 @@ public class AttributeToken {
 	}
 }
 
-public class Hero
-{
-//	private float health = 100;
-//	private float energy = 100;
-//	private float food = 100;
+public struct HeroConfig {
+	public float foodPerMinute;
+	public float energyPerMinute;
+}
+
+public class Hero {
+	private HeroConfig heroConfig;
 	private HeroSkills heroSkill = HeroSkills.ENTRY_LEVEL;
 	private float hungerPerTick = 100f / 360;
 	private float healthReducePerTick = 100f / 3000;
@@ -71,6 +73,10 @@ public class Hero
 		set { heroAttributes[HeroAttributes.MONEY] = value; }
 	}
 
+	public void SetHeroConfig(HeroConfig heroConfig) {
+		this.heroConfig = heroConfig;
+	}
+
 	public HeroSkills HeroSkill
 	{
 		get { return heroSkill; }
@@ -84,15 +90,16 @@ public class Hero
 
 	public void Update(float deltaTime)
 	{
-		heroAttributes[HeroAttributes.FOOD] -= hungerPerTick * deltaTime;
+		heroAttributes[HeroAttributes.FOOD] -= heroConfig.foodPerMinute * deltaTime;
+		heroAttributes[HeroAttributes.ENERGY] -= heroConfig.energyPerMinute * deltaTime;
 		if (heroAttributes[HeroAttributes.FOOD] < 0)
 		{
-			ReduceHealth(-heroAttributes[HeroAttributes.FOOD] / hungerPerTick);
+			ReduceHealth(-heroAttributes[HeroAttributes.FOOD]/(heroConfig.foodPerMinute * 2));
 			heroAttributes[HeroAttributes.FOOD] = 0;
 		}
 
 		if (heroAttributes[HeroAttributes.ENERGY] <= 0) {
-			ReduceHealth(-heroAttributes[HeroAttributes.ENERGY] / hungerPerTick);
+			ReduceHealth(-heroAttributes[HeroAttributes.ENERGY]/(heroConfig.energyPerMinute * 2));
 			heroAttributes[HeroAttributes.ENERGY] = 0;
 		}
 	}

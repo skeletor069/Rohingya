@@ -5,8 +5,8 @@ using UnityEngine.AI;
 
 public class PickupItemController : MonoBehaviour {
 	private float paperProbability = 40f;
-	private float foodProbability = 70f;
-	private float canProbability = 85f;
+	//private float foodProbability = 70f;
+	private float canProbability = 80f;
 
 	private List<PickupItem> itemPool;
 	private List<PickupItem> activeItems;
@@ -33,8 +33,6 @@ public class PickupItemController : MonoBehaviour {
 		float rand = Random.Range(0, 100f);
 		if(rand < paperProbability)
 			return new Item(ItemType.PAPER, 1);
-		else if(rand < foodProbability)
-			return new Item(ItemType.LEFTOVER, 1);
 		else if(rand < canProbability)
 			return new Item(ItemType.CANS, 1);
 		else 

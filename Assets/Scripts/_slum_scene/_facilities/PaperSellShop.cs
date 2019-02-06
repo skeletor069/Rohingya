@@ -16,6 +16,7 @@ public class PaperSellShop : Facility {
 
 	public override void Action1() {
 		if (GameController.GetInstance().World.Inventory.ConsumeItem(new Item(ItemType.PAPER, 10))) {
+			InteractionDone();
 			List<AttributeToken> temp = new List<AttributeToken>();
 			temp.Add(new AttributeToken(HeroAttributes.MONEY, Balancer.GetInstance().GetPaperPrice(10)));
 			SlumWorld.GetInstance().ActionPerformed(temp, 3);
@@ -27,6 +28,7 @@ public class PaperSellShop : Facility {
 
 	public override void Action2() {
 		if (GameController.GetInstance().World.Inventory.ConsumeItem(new Item(ItemType.PAPER, 20))) {
+			InteractionDone();
 			List<AttributeToken> temp = new List<AttributeToken>();
 			temp.Add(new AttributeToken(HeroAttributes.MONEY, Balancer.GetInstance().GetPaperPrice(20)));
 			SlumWorld.GetInstance().ActionPerformed(temp, 5);
@@ -38,6 +40,7 @@ public class PaperSellShop : Facility {
 
 	public override void Action3() {
 		if (GameController.GetInstance().World.Inventory.ConsumeItem(new Item(ItemType.PAPER, 40))) {
+			InteractionDone();
 			List<AttributeToken> temp = new List<AttributeToken>();
 			temp.Add(new AttributeToken(HeroAttributes.MONEY, Balancer.GetInstance().GetPaperPrice(40)));
 			SlumWorld.GetInstance().ActionPerformed(temp, 7);
@@ -48,9 +51,10 @@ public class PaperSellShop : Facility {
 	}
 
 	public override void DoJob() {
+		InteractionDone();
 		List<AttributeToken> tokens = new List<AttributeToken>();
-		tokens.Add(new AttributeToken(HeroAttributes.MONEY, 5));
-		tokens.Add(new AttributeToken(HeroAttributes.ENERGY, -30));
+//		tokens.Add(new AttributeToken(HeroAttributes.MONEY, 30));
+//		tokens.Add(new AttributeToken(HeroAttributes.ENERGY, -30));
 		SlumWorld.GetInstance().ActionPerformed(tokens, 60);
 	}
 }

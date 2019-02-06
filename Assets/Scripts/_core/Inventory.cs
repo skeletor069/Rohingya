@@ -11,7 +11,7 @@ public class Inventory {
 
 	public Inventory() {
 		inventoryItems = new Dictionary<ItemType, Item>();
-		inventoryItems.Add(ItemType.PAPER, new Item(ItemType.PAPER, 60));
+		inventoryItems.Add(ItemType.PAPER, new Item(ItemType.PAPER, 0));
 		inventoryItems.Add(ItemType.CANS, new Item(ItemType.CANS, 0));
 		inventoryItems.Add(ItemType.BOTTLE, new Item(ItemType.BOTTLE, 0));
 		inventoryItems.Add(ItemType.LEFTOVER, new Item(ItemType.LEFTOVER, 0));
@@ -20,7 +20,7 @@ public class Inventory {
 		for(int i = 0 ; i < 9; i++)
 			itemSlots[i] = new ItemSlot();
 		
-		PopulateSlots();
+		//PopulateSlots();
 	}
 
 	public int GetItemCount(ItemType type) {

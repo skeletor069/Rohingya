@@ -58,11 +58,18 @@ public class GameController : MonoBehaviour {
 
 	public void NewGame() {
 		world = new World();
-		worldRunning = true;
+		worldRunning = false;
 		GoToSlumScene();
 	}
-	
-	
+
+	public void StartSurvival() {
+		world.SetMinutesGone(600);
+		worldRunning = true;
+		HeroConfig heroConfig = new HeroConfig();
+		heroConfig.energyPerMinute = Balancer.GetInstance().EnergyPerMinute;
+		heroConfig.foodPerMinute = Balancer.GetInstance().FoodPerMinute;
+		world.Hero.SetHeroConfig(heroConfig);
+	}
 
 
 }

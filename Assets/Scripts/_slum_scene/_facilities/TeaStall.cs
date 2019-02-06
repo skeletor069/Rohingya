@@ -15,7 +15,7 @@ public class TeaStall : Facility {
 	}
 
 	public override void Action1() {
-		Debug.Log("Action 1");
+		InteractionDone();
 		List<AttributeToken> tokens = new List<AttributeToken>();
 		tokens.Add(new AttributeToken(HeroAttributes.FOOD, Balancer.GetInstance().GetFoodWithMoney(6)));
 		tokens.Add(new AttributeToken(HeroAttributes.MONEY, -6));
@@ -23,6 +23,7 @@ public class TeaStall : Facility {
 	}
 
 	public override void Action2() {
+		InteractionDone();
 		List<AttributeToken> tokens = new List<AttributeToken>();
 		tokens.Add(new AttributeToken(HeroAttributes.FOOD, Balancer.GetInstance().GetFoodWithMoney(12)));
 		tokens.Add(new AttributeToken(HeroAttributes.MONEY, -12));
@@ -30,6 +31,7 @@ public class TeaStall : Facility {
 	}
 
 	public override void Action3() {
+		InteractionDone();
 		List<AttributeToken> tokens = new List<AttributeToken>();
 		tokens.Add(new AttributeToken(HeroAttributes.FOOD, Balancer.GetInstance().GetFoodWithMoney(3)));
 		tokens.Add(new AttributeToken(HeroAttributes.MONEY, -3));
@@ -37,9 +39,10 @@ public class TeaStall : Facility {
 	}
 
 	public override void DoJob() {
+		InteractionDone();
 		List<AttributeToken> tokens = new List<AttributeToken>();
-		tokens.Add(new AttributeToken(HeroAttributes.MONEY, 3));
-		tokens.Add(new AttributeToken(HeroAttributes.ENERGY, -30));
+//		tokens.Add(new AttributeToken(HeroAttributes.MONEY, 3));
+//		tokens.Add(new AttributeToken(HeroAttributes.ENERGY, -30));
 		SlumWorld.GetInstance().ActionPerformed(tokens, 60);
 	}
 }

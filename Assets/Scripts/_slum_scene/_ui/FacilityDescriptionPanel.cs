@@ -14,6 +14,9 @@ public class FacilityDescriptionPanel : MonoBehaviour {
 	public List<FacilityDescriptionBtn> actionBtns = new List<FacilityDescriptionBtn>();
 	private int selectedIndex = 0;
 	private FacilityDescriptionBtn jobBtn;
+	private bool tutorialMode = true;
+	private TutorialController tutorialController;
+	private bool jobLocked = false;
 	
 
 	private void Start() {
@@ -23,6 +26,7 @@ public class FacilityDescriptionPanel : MonoBehaviour {
 
 	public void ShowDescription(Facility facility) {
 		if (actionBtns.Count == 4) {
+			
 			actionBtns.Insert(1, jobBtn);
 			jobBtn.gameObject.SetActive(true);
 		}
@@ -31,6 +35,18 @@ public class FacilityDescriptionPanel : MonoBehaviour {
 			actionBtns.RemoveAt(1);
 			jobBtn.gameObject.SetActive(false);
 		}
+		else {
+			if (facility.IsRelationMax()) {
+				// job active
+				jobLocked = false;
+			}
+			else {
+				// try later
+				jobLocked = true;
+			}
+		}
+
+		Debug.Log("Relation " + facility.GetRelationStatus());
 			
 		interactionActive = true;
 		this.facility = facility;
@@ -42,6 +58,8 @@ public class FacilityDescriptionPanel : MonoBehaviour {
 		
 		if(facility.ShowInventory)
 			InventoryUI.GetInstance().ShowInventoryPanel();
+		
+		
 	}
 
 	void PopulateBtnNames(string[] optionNames, bool jobActive) {
@@ -54,11 +72,14 @@ public class FacilityDescriptionPanel : MonoBehaviour {
 			if (Input.GetKeyDown(KeyCode.Return)) {
 				switch (selectedIndex) {
 					case 0:
-						ClosePanel();
+						if(!tutorialMode)
+							ClosePanel();
 						break;
 					case 1:
-						if(facility.JobActive)
-							facility.DoJob();
+						if (facility.JobActive) {
+							if(!jobLocked)
+								facility.DoJob();
+						}
 						else 
 							facility.ExecuteAction(0);
 						
@@ -95,14 +116,17 @@ public class FacilityDescriptionPanel : MonoBehaviour {
 	}
 
 	public void ClosePanel() {
-		if (facility.ShowInventory) {
-			InventoryUI.GetInstance().CloseInventoryPanel();
-		}
-
-		StartCoroutine(SlumWorld.GetInstance().DescriptionPanelClosed());
+//		if (facility.ShowInventory) {
+//			InventoryUI.GetInstance().CloseInventoryPanel();
+//		}
+		
+		StartCoroutine(SlumWorld.GetInstance().DescriptionPanelClosed(tutorialMode, (facility != null)?facility.ShowInventory:false));
 		interactionActive = false;
 		facility = null;
 		panel.SetActive(false);
+		
+		if(tutorialMode)
+			tutorialController.FacilityPanelClosed();
 	}
 
 	private void ButtonSelectionDown() {
@@ -119,6 +143,15 @@ public class FacilityDescriptionPanel : MonoBehaviour {
 
 	public bool IsShowing() {
 		return interactionActive;
+	}
+
+	public void TutorialMode(TutorialController tutorialController) {
+		tutorialMode = true;
+		this.tutorialController = tutorialController;
+	}
+
+	public void NormalMode() {
+		tutorialMode = false;
 	}
 
 	void ResetSelection() {

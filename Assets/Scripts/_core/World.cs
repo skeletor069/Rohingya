@@ -19,12 +19,16 @@ public class World
 		inventory = new Inventory();
 		sceneTickerSubscribers = new List<ITickerSubscriber>();
 		dataHud = new DataHUD();
-		minutesGone = 600;
+		minutesGone = 0;
 	}
 
 	public Inventory Inventory {
 		get { return inventory; }
 		set { inventory = value; }
+	}
+
+	public Hero Hero {
+		get { return hero; }
 	}
 
 	public void Update (float deltaTime)
@@ -52,8 +56,20 @@ public class World
 		return ((hour%12 < 10)?"0":"")+(hour%12) + ":" +((minute < 10)?"0":"")+ minute + " " + ((hour < 12) ? "am" : "pm");
 	}
 
+	public float GetMinutesGone() {
+		return minutesGone;
+	}
+
 	public float GetHour() {
 		return minutesGone / 60;
+	}
+
+	public int GetDaysGone() {
+		return daysGone;
+	}
+
+	public void SetMinutesGone(float minutesGone) {
+		this.minutesGone = minutesGone;
 	}
 
 	void UpdateClock(float deltaTime)
@@ -85,7 +101,7 @@ public class World
 	}
 
 	public void ActionPerformed(List<AttributeToken> tokens, float minutes) {
-		Update(minutes);
+		//Update(minutes);
 		hero.UpdateAttributes(tokens);
 	}
 }
