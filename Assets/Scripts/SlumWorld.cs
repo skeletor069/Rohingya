@@ -10,6 +10,7 @@ public class SlumWorld : MonoBehaviour {
 	private readonly WaitForSeconds interactionActiveDelay = new WaitForSeconds(.1f);
 	private bool heroMovementActive = true;
 	private int animTime = Animator.StringToHash("time");
+	private bool campfireStarted = false;
 	
 	public Facility[] facilities;
 	public Facility home;
@@ -24,6 +25,8 @@ public class SlumWorld : MonoBehaviour {
 	public SimulationPanel simulationPanel;
 	public PickupItemController pickupItemController;
 	public Animator dayNightAnim;
+
+	public GameObject[] campfires;
 	
 	
 	
@@ -81,6 +84,28 @@ public class SlumWorld : MonoBehaviour {
 		dayNightAnim.SetFloat(animTime, gameController.World.GetHour());
 		if(gameController.WorldRunning)
 			FacilityActivateCheck();
+
+		if (gameController.World.GetHour() > 21 && !campfireStarted && gameController.World.GetHour() < 23) {
+			campfireStarted = true;
+			StartCampfire();
+		}
+
+		if (campfireStarted && gameController.World.GetHour() > 23) {
+			campfireStarted = false;
+			StopCampfire();
+		}
+
+
+	}
+
+	void StartCampfire() {
+		for(int i = 0 ; i < campfires.Length; i++)
+			campfires[i].SetActive(true);
+	}
+
+	void StopCampfire() {
+		for(int i = 0 ; i < campfires.Length; i++)
+			campfires[i].SetActive(false);
 	}
 
 	void FacilityActivateCheck() {
@@ -144,7 +169,7 @@ public class SlumWorld : MonoBehaviour {
 
 	IEnumerator ActionPerformedRoutine(List<AttributeToken> tokens, float minutes) {
 		float targetMinute = gameController.World.GetMinutesGone() + minutes;
-		Time.timeScale = (minutes > 30)?20:8;
+		Time.timeScale = (minutes > 60)?60:8;
 		float lastFrame = gameController.World.GetMinutesGone();
 		while (gameController.World.GetMinutesGone() < targetMinute) {
 			if (gameController.World.GetMinutesGone() < lastFrame) {
