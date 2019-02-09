@@ -26,7 +26,7 @@ public class SlumWorld : MonoBehaviour {
 	public PickupItemController pickupItemController;
 	public Animator dayNightAnim;
 
-	public GameObject[] campfires;
+	public Campfire[] campfires;
 	
 	
 	
@@ -99,13 +99,26 @@ public class SlumWorld : MonoBehaviour {
 	}
 
 	void StartCampfire() {
+		Campfire.CAMPFIRE_STARTED = true;
 		for(int i = 0 ; i < campfires.Length; i++)
-			campfires[i].SetActive(true);
+			campfires[i].StartFire();
 	}
 
 	void StopCampfire() {
+		Campfire.CAMPFIRE_STARTED = false;
 		for(int i = 0 ; i < campfires.Length; i++)
-			campfires[i].SetActive(false);
+			campfires[i].StopFire();
+	}
+
+	public Transform GetAFreeSeat() {
+		Transform freeSeat = null;
+
+		for (int i = 0; i < campfires.Length; i++) {
+			freeSeat = campfires[i].GetAFreeSeat();
+			if(freeSeat != null)
+				break;
+		}
+		return freeSeat;
 	}
 
 	void FacilityActivateCheck() {
