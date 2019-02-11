@@ -115,12 +115,13 @@ public class FacilityDescriptionPanel : MonoBehaviour {
 		}
 	}
 
-	public void ClosePanel() {
+	public void ClosePanel(bool sleeping = false) {
 //		if (facility.ShowInventory) {
 //			InventoryUI.GetInstance().CloseInventoryPanel();
 //		}
 		
-		StartCoroutine(SlumWorld.GetInstance().DescriptionPanelClosed(tutorialMode, (facility != null)?facility.ShowInventory:false));
+		if(!sleeping)
+			StartCoroutine(SlumWorld.GetInstance().DescriptionPanelClosed(tutorialMode, (facility != null)?facility.ShowInventory:false));
 		interactionActive = false;
 		facility = null;
 		panel.SetActive(false);
@@ -128,6 +129,8 @@ public class FacilityDescriptionPanel : MonoBehaviour {
 		if(tutorialMode)
 			tutorialController.FacilityPanelClosed();
 	}
+	
+	
 
 	private void ButtonSelectionDown() {
 		actionBtns[selectedIndex].SetBtnStateAtive(false);

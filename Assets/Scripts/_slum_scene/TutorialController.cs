@@ -58,7 +58,7 @@ public class TutorialController : MonoBehaviour {
 	IEnumerator TutorialRoutine2() {
 		
 		hero.SetMovementActive(false);
-		yield return new WaitForSeconds(3);
+		yield return new WaitForSeconds(1);
 //		CallPedestrianNearby();
 //		facilityPanel.TutorialMode(this);
 //		yield return StartCoroutine(InitialTexts());

@@ -16,21 +16,21 @@ public class SleepingArea : Facility {
 
 	public override void Action1() {
 		List<AttributeToken> tokens = new List<AttributeToken>();
-		tokens.Add(new AttributeToken(HeroAttributes.ENERGY, energyPerHour * 3));
-		Debug.Log(energyPerHour * 3);
-		SlumWorld.GetInstance().ActionPerformed(tokens, 180);
+		tokens.Add(new AttributeToken(HeroAttributes.ENERGY, 30));
+		//Debug.Log(energyPerHour * 3);
+		SlumWorld.GetInstance().SleepActionPerformed(tokens, 180);
 	}
 
 	public override void Action2() {
 		List<AttributeToken> tokens = new List<AttributeToken>();
-		tokens.Add(new AttributeToken(HeroAttributes.ENERGY, energyPerHour * 6));
-		SlumWorld.GetInstance().ActionPerformed(tokens, 360);
+		tokens.Add(new AttributeToken(HeroAttributes.ENERGY, 70));
+		SlumWorld.GetInstance().SleepActionPerformed(tokens, 360);
 	}
 
 	public override void Action3() {
 		List<AttributeToken> tokens = new List<AttributeToken>();
 		tokens.Add(new AttributeToken(HeroAttributes.ENERGY, 100));
-		SlumWorld.GetInstance().ActionPerformed(tokens, 480);
+		SlumWorld.GetInstance().SleepActionPerformed(tokens, 480);
 	}
 
 	public override void DoJob() {

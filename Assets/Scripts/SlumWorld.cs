@@ -47,7 +47,6 @@ public class SlumWorld : MonoBehaviour {
 	public void ShowInteractionIcon(Facility facility) {
 		currentFacility = facility;
 		actionBtn.SetActive(true);
-		// show enter button UI
 	}
 
 	public void HideInteractionIcon() {
@@ -175,33 +174,37 @@ public class SlumWorld : MonoBehaviour {
 			InventoryUI.GetInstance().CloseInventoryPanel();
 		}
 	}
-	
+
+	public void SleepActionPerformed(List<AttributeToken> tokens, float minutes) {
+		StartCoroutine(SleepActionPerformedRoutine(tokens, minutes));
+	}
+
+	IEnumerator SleepActionPerformedRoutine(List<AttributeToken> tokens, float minutes) {
+		facilityDescriptionPanel.ClosePanel(true);
+		gameController.WorldRunning = false;
+		simulationPanel.StartOverlay();
+		yield return new WaitForSeconds(3);
+		gameController.World.Update(minutes);
+		gameController.World.ActionPerformed(tokens, minutes);
+		simulationPanel.DissolveOverlay();
+		yield return new WaitForSeconds(1);
+		gameController.WorldRunning = true;
+		facilityDescriptionPanel.ClosePanel();
+	}
+
 	public void ActionPerformed(List<AttributeToken> tokens, float minutes) {
 		StartCoroutine(ActionPerformedRoutine(tokens, minutes));
 	}
 
 	IEnumerator ActionPerformedRoutine(List<AttributeToken> tokens, float minutes) {
-		float targetMinute = gameController.World.GetMinutesGone() + minutes;
-		Time.timeScale = (minutes > 60)?60:8;
-		float lastFrame = gameController.World.GetMinutesGone();
-		while (gameController.World.GetMinutesGone() < targetMinute) {
-			if (gameController.World.GetMinutesGone() < lastFrame) {
-				targetMinute -= 1440;
-
-				while (gameController.World.GetMinutesGone() < targetMinute) {
-					yield return new WaitForEndOfFrame();
-				}
-				break;
-			}
-			lastFrame = gameController.World.GetMinutesGone();
+		Time.timeScale = (minutes > 30)?16:8;
+		float accum = 0;
+		while (accum < minutes) {
+			accum += Time.deltaTime;
 			yield return new WaitForEndOfFrame();
 		}
-
 		Time.timeScale = 1;
-		//gameController.WorldRunning = false;
-		//yield return StartCoroutine(simulationPanel.ShowSimulationDisplay(GetSimulationDisplayText()));
 		gameController.World.ActionPerformed(tokens, minutes);
-		//gameController.WorldRunning = true;
 		facilityDescriptionPanel.ClosePanel();
 	}
 
@@ -211,25 +214,18 @@ public class SlumWorld : MonoBehaviour {
 	}
 
 	IEnumerator ItemsFoundRoutine(List<Item> trashItems, float minutes) {
-		float targetMinute = gameController.World.GetMinutesGone() + minutes;
 		Time.timeScale = 8;
-		while (gameController.World.GetMinutesGone() < targetMinute) {
+		float accum = 0;
+		while (accum < minutes) {
+			accum += Time.deltaTime;
 			yield return new WaitForEndOfFrame();
 		}
-
 		Time.timeScale = 1;
-//		gameController.WorldRunning = false;
-//		yield return StartCoroutine(simulationPanel.ShowSimulationDisplay(GetSimulationDisplayText()));
 		for (int i = 0; i < trashItems.Count; i++) {
 			GameController.GetInstance().World.Inventory.AddItem(trashItems[i]);	
 		}
 		gameController.World.ActionPerformed(new List<AttributeToken>(), minutes);
-//		gameController.WorldRunning = true;
 		facilityDescriptionPanel.ClosePanel();
-	}
-
-	string GetSimulationDisplayText() {
-		return "";
 	}
 
 	public void ItemPicked(PickupItem pickItem) {

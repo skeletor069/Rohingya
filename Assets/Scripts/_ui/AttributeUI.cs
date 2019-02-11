@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,6 +9,7 @@ public class AttributeUI : MonoBehaviour {
 	public Image fillBar;
 	public Image fill;
 	public Image icon;
+	public TextMeshProUGUI title;
 
 	
 
@@ -16,14 +18,16 @@ public class AttributeUI : MonoBehaviour {
 	}
 
 	public void Hide() {
-		icon.enabled = false;
+		//icon.enabled = false;
 		fill.enabled = false;
 		fillBar.enabled = false;
+		title.enabled = false;
 	}
 
 	public void Show() {
-		icon.enabled = true;
+		//icon.enabled = true;
 		fill.enabled = true;
 		fillBar.enabled = true;
+		title.enabled = true;
 	}
 }
