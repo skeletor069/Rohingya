@@ -77,6 +77,10 @@ public class Hero {
 		this.heroConfig = heroConfig;
 	}
 
+	public HeroConfig GetHeroConfig() {
+		return heroConfig;
+	}
+
 	public HeroSkills HeroSkill
 	{
 		get { return heroSkill; }

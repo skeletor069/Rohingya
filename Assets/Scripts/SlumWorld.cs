@@ -197,12 +197,30 @@ public class SlumWorld : MonoBehaviour {
 	}
 
 	IEnumerator ActionPerformedRoutine(List<AttributeToken> tokens, float minutes) {
+		AttributeToken foodToken = new AttributeToken(HeroAttributes.FOOD, 0);
+		HeroConfig initialHeroConfig = gameController.World.Hero.GetHeroConfig();
+		for (int i = 0; i < tokens.Count; i++) {
+			if (tokens[i].attribute == HeroAttributes.FOOD) {
+				foodToken = tokens[i];
+				tokens.Remove(foodToken);
+				break;	
+			}
+		}
+
+		if (foodToken.amount > 0) {
+			float targetFood = foodToken.amount / minutes;
+			HeroConfig heroConfig = gameController.World.Hero.GetHeroConfig();
+			heroConfig.foodPerMinute = -targetFood;
+			gameController.World.Hero.SetHeroConfig(heroConfig);
+		}
+
 		Time.timeScale = (minutes > 30)?16:8;
 		float accum = 0;
 		while (accum < minutes) {
 			accum += Time.deltaTime;
 			yield return new WaitForEndOfFrame();
 		}
+		gameController.World.Hero.SetHeroConfig(initialHeroConfig);
 		Time.timeScale = 1;
 		gameController.World.ActionPerformed(tokens, minutes);
 		facilityDescriptionPanel.ClosePanel();

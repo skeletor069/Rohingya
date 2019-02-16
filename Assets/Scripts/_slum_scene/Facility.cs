@@ -17,6 +17,7 @@ public abstract class Facility : MonoBehaviour {
 	private int lastInteractionDay = 0;
 
 	private GameObject facilityIcon;
+	protected FacilityBtnData[] btnDatas = new FacilityBtnData[3];
 	// Use this for initialization
 	void Start () {
 		collider = GetComponent<BoxCollider>();
@@ -71,6 +72,10 @@ public abstract class Facility : MonoBehaviour {
 
 	public string[] GetOptionNames() {
 		return optionNames;
+	}
+
+	public FacilityBtnData[] GetActionBtnsData() {
+		return btnDatas;
 	}
 
 	public void ExecuteAction(int index) {

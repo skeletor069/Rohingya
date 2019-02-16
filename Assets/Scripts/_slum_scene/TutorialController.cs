@@ -87,12 +87,10 @@ public class TutorialController : MonoBehaviour {
 	}
 
 	IEnumerator FoodBarShowRoutine() {
-		//GameController.GetInstance().World.h
 		GameController.GetInstance().World.SetMinutesGone(600);
 		homeFacility.FacilityActive = false;
 		hero.SetMovementActive(false);
 		yield return StartCoroutine(speechPartner.SpeakRoutine("Did you have a good sleep, kiddo?", true));
-		
 		yield return StartCoroutine(hero.SpeakRoutine("Yes, thanks.", false));
 		HUD.GetInstance().foodBar.Show();
 		yield return StartCoroutine(hero.SpeakRoutine("But I am so hungry now.", false));
@@ -128,16 +126,12 @@ public class TutorialController : MonoBehaviour {
 		while (true) {
 			if(Vector3.Distance(hero.transform.position, targetPosition) < 1.5f)
 				break;
-			//Debug.Log(Vector3.Distance(hero.transform.position, trashIcon.transform.position));
 			yield return endOfFrame;
 		}
 		textAnimator.SetTrigger(animHide);
-		//hero.SetMovementActive(false);
-		//yield return StartCoroutine(hero.GoToTarget(targetPosition + new Vector3(-1, 0, -1.5f)));
 		hero.SetMovementActive(false);
 		hero.transform.LookAt(speechPartner.transform);
 		yield return StartCoroutine(speechPartner.SpeakRoutine("This is your home now. Get a nice sleep. We will talk tomorrow.", false));
-		//StartCoroutine(speechPartner.StartRandomWalk());
 		hero.SetMovementActive(true);
 		homeIcon.SetActive(true);
 		homeFacility.FacilityActive = true;
@@ -147,10 +141,7 @@ public class TutorialController : MonoBehaviour {
 
 	IEnumerator InitialTexts() {
 		yield return StartCoroutine(hero.SpeakRoutine("Mom!!...Dad!!!......", false));
-		//CallPedestrianNearby();
 		yield return StartCoroutine(hero.SpeakRoutine("mmmm mmmm (crying)...", false));
-		
-
 	}
 
 	void CallPedestrianNearby() {
@@ -189,7 +180,6 @@ public class TutorialController : MonoBehaviour {
 		while (true) {
 			if(Vector3.Distance(hero.transform.position, trashIcon.transform.position) < 5)
 				break;
-			//Debug.Log(Vector3.Distance(hero.transform.position, trashIcon.transform.position));
 			yield return endOfFrame;
 		}
 		textAnimator.SetTrigger(animHide);

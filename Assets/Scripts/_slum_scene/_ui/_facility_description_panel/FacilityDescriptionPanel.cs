@@ -17,7 +17,15 @@ public class FacilityDescriptionPanel : MonoBehaviour {
 	private bool tutorialMode = true;
 	private TutorialController tutorialController;
 	private bool jobLocked = false;
-	
+	public static Color foodColor, energyColor, moneyColor;
+
+	void Awake() {
+		foodColor = new Color(11f/255, 173f/255, 63f/255);
+		energyColor = new Color(137f/255, 184f/255, 185f/255);
+		moneyColor = new Color(241f/255, 219f/255, 0f);
+		for(int i = 0 ; i < 5; i++)
+			actionBtns.Add(transform.GetChild(0).GetChild(i).GetComponent<FacilityDescriptionBtn>());
+	}
 
 	private void Start() {
 		jobBtn = actionBtns[1];
@@ -28,12 +36,12 @@ public class FacilityDescriptionPanel : MonoBehaviour {
 		if (actionBtns.Count == 4) {
 			
 			actionBtns.Insert(1, jobBtn);
-			jobBtn.gameObject.SetActive(true);
+			jobBtn.SetVisible(true);
 		}
 			
 		if (!facility.JobActive) {
 			actionBtns.RemoveAt(1);
-			jobBtn.gameObject.SetActive(false);
+			jobBtn.SetVisible(false);
 		}
 		else {
 			if (facility.IsRelationMax()) {
@@ -52,7 +60,8 @@ public class FacilityDescriptionPanel : MonoBehaviour {
 		this.facility = facility;
 		facilityNameTxt.text = facility.GetFacilityName();
 		facilityDescriptionTxt.text = facility.GetFacilityDescription();
-		PopulateBtnNames(facility.GetOptionNames(), facility.JobActive);
+//		PopulateBtnNames(facility.GetOptionNames(), facility.JobActive);
+		PopulateBtnWithData(facility.GetActionBtnsData(), facility.JobActive);
 		ResetSelection();
 		panel.SetActive(true);	
 		
@@ -65,6 +74,11 @@ public class FacilityDescriptionPanel : MonoBehaviour {
 	void PopulateBtnNames(string[] optionNames, bool jobActive) {
 		for(int i = 0 ; i < optionNames.Length; i++)
 			actionBtns[i+2 - ((jobActive)?0:1)].SetBtnName(optionNames[i]);
+	}
+	
+	void PopulateBtnWithData(FacilityBtnData[] options, bool jobActive) {
+		for(int i = 0 ; i < options.Length; i++)
+			actionBtns[i+2 - ((jobActive)?0:1)].SetBtnData(options[i]);
 	}
 
 	void Update() {

@@ -217,8 +217,12 @@
               <e p="PublicPlaces.cs" t="Include" />
             </e>
             <e p="_ui" t="Include">
-              <e p="FacilityDescriptionBtn.cs" t="Include" />
-              <e p="FacilityDescriptionPanel.cs" t="Include" />
+              <e p="_facility_description_panel" t="Include">
+                <e p="CancelBtn.cs" t="Include" />
+                <e p="FacilityActionBtn.cs" t="Include" />
+                <e p="FacilityDescriptionBtn.cs" t="Include" />
+                <e p="FacilityDescriptionPanel.cs" t="Include" />
+              </e>
               <e p="InventoryUI.cs" t="Include" />
               <e p="NewBehaviourScript.cs" t="Include" />
               <e p="PauseMenu.cs" t="Include" />
