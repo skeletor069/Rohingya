@@ -140,7 +140,7 @@ public class FacilityDescriptionPanel : MonoBehaviour {
 		facility = null;
 		panel.SetActive(false);
 		
-		if(tutorialMode)
+		if(tutorialMode && !sleeping)
 			tutorialController.FacilityPanelClosed();
 	}
 	

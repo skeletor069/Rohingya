@@ -59,12 +59,12 @@ public class TutorialController : MonoBehaviour {
 		
 		hero.SetMovementActive(false);
 		yield return new WaitForSeconds(1);
-//		CallPedestrianNearby();
-//		facilityPanel.TutorialMode(this);
-//		yield return StartCoroutine(InitialTexts());
-//		yield return StartCoroutine(ConversationWithPedestrian2());
-//		yield return StartCoroutine(EnergyBarShowRoutine());
-//		yield return FoodBarShowRoutine();
+		CallPedestrianNearby();
+		facilityPanel.TutorialMode(this);
+		yield return StartCoroutine(InitialTexts());
+		yield return StartCoroutine(ConversationWithPedestrian2());
+		yield return StartCoroutine(EnergyBarShowRoutine());
+		yield return FoodBarShowRoutine();
 		StartSimulation();
 	}
 
@@ -73,9 +73,6 @@ public class TutorialController : MonoBehaviour {
 		trashFacility.FacilityActive = true;
 		hero.SetMovementActive(true);
 		SlumWorld.GetInstance().ActivateAllFacilities();
-		GameController.GetInstance().World.SetMinutesGone(600);
-		HUD.GetInstance().ShowHud();
-		GameController.GetInstance().WorldRunning = true;
 		GameController.GetInstance().StartSurvival();
 	}
 

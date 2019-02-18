@@ -69,6 +69,8 @@ public class GameController : MonoBehaviour {
 		heroConfig.energyPerMinute = Balancer.GetInstance().EnergyPerMinute;
 		heroConfig.foodPerMinute = Balancer.GetInstance().FoodPerMinute;
 		world.Hero.SetHeroConfig(heroConfig);
+		world.Hero.Health = 100;
+		HUD.GetInstance().ShowHud();
 	}
 
 

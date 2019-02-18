@@ -44,8 +44,8 @@ public class Hero {
 		
 		heroAttributes = new Dictionary<HeroAttributes, float>();
 		heroAttributes.Add(HeroAttributes.HEALTH, 100);
-		heroAttributes.Add(HeroAttributes.ENERGY, 100);
-		heroAttributes.Add(HeroAttributes.FOOD, 100);
+		heroAttributes.Add(HeroAttributes.ENERGY, 0);
+		heroAttributes.Add(HeroAttributes.FOOD, 0);
 		heroAttributes.Add(HeroAttributes.MONEY, 0);
 	}
 
