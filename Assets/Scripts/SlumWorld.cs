@@ -89,7 +89,7 @@ public class SlumWorld : MonoBehaviour {
 			StartCampfire();
 		}
 
-		if (campfireStarted && gameController.World.GetHour() > 23) {
+		if (campfireStarted && (gameController.World.GetHour() > 23 || gameController.World.GetHour() < 21)) {
 			campfireStarted = false;
 			StopCampfire();
 		}
