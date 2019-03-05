@@ -13,7 +13,7 @@ public class FacilityDescriptionPanel : MonoBehaviour {
 	private Facility facility = null;
 	public List<FacilityDescriptionBtn> actionBtns = new List<FacilityDescriptionBtn>();
 	private int selectedIndex = 0;
-	private FacilityDescriptionBtn jobBtn;
+	private JobBtn jobBtn;
 	private bool tutorialMode = true;
 	private TutorialController tutorialController;
 	private bool jobLocked = false;
@@ -25,10 +25,11 @@ public class FacilityDescriptionPanel : MonoBehaviour {
 		moneyColor = new Color(241f/255, 219f/255, 0f);
 		for(int i = 0 ; i < 5; i++)
 			actionBtns.Add(transform.GetChild(0).GetChild(i).GetComponent<FacilityDescriptionBtn>());
+		jobBtn = transform.GetChild(0).GetChild(1).GetComponent<JobBtn>();
 	}
 
 	private void Start() {
-		jobBtn = actionBtns[1];
+		//jobBtn = actionBtns[1];
 		panel.SetActive(false);
 	}
 
@@ -44,6 +45,7 @@ public class FacilityDescriptionPanel : MonoBehaviour {
 			jobBtn.SetVisible(false);
 		}
 		else {
+			jobBtn.SetRelationData(facility.GetRelationStatus());
 			if (facility.IsRelationMax()) {
 				// job active
 				jobLocked = false;
@@ -156,6 +158,11 @@ public class FacilityDescriptionPanel : MonoBehaviour {
 		actionBtns[selectedIndex].SetBtnStateAtive(false);
 		selectedIndex = Mathf.Min((selectedIndex + 1), (actionBtns.Count - 1));
 		actionBtns[selectedIndex].SetBtnStateAtive(true);
+	}
+
+	public bool InteractionActive {
+		get { return interactionActive; }
+		set { interactionActive = value; }
 	}
 
 	public bool IsShowing() {

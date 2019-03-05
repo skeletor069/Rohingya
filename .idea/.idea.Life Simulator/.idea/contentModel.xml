@@ -222,6 +222,7 @@
                 <e p="FacilityActionBtn.cs" t="Include" />
                 <e p="FacilityDescriptionBtn.cs" t="Include" />
                 <e p="FacilityDescriptionPanel.cs" t="Include" />
+                <e p="JobBtn.cs" t="Include" />
               </e>
               <e p="InventoryUI.cs" t="Include" />
               <e p="NewBehaviourScript.cs" t="Include" />
@@ -235,6 +236,7 @@
             <e p="PickupItemController.cs" t="Include" />
             <e p="SleepingArea.cs" t="Include" />
             <e p="SlumUIController.cs" t="Include" />
+            <e p="SoundManager.cs" t="Include" />
             <e p="SpeechPartner.cs" t="Include" />
             <e p="TrashItemsGenerator.cs" t="Include" />
             <e p="TutorialController.cs" t="Include" />

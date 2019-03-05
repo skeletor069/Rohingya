@@ -27,6 +27,7 @@ public class SlumWorld : MonoBehaviour {
 	public Animator dayNightAnim;
 
 	public Campfire[] campfires;
+	public SoundManager soundManager;
 	
 	
 	
@@ -81,6 +82,7 @@ public class SlumWorld : MonoBehaviour {
 			}
 		}
 		dayNightAnim.SetFloat(animTime, gameController.World.GetHour());
+		soundManager.UpdateSound((int)gameController.World.GetMinutesGone());
 		if(gameController.WorldRunning)
 			FacilityActivateCheck();
 
@@ -214,12 +216,15 @@ public class SlumWorld : MonoBehaviour {
 			gameController.World.Hero.SetHeroConfig(heroConfig);
 		}
 
+		facilityDescriptionPanel.InteractionActive = false;
 		Time.timeScale = (minutes > 30)?16:8;
 		float accum = 0;
 		while (accum < minutes) {
 			accum += Time.deltaTime;
 			yield return new WaitForEndOfFrame();
 		}
+
+		facilityDescriptionPanel.InteractionActive = true;
 		gameController.World.Hero.SetHeroConfig(initialHeroConfig);
 		Time.timeScale = 1;
 		gameController.World.ActionPerformed(tokens, minutes);
@@ -232,12 +237,15 @@ public class SlumWorld : MonoBehaviour {
 	}
 
 	IEnumerator ItemsFoundRoutine(List<Item> trashItems, float minutes) {
+		facilityDescriptionPanel.InteractionActive = false;
 		Time.timeScale = 8;
 		float accum = 0;
 		while (accum < minutes) {
 			accum += Time.deltaTime;
 			yield return new WaitForEndOfFrame();
 		}
+
+		facilityDescriptionPanel.InteractionActive = true;
 		Time.timeScale = 1;
 		for (int i = 0; i < trashItems.Count; i++) {
 			GameController.GetInstance().World.Inventory.AddItem(trashItems[i]);	

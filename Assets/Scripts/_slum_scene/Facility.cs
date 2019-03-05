@@ -39,7 +39,7 @@ public abstract class Facility : MonoBehaviour {
 		get { return facilityActive; }
 		set {
 			facilityActive = value;
-			facilityIcon.SetActive(value);
+			//facilityIcon.SetActive(value);
 		}
 	}
 
