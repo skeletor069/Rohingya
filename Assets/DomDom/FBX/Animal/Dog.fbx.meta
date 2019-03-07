@@ -1,0 +1,167 @@
+fileFormatVersion: 2
+guid: b57a66b27b8e6f14dbdc8e520ac5a003
+ModelImporter:
+  serializedVersion: 23
+  fileIDToRecycleName:
+    100000: Armature
+    100002: Cube
+    100004: //RootNode
+    100006: foot.L
+    100008: foot.R
+    100010: front_foot.L
+    100012: front_foot.R
+    100014: front_shin.L
+    100016: front_shin.R
+    100018: front_thigh.L
+    100020: front_thigh.R
+    100022: front_toe.L
+    100024: front_toe.L_end
+    100026: front_toe.R
+    100028: front_toe.R_end
+    100030: Head
+    100032: Head_end
+    100034: hip.L
+    100036: hip.R
+    100038: Neck
+    100040: shin.L
+    100042: shin.R
+    100044: shoulder.L
+    100046: shoulder.R
+    100048: Stomach
+    100050: Tail
+    100052: Tail_end
+    100054: thigh.L
+    100056: thigh.R
+    100058: toe.L
+    100060: toe.L_end
+    100062: toe.R
+    100064: toe.R_end
+    100066: Upperchest
+    400000: Armature
+    400002: Cube
+    400004: //RootNode
+    400006: foot.L
+    400008: foot.R
+    400010: front_foot.L
+    400012: front_foot.R
+    400014: front_shin.L
+    400016: front_shin.R
+    400018: front_thigh.L
+    400020: front_thigh.R
+    400022: front_toe.L
+    400024: front_toe.L_end
+    400026: front_toe.R
+    400028: front_toe.R_end
+    400030: Head
+    400032: Head_end
+    400034: hip.L
+    400036: hip.R
+    400038: Neck
+    400040: shin.L
+    400042: shin.R
+    400044: shoulder.L
+    400046: shoulder.R
+    400048: Stomach
+    400050: Tail
+    400052: Tail_end
+    400054: thigh.L
+    400056: thigh.R
+    400058: toe.L
+    400060: toe.L_end
+    400062: toe.R
+    400064: toe.R_end
+    400066: Upperchest
+    2100000: Material.001
+    4300000: Cube
+    7400000: Armature|Sit
+    7400002: Armature|walk
+    7400004: Armature|walk2
+    9500000: //RootNode
+    13700000: Cube
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.001
+    second: {fileID: 2100000, guid: 722a409950b22694681ce599d36cc35c, type: 2}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    previousCalculatedGlobalScale: 0.01
+    hasPreviousCalculatedGlobalScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
