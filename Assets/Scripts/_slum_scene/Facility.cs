@@ -6,6 +6,8 @@ public abstract class Facility : MonoBehaviour {
 	protected string facilityName;
 	protected string facilityDescription;
 	protected string[] optionNames = new string[3];
+	public int openningMinute = 0;
+	public int closingMinute = 0;
 
 	private bool facilityActive;
 	private bool jobActive;
@@ -16,12 +18,12 @@ public abstract class Facility : MonoBehaviour {
 	private int interactionCount = 0;
 	private int lastInteractionDay = 0;
 
-	private GameObject facilityIcon;
+	//private GameObject facilityIcon;
 	protected FacilityBtnData[] btnDatas = new FacilityBtnData[3];
 	// Use this for initialization
 	void Start () {
 		collider = GetComponent<BoxCollider>();
-		facilityIcon = transform.GetChild(0).gameObject;
+		//facilityIcon = transform.GetChild(0).gameObject;
 		InitiateData();
 	}
 
@@ -43,8 +45,13 @@ public abstract class Facility : MonoBehaviour {
 		}
 	}
 
+	public void CheckFacilityActive(int minutesGone) {
+		facilityActive = (minutesGone >= openningMinute && minutesGone < closingMinute);
+	}
+
 	private void OnTriggerEnter(Collider other) {
-		if (facilityActive && other.tag == "Player") {
+		//Debug.Log(facilityActive);
+		if (other.tag == "Player") {
 			Debug.Log("enter");
 			SlumWorld.GetInstance().ShowInteractionIcon(this);
 		}

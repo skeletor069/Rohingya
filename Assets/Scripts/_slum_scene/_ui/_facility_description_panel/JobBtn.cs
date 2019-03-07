@@ -6,6 +6,7 @@ public class JobBtn : MonoBehaviour, FacilityDescriptionBtn {
 	private Image highlight;
 	public Slider relationSlider;
 	public TextMeshProUGUI alertText;
+	public Image progressImage;
 	
 	void Awake () {
 		
@@ -22,6 +23,10 @@ public class JobBtn : MonoBehaviour, FacilityDescriptionBtn {
 
 	public void SetBtnData(FacilityBtnData btnData) {
 		
+	}
+
+	public void SetProgress(float fillAmount) {
+		progressImage.fillAmount = fillAmount;
 	}
 
 	public void SetRelationData(int relation) {

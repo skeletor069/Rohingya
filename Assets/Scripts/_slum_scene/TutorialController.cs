@@ -23,12 +23,21 @@ public class TutorialController : MonoBehaviour {
 	public Facility teaStallFacility;
 	public Facility homeFacility;
 
+	public Transform facilityNamesHolder;
+	private List<GameObject> facilityNames = new List<GameObject>();
+
 	private void Awake() {
 		textAnimator = tutorialText.GetComponent<Animator>();
+		for (int i = 0; i < facilityNamesHolder.childCount; i++) {
+			facilityNames.Add(facilityNamesHolder.GetChild(i).gameObject);
+		}
+			
 	}
 
 	void Start () {
-		
+		for (int i = 0; i < facilityNames.Count; i++) {
+			facilityNames[i].SetActive(false);
+		}
 		StartCoroutine(TutorialRoutine2());
 	}
 
@@ -56,24 +65,39 @@ public class TutorialController : MonoBehaviour {
 	}
 
 	IEnumerator TutorialRoutine2() {
+		GameController.GetInstance().IsTutorialRunning = true;
+		SlumWorld.GetInstance().DectivateAllFacilities();
+		homeFacility.gameObject.SetActive(false);
+		trashFacility.gameObject.SetActive(false);
 		
 		hero.SetMovementActive(false);
 		yield return new WaitForSeconds(1);
-//		CallPedestrianNearby();
-//		facilityPanel.TutorialMode(this);
-//		yield return StartCoroutine(InitialTexts());
-//		yield return StartCoroutine(ConversationWithPedestrian2());
-//		yield return StartCoroutine(EnergyBarShowRoutine());
-//		yield return FoodBarShowRoutine();
+		CallPedestrianNearby();
+		facilityPanel.TutorialMode(this);
+		yield return StartCoroutine(InitialTexts());
+		yield return StartCoroutine(ConversationWithPedestrian2());
+		yield return StartCoroutine(EnergyBarShowRoutine());
+		homeIcon.SetActive(false);
+		yield return FoodBarShowRoutine();
 		StartSimulation();
 	}
 
 	private void StartSimulation() {
 		facilityPanel.NormalMode();
 		trashFacility.FacilityActive = true;
-		hero.SetMovementActive(true);
+		trashFacility.gameObject.SetActive(true);
+		homeFacility.gameObject.SetActive(true);
 		SlumWorld.GetInstance().ActivateAllFacilities();
+		
+		hero.SetMovementActive(true);
+		
+		
 		GameController.GetInstance().StartSurvival();
+		for (int i = 0; i < facilityNames.Count; i++) {
+			facilityNames[i].SetActive(true);
+		}
+
+		GameController.GetInstance().IsTutorialRunning = false;
 	}
 
 	IEnumerator FacilityPanelCloseWait() {
@@ -85,7 +109,8 @@ public class TutorialController : MonoBehaviour {
 
 	IEnumerator FoodBarShowRoutine() {
 		GameController.GetInstance().World.SetMinutesGone(600);
-		homeFacility.FacilityActive = false;
+		//homeFacility.FacilityActive = false;
+		homeFacility.gameObject.SetActive(false);
 		hero.SetMovementActive(false);
 		yield return StartCoroutine(speechPartner.SpeakRoutine("Did you have a good sleep, kiddo?", true));
 		yield return StartCoroutine(hero.SpeakRoutine("Yes, thanks.", false));
@@ -132,6 +157,7 @@ public class TutorialController : MonoBehaviour {
 		hero.SetMovementActive(true);
 		homeIcon.SetActive(true);
 		homeFacility.FacilityActive = true;
+		homeFacility.gameObject.SetActive(true);
 		yield return StartCoroutine(FacilityPanelCloseWait());
 		
 	}

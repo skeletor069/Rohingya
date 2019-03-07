@@ -58,6 +58,14 @@ public class SlumWorld : MonoBehaviour {
 	public void ActivateAllFacilities() {
 		for (int i = 0; i < facilities.Length; i++) {
 			facilities[i].FacilityActive = true;
+			facilities[i].gameObject.SetActive(true);
+		}
+	}
+	
+	public void DectivateAllFacilities() {
+		for (int i = 0; i < facilities.Length; i++) {
+			facilities[i].FacilityActive = false;
+			facilities[i].gameObject.SetActive(false);
 		}
 	}
 
@@ -123,24 +131,31 @@ public class SlumWorld : MonoBehaviour {
 	}
 
 	void FacilityActivateCheck() {
-		float hour = gameController.World.GetHour();
-		if (hour > 8 && hour < 21) {
-			for (int i = 0; i < foodFacilities.Length; i++)
-				foodFacilities[i].FacilityActive = true;
-		}
-		else {
-			for (int i = 0; i < foodFacilities.Length; i++)
-				foodFacilities[i].FacilityActive = false;
-		}
 
-		if (hour > 10 && hour < 19) {
-			for (int i = 0; i < dealerFacilities.Length; i++)
-				dealerFacilities[i].FacilityActive = true;
-		}
-		else {
-			for (int i = 0; i < dealerFacilities.Length; i++)
-				dealerFacilities[i].FacilityActive = false;
-		}
+		float minutesGone = gameController.World.GetMinutesGone();
+		for (int i = 0; i < foodFacilities.Length; i++)
+			foodFacilities[i].CheckFacilityActive((int)minutesGone);
+		for (int i = 0; i < dealerFacilities.Length; i++)
+			dealerFacilities[i].CheckFacilityActive((int)minutesGone);
+		
+//		float hour = gameController.World.GetHour();
+//		if (hour > 8 && hour < 21) {
+//			for (int i = 0; i < foodFacilities.Length; i++)
+//				foodFacilities[i].FacilityActive = true;
+//		}
+//		else {
+//			for (int i = 0; i < foodFacilities.Length; i++)
+//				foodFacilities[i].FacilityActive = false;
+//		}
+//
+//		if (hour > 10 && hour < 19) {
+//			for (int i = 0; i < dealerFacilities.Length; i++)
+//				dealerFacilities[i].FacilityActive = true;
+//		}
+//		else {
+//			for (int i = 0; i < dealerFacilities.Length; i++)
+//				dealerFacilities[i].FacilityActive = false;
+//		}
 	}
 
 	void ShowPauseMenu() {
@@ -187,10 +202,10 @@ public class SlumWorld : MonoBehaviour {
 		simulationPanel.StartOverlay();
 		yield return new WaitForSeconds(3);
 		gameController.World.Update(minutes);
-		gameController.World.ActionPerformed(tokens, minutes);
+		gameController.World.UpdateHeroAttribute(tokens);
 		simulationPanel.DissolveOverlay();
-		yield return new WaitForSeconds(1);
 		gameController.WorldRunning = true;
+		//yield return new WaitForSeconds(1);
 		facilityDescriptionPanel.ClosePanel();
 	}
 
@@ -215,19 +230,22 @@ public class SlumWorld : MonoBehaviour {
 			heroConfig.foodPerMinute = -targetFood;
 			gameController.World.Hero.SetHeroConfig(heroConfig);
 		}
-
+		if(!gameController.IsTutorialRunning)
+			player.gameObject.SetActive(false);
 		facilityDescriptionPanel.InteractionActive = false;
 		Time.timeScale = (minutes > 30)?16:8;
 		float accum = 0;
 		while (accum < minutes) {
 			accum += Time.deltaTime;
+			facilityDescriptionPanel.SetCurrentActionProgress(accum/minutes);
 			yield return new WaitForEndOfFrame();
 		}
-
+		player.gameObject.SetActive(true);
+		facilityDescriptionPanel.SetCurrentActionProgress(0);
 		facilityDescriptionPanel.InteractionActive = true;
 		gameController.World.Hero.SetHeroConfig(initialHeroConfig);
 		Time.timeScale = 1;
-		gameController.World.ActionPerformed(tokens, minutes);
+		gameController.World.UpdateHeroAttribute(tokens);
 		facilityDescriptionPanel.ClosePanel();
 	}
 
@@ -242,15 +260,16 @@ public class SlumWorld : MonoBehaviour {
 		float accum = 0;
 		while (accum < minutes) {
 			accum += Time.deltaTime;
+			facilityDescriptionPanel.SetCurrentActionProgress(accum/minutes);
 			yield return new WaitForEndOfFrame();
 		}
-
+		facilityDescriptionPanel.SetCurrentActionProgress(0);
 		facilityDescriptionPanel.InteractionActive = true;
 		Time.timeScale = 1;
 		for (int i = 0; i < trashItems.Count; i++) {
 			GameController.GetInstance().World.Inventory.AddItem(trashItems[i]);	
 		}
-		gameController.World.ActionPerformed(new List<AttributeToken>(), minutes);
+		//gameController.World.ActionPerformed(new List<AttributeToken>(), minutes);
 		facilityDescriptionPanel.ClosePanel();
 	}
 

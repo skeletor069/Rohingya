@@ -19,4 +19,5 @@ public interface FacilityDescriptionBtn {
 	void SetBtnStateAtive(bool active);
 	void SetVisible(bool active);
 	void SetBtnData(FacilityBtnData btnData);
+	void SetProgress(float fillAmount);
 }

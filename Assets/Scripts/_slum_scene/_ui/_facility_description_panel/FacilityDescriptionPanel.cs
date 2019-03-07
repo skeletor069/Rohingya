@@ -18,6 +18,12 @@ public class FacilityDescriptionPanel : MonoBehaviour {
 	private TutorialController tutorialController;
 	private bool jobLocked = false;
 	public static Color foodColor, energyColor, moneyColor;
+	public TextMeshProUGUI statusText;
+	public TextMeshProUGUI activeHoursText;
+	public Color greenColor;
+	public Color redColor;
+
+	private FacilityDescriptionBtn currentBtn;
 
 	void Awake() {
 		foodColor = new Color(11f/255, 173f/255, 63f/255);
@@ -43,8 +49,34 @@ public class FacilityDescriptionPanel : MonoBehaviour {
 		if (!facility.JobActive) {
 			actionBtns.RemoveAt(1);
 			jobBtn.SetVisible(false);
+			activeHoursText.enabled = false;
+			statusText.enabled = false;
 		}
 		else {
+			activeHoursText.enabled = true;
+			statusText.enabled = true;
+
+			if (facility.FacilityActive) {
+				statusText.text = "Open";
+				int hour = (facility.closingMinute / 60);
+				int minute = facility.closingMinute % 60;
+				activeHoursText.text = "Closes at " + ((hour < 10)?"0":"") + hour + ":" + ((minute<10)?"0":"")+minute + " uhr";
+				statusText.color = greenColor;
+				activeHoursText.color = redColor;
+				// status color green
+				// notification color red
+			}
+			else {
+				statusText.text = "Closed";
+				int hour = (facility.openningMinute / 60);
+				int minute = facility.openningMinute % 60;
+				activeHoursText.text = "Opening at " + ((hour < 10)?"0":"") + hour + ":" + ((minute<10)?"0":"")+minute + " uhr";
+				statusText.color = redColor;
+				activeHoursText.color = greenColor;
+				// status color red
+				// notification color green
+			}
+
 			jobBtn.SetRelationData(facility.GetRelationStatus());
 			if (facility.IsRelationMax()) {
 				// job active
@@ -60,6 +92,8 @@ public class FacilityDescriptionPanel : MonoBehaviour {
 			
 		interactionActive = true;
 		this.facility = facility;
+		if(currentBtn != null)
+			currentBtn.SetProgress(0);
 		facilityNameTxt.text = facility.GetFacilityName();
 		facilityDescriptionTxt.text = facility.GetFacilityDescription();
 //		PopulateBtnNames(facility.GetOptionNames(), facility.JobActive);
@@ -71,6 +105,12 @@ public class FacilityDescriptionPanel : MonoBehaviour {
 			InventoryUI.GetInstance().ShowInventoryPanel();
 		
 		
+	}
+
+	public void SetCurrentActionProgress(float fillAmount) {
+//		if(currentBtn != null)
+//			currentBtn.SetProgress(fillAmount);
+		actionBtns[selectedIndex].SetProgress(fillAmount);
 	}
 
 	void PopulateBtnNames(string[] optionNames, bool jobActive) {
@@ -93,28 +133,47 @@ public class FacilityDescriptionPanel : MonoBehaviour {
 						break;
 					case 1:
 						if (facility.JobActive) {
-							if(!jobLocked)
+							if (!jobLocked) {
+								currentBtn = jobBtn;
 								facility.DoJob();
+							}
+								
 						}
-						else 
+						else {
+							currentBtn = actionBtns[0];
 							facility.ExecuteAction(0);
+						}
+							
 						
 						break;
 					case 2:
-						if(facility.JobActive)
+						if (facility.JobActive) {
+							currentBtn = actionBtns[0];
 							facility.ExecuteAction(0);
-						else 
+						}
+						else {
+							currentBtn = actionBtns[1];
 							facility.ExecuteAction(1);
+						}
+
+						
 						break;
 					case 3:
-						if(facility.JobActive)
+						if (facility.JobActive) {
+							currentBtn = actionBtns[1];
 							facility.ExecuteAction(1);
-						else 
+						}
+						else {
+							currentBtn = actionBtns[2];
 							facility.ExecuteAction(2);
+						}
 						break;
 					case 4:
-						if(facility.JobActive)
+						if (facility.JobActive) {
+							currentBtn = actionBtns[2];
 							facility.ExecuteAction(2);
+						}
+							
 						
 						break;
 				}
@@ -149,12 +208,21 @@ public class FacilityDescriptionPanel : MonoBehaviour {
 	
 
 	private void ButtonSelectionDown() {
+		if (!facility.FacilityActive) {
+			ResetSelection();
+			return;
+		}
+			
 		actionBtns[selectedIndex].SetBtnStateAtive(false);
 		selectedIndex = Mathf.Max((selectedIndex - 1), 0);
 		actionBtns[selectedIndex].SetBtnStateAtive(true);
 	}
 
 	private void ButtonSelectionUp() {
+		if (!facility.FacilityActive) {
+			ResetSelection();
+			return;
+		}
 		actionBtns[selectedIndex].SetBtnStateAtive(false);
 		selectedIndex = Mathf.Min((selectedIndex + 1), (actionBtns.Count - 1));
 		actionBtns[selectedIndex].SetBtnStateAtive(true);

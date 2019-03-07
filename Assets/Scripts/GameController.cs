@@ -5,6 +5,7 @@ public class GameController : MonoBehaviour {
 	private static GameController instance;
 	private World world;
 	private bool worldRunning = false;
+	private bool isTutorialRunning = false;
 	
 	void Awake () {
 		instance = this;
@@ -33,6 +34,11 @@ public class GameController : MonoBehaviour {
 	public bool WorldRunning {
 		get { return worldRunning; }
 		set { worldRunning = value; }
+	}
+
+	public bool IsTutorialRunning {
+		get { return isTutorialRunning; }
+		set { isTutorialRunning = value; }
 	}
 
 	public void GoToSplashScene() {

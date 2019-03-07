@@ -53,7 +53,8 @@ public class World
 		int tempMinutesGone = (int)minutesGone;
 		int hour = tempMinutesGone / 60;
 		int minute = tempMinutesGone % 60;
-		return ((hour%12 < 10)?"0":"")+(hour%12) + ":" +((minute < 10)?"0":"")+ minute + " " + ((hour < 12) ? "am" : "pm");
+//		return ((hour%12 < 10)?"0":"")+(hour%12) + ":" +((minute < 10)?"0":"")+ minute + " " + ((hour < 12) ? "am" : "pm");
+		return ((hour < 10)?"0":"")+hour + ":" +((minute < 10)?"0":"")+ minute;
 	}
 
 	public float GetMinutesGone() {
@@ -100,8 +101,7 @@ public class World
 		return dataHud;
 	}
 
-	public void ActionPerformed(List<AttributeToken> tokens, float minutes) {
-		//Update(minutes);
+	public void UpdateHeroAttribute(List<AttributeToken> tokens) {
 		hero.UpdateAttributes(tokens);
 	}
 }

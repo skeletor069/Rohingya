@@ -9,6 +9,7 @@ public class FacilityActionBtn : MonoBehaviour,FacilityDescriptionBtn {
 	private TextMeshProUGUI timeText;
 	private TextMeshProUGUI[] changeTexts = new TextMeshProUGUI[2];
 	private TextMeshProUGUI notificationText;
+	private Image progressImage;
 	
 	void Awake () {
 		btnText = transform.GetChild(0).GetComponent<TextMeshProUGUI>();
@@ -17,6 +18,7 @@ public class FacilityActionBtn : MonoBehaviour,FacilityDescriptionBtn {
 		changeTexts[0] = transform.GetChild(3).GetChild(0).GetComponent<TextMeshProUGUI>();
 		changeTexts[1] = transform.GetChild(3).GetChild(1).GetComponent<TextMeshProUGUI>();
 		notificationText = transform.GetChild(4).GetComponent<TextMeshProUGUI>();
+		progressImage = transform.GetChild(5).GetComponent<Image>();
 	}
 	
 	public void SetBtnName(string btnName) {
@@ -51,6 +53,10 @@ public class FacilityActionBtn : MonoBehaviour,FacilityDescriptionBtn {
 		}
 
 		notificationText.text = btnData.notificationText;
+	}
+
+	public void SetProgress(float fillAmount) {
+		progressImage.fillAmount = fillAmount;
 	}
 
 

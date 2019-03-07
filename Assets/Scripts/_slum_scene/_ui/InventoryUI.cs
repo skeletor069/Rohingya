@@ -44,7 +44,7 @@ public class InventoryUI : MonoBehaviour {
 	public void ShowInventoryPanel() {
 		panel.SetActive(true);
 		ItemSlot[] itemSlots = GameController.GetInstance().World.Inventory.GetItemSlots();
-		Debug.Log("count " + itemSlots.Length);
+		//Debug.Log("count " + itemSlots.Length);
 		for (int i = 0; i < itemSlots.Length; i++) {
 			if(itemSlots[i].IsEmpty())
 				slotUis[i].SetEmpty();

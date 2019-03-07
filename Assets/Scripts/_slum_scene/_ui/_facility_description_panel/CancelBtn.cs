@@ -20,7 +20,11 @@ public class CancelBtn : MonoBehaviour, FacilityDescriptionBtn {
 	public void SetBtnData(FacilityBtnData btnData) {
 		
 	}
-	
+
+	public void SetProgress(float fillAmount) {
+		
+	}
+
 	public void SetVisible(bool active) {
 		gameObject.SetActive(active);
 	}
