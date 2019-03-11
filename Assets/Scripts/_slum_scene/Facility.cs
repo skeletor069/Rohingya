@@ -5,7 +5,7 @@ using UnityEngine;
 public abstract class Facility : MonoBehaviour {
 	protected string facilityName;
 	protected string facilityDescription;
-	protected string[] optionNames = new string[3];
+//	protected string[] optionNames = new string[3];
 	public int openningMinute = 0;
 	public int closingMinute = 0;
 
@@ -52,7 +52,7 @@ public abstract class Facility : MonoBehaviour {
 	private void OnTriggerEnter(Collider other) {
 		//Debug.Log(facilityActive);
 		if (other.tag == "Player") {
-			Debug.Log("enter");
+//			Debug.Log("enter");
 			SlumWorld.GetInstance().ShowInteractionIcon(this);
 		}
 	}
@@ -77,9 +77,9 @@ public abstract class Facility : MonoBehaviour {
 		return facilityDescription;
 	}
 
-	public string[] GetOptionNames() {
-		return optionNames;
-	}
+//	public string[] GetOptionNames() {
+//		return optionNames;
+//	}
 
 	public FacilityBtnData[] GetActionBtnsData() {
 		return btnDatas;

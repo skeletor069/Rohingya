@@ -106,4 +106,6 @@ public class Hero3d : MonoBehaviour {
 		agent.SetDestination(transform.position);
 		agent.velocity = Vector3.zero;
 	}
+
+	
 }

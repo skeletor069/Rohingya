@@ -6,9 +6,9 @@ public class Dhaba : Facility {
 	public override void InitiateData() {
 		facilityName = "Dhaba";
 		facilityDescription = "Some guys selling low quality foods for lunch and dinner";
-		optionNames[0] = "small lunch plate (-৳35)";
-		optionNames[1] = "big lunch plate (-৳60)";
-		optionNames[2] = "bread with curry (-৳30)";
+//		optionNames[0] = "small lunch plate (-৳35)";
+//		optionNames[1] = "big lunch plate (-৳60)";
+//		optionNames[2] = "bread with curry (-৳30)";
 		JobActive = true;
 		
 		btnDatas[0] = new FacilityBtnData();

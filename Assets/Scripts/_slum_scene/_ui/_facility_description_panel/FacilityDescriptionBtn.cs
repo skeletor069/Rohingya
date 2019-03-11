@@ -10,6 +10,7 @@ public struct FacilityBtnData {
 	public string[] changesText;
 	public Color[] changesColor;
 	public string notificationText;
+	public SoundTypes actionSound;
 }
 
 public interface FacilityDescriptionBtn {

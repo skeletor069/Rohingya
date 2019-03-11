@@ -1,13 +1,97 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEditor.Audio;
+using UnityEngine;
+using UnityEngine.Audio;
+
+public enum SoundTypes {
+	EAT_JUICY, EAT_CRUNCHY, DRINK, SLEEP, EAT_MEAL, SEARCH, SELL, WORK_FOOD, WORK_WORKSHOP
+}
 
 public class SoundManager : MonoBehaviour {
 	
 	public AudioSource dayChannel;
 	public AudioSource nightChannel;
 	public AudioSource morningChannel;
+	public AudioSource eatBanana;
+	public AudioSource eatBiscuit;
+	public AudioSource drinkCoffee;
+	public AudioSource sleeping;
+	public AudioSource stepL;
+	public AudioSource stepR;
 	
+	private AudioMixer mixer;
+	public AudioMixerSnapshot backgroundActiveSnapshot;
+	public AudioMixerSnapshot performActionSnapshot;
+	public AudioMixerSnapshot sleepSnapshot;
+	private Dictionary<SoundTypes, AudioSource> audioSources;
+	public AudioMixerGroup ambientGroup;
 
-	public void UpdateSound(int minutesGone) {
+	private static SoundManager instance;
+
+	void Awake() {
+		instance = this;
+		audioSources = new Dictionary<SoundTypes, AudioSource>();
+		audioSources.Add(SoundTypes.EAT_JUICY, eatBanana);
+		audioSources.Add(SoundTypes.EAT_CRUNCHY, eatBiscuit);
+		audioSources.Add(SoundTypes.DRINK, drinkCoffee);
+		audioSources.Add(SoundTypes.SLEEP, sleeping);
+		audioSources.Add(SoundTypes.EAT_MEAL, eatBanana);
+		audioSources.Add(SoundTypes.SEARCH, eatBanana);
+		audioSources.Add(SoundTypes.SELL, eatBanana);
+		audioSources.Add(SoundTypes.WORK_FOOD, eatBanana);
+		audioSources.Add(SoundTypes.WORK_WORKSHOP, eatBanana);
+		
+	}
+
+	public static SoundManager GetInstance() {
+		return instance;
+	}
+
+	public void PlayEatBiscuitSound() {
+		eatBiscuit.Play();
+	}
+
+	public void PlayEatBananaSound() {
+		eatBanana.Play();
+	}
+	
+	public void PlayDrinkCoffeeSound() {
+		drinkCoffee.Play();
+	}
+
+	public void PlaySound(SoundTypes soundType) {
+		if(audioSources.ContainsKey(soundType))
+			audioSources[soundType].Play();
+	}
+
+	public void PlayFootStep(bool leftFoot) {
+		if(leftFoot)
+			stepL.Play();
+		else 
+			stepR.Play();
+	}
+
+	public void SwitchToActionMode() {
+		performActionSnapshot.TransitionTo(.15f);
+	}
+
+	public void SwitchToNormalMode() {
+		backgroundActiveSnapshot.TransitionTo(2);
+	}
+
+	public void SwitchToSleepMode() {
+		sleepSnapshot.TransitionTo(2);
+	}
+
+	public void WarningMode() {
+		mixer.SetFloat("ambience_cutoff", 200);
+	}
+
+	public void NormalMode() {
+		mixer.SetFloat("ambience_cutoff", 8000);
+	}
+
+	public void UpdateAmbientSound(int minutesGone) {
 		// night-morning transition 4.30 - 5.30
 		// morning-day transition 7.00 - 8.00
 		// day sound - 0% at 7.00, 100% at 11.00 - 15.00, 0% at 20.00 

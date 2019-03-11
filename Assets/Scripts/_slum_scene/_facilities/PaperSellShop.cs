@@ -7,9 +7,9 @@ public class PaperSellShop : Facility {
 	public override void InitiateData() {
 		facilityName = "Paper Dealer";
 		facilityDescription = "A guy buying scrap papers. He makes packets out of it and sells later.";
-		optionNames[0] = "Sell 10 papers ("+Balancer.GetInstance().GetPaperPrice(10)+")";
-		optionNames[1] = "Sell 20 papers ("+Balancer.GetInstance().GetPaperPrice(20)+")";
-		optionNames[2] = "Sell 40 papers ("+Balancer.GetInstance().GetPaperPrice(40)+")";
+//		optionNames[0] = "Sell 10 papers ("+Balancer.GetInstance().GetPaperPrice(10)+")";
+//		optionNames[1] = "Sell 20 papers ("+Balancer.GetInstance().GetPaperPrice(20)+")";
+//		optionNames[2] = "Sell 40 papers ("+Balancer.GetInstance().GetPaperPrice(40)+")";
 		JobActive = true;
 		ShowInventory = true;
 		

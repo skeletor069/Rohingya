@@ -7,9 +7,9 @@ public class SleepingArea : Facility {
 	public override void InitiateData() {
 		facilityName = "Sleeping Area 1";
 		facilityDescription = "Sleeping is must to revive energy.";
-		optionNames[0] = "Sleep 3h";
-		optionNames[1] = "Sleep 6h";
-		optionNames[2] = "Sleep 8h";
+//		optionNames[0] = "Sleep 3h";
+//		optionNames[1] = "Sleep 6h";
+//		optionNames[2] = "Sleep 8h";
 		energyPerHour = 60 * 100f / 480;
 		JobActive = false;
 		

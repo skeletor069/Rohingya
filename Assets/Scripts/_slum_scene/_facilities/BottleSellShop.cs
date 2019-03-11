@@ -7,9 +7,9 @@ public class BottleSellShop : Facility {
 	public override void InitiateData() {
 		facilityName = "Bottle Dealer";
 		facilityDescription = "A guy buying plastic bottles. He sells them to different shops selling liquid items..";
-		optionNames[0] = "Sell 10 bottles ("+Balancer.GetInstance().GetBottlePrice(10)+")";
-		optionNames[1] = "Sell 20 bottles ("+Balancer.GetInstance().GetBottlePrice(20)+")";
-		optionNames[2] = "Sell 40 bottles ("+Balancer.GetInstance().GetBottlePrice(40)+")";
+//		optionNames[0] = "Sell 10 bottles ("+Balancer.GetInstance().GetBottlePrice(10)+")";
+//		optionNames[1] = "Sell 20 bottles ("+Balancer.GetInstance().GetBottlePrice(20)+")";
+//		optionNames[2] = "Sell 40 bottles ("+Balancer.GetInstance().GetBottlePrice(40)+")";
 		JobActive = true;
 		ShowInventory = true;
 		

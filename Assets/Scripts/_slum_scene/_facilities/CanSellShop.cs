@@ -7,9 +7,9 @@ public class CanSellShop : Facility {
 	public override void InitiateData() {
 		facilityName = "Can Dealer";
 		facilityDescription = "A guy buying thrown away cans. And he pays well for them.";
-		optionNames[0] = "Sell 10 cans ("+Balancer.GetInstance().GetCanPrice(10)+")";
-		optionNames[1] = "Sell 20 cans ("+Balancer.GetInstance().GetCanPrice(20)+")";
-		optionNames[2] = "Sell 40 cans ("+Balancer.GetInstance().GetCanPrice(40)+")";
+//		optionNames[0] = "Sell 10 cans ("+Balancer.GetInstance().GetCanPrice(10)+")";
+//		optionNames[1] = "Sell 20 cans ("+Balancer.GetInstance().GetCanPrice(20)+")";
+//		optionNames[2] = "Sell 40 cans ("+Balancer.GetInstance().GetCanPrice(40)+")";
 		JobActive = true;
 		ShowInventory = true;
 		

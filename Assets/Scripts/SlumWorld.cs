@@ -38,7 +38,7 @@ public class SlumWorld : MonoBehaviour {
 	}
 
 	private void Start() {
-		HUD.GetInstance().HideHud();
+		
 	}
 
 	public static SlumWorld GetInstance() {
@@ -90,7 +90,7 @@ public class SlumWorld : MonoBehaviour {
 			}
 		}
 		dayNightAnim.SetFloat(animTime, gameController.World.GetHour());
-		soundManager.UpdateSound((int)gameController.World.GetMinutesGone());
+		soundManager.UpdateAmbientSound((int)gameController.World.GetMinutesGone());
 		if(gameController.WorldRunning)
 			FacilityActivateCheck();
 
@@ -137,25 +137,6 @@ public class SlumWorld : MonoBehaviour {
 			foodFacilities[i].CheckFacilityActive((int)minutesGone);
 		for (int i = 0; i < dealerFacilities.Length; i++)
 			dealerFacilities[i].CheckFacilityActive((int)minutesGone);
-		
-//		float hour = gameController.World.GetHour();
-//		if (hour > 8 && hour < 21) {
-//			for (int i = 0; i < foodFacilities.Length; i++)
-//				foodFacilities[i].FacilityActive = true;
-//		}
-//		else {
-//			for (int i = 0; i < foodFacilities.Length; i++)
-//				foodFacilities[i].FacilityActive = false;
-//		}
-//
-//		if (hour > 10 && hour < 19) {
-//			for (int i = 0; i < dealerFacilities.Length; i++)
-//				dealerFacilities[i].FacilityActive = true;
-//		}
-//		else {
-//			for (int i = 0; i < dealerFacilities.Length; i++)
-//				dealerFacilities[i].FacilityActive = false;
-//		}
 	}
 
 	void ShowPauseMenu() {
@@ -200,12 +181,15 @@ public class SlumWorld : MonoBehaviour {
 		facilityDescriptionPanel.ClosePanel(true);
 		gameController.WorldRunning = false;
 		simulationPanel.StartOverlay();
-		yield return new WaitForSeconds(3);
+		soundManager.SwitchToSleepMode();
+		yield return new WaitForSeconds(2);
+		soundManager.PlaySound(SoundTypes.SLEEP);
+		yield return new WaitForSeconds(4);
+		soundManager.SwitchToNormalMode();
 		gameController.World.Update(minutes);
 		gameController.World.UpdateHeroAttribute(tokens);
 		simulationPanel.DissolveOverlay();
 		gameController.WorldRunning = true;
-		//yield return new WaitForSeconds(1);
 		facilityDescriptionPanel.ClosePanel();
 	}
 
@@ -223,16 +207,20 @@ public class SlumWorld : MonoBehaviour {
 				break;	
 			}
 		}
-
+		Debug.LogError("Initial food " + gameController.World.Hero.Food);
 		if (foodToken.amount > 0) {
 			float targetFood = foodToken.amount / minutes;
+			Debug.Log("Target food " + targetFood + ", total food " + foodToken.amount);
 			HeroConfig heroConfig = gameController.World.Hero.GetHeroConfig();
 			heroConfig.foodPerMinute = -targetFood;
 			gameController.World.Hero.SetHeroConfig(heroConfig);
+			
 		}
 		if(!gameController.IsTutorialRunning)
 			player.gameObject.SetActive(false);
 		facilityDescriptionPanel.InteractionActive = false;
+		soundManager.SwitchToActionMode();
+//		soundManager.PlaySound();
 		Time.timeScale = (minutes > 30)?16:8;
 		float accum = 0;
 		while (accum < minutes) {
@@ -240,6 +228,8 @@ public class SlumWorld : MonoBehaviour {
 			facilityDescriptionPanel.SetCurrentActionProgress(accum/minutes);
 			yield return new WaitForEndOfFrame();
 		}
+		Debug.LogError("Final food " + gameController.World.Hero.Food);
+		soundManager.SwitchToNormalMode();
 		player.gameObject.SetActive(true);
 		facilityDescriptionPanel.SetCurrentActionProgress(0);
 		facilityDescriptionPanel.InteractionActive = true;
@@ -269,7 +259,6 @@ public class SlumWorld : MonoBehaviour {
 		for (int i = 0; i < trashItems.Count; i++) {
 			GameController.GetInstance().World.Inventory.AddItem(trashItems[i]);	
 		}
-		//gameController.World.ActionPerformed(new List<AttributeToken>(), minutes);
 		facilityDescriptionPanel.ClosePanel();
 	}
 

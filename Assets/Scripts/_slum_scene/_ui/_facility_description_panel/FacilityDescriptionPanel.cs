@@ -88,7 +88,7 @@ public class FacilityDescriptionPanel : MonoBehaviour {
 			}
 		}
 
-		Debug.Log("Relation " + facility.GetRelationStatus());
+//		Debug.Log("Relation " + facility.GetRelationStatus());
 			
 		interactionActive = true;
 		this.facility = facility;

@@ -65,21 +65,23 @@ public class TutorialController : MonoBehaviour {
 	}
 
 	IEnumerator TutorialRoutine2() {
-		GameController.GetInstance().IsTutorialRunning = true;
-		SlumWorld.GetInstance().DectivateAllFacilities();
-		homeFacility.gameObject.SetActive(false);
-		trashFacility.gameObject.SetActive(false);
-		
-		hero.SetMovementActive(false);
-		yield return new WaitForSeconds(1);
-		CallPedestrianNearby();
-		facilityPanel.TutorialMode(this);
-		yield return StartCoroutine(InitialTexts());
-		yield return StartCoroutine(ConversationWithPedestrian2());
-		yield return StartCoroutine(EnergyBarShowRoutine());
-		homeIcon.SetActive(false);
-		yield return FoodBarShowRoutine();
+//		HUD.GetInstance().HideHud();
+//		GameController.GetInstance().IsTutorialRunning = true;
+//		SlumWorld.GetInstance().DectivateAllFacilities();
+//		homeFacility.gameObject.SetActive(false);
+//		trashFacility.gameObject.SetActive(false);
+//		
+//		hero.SetMovementActive(false);
+//		yield return new WaitForSeconds(1);
+//		CallPedestrianNearby();
+//		facilityPanel.TutorialMode(this);
+//		yield return StartCoroutine(InitialTexts());
+//		yield return StartCoroutine(ConversationWithPedestrian2());
+//		yield return StartCoroutine(EnergyBarShowRoutine());
+//		homeIcon.SetActive(false);
+//		yield return FoodBarShowRoutine();
 		StartSimulation();
+		yield return 0;
 	}
 
 	private void StartSimulation() {
@@ -88,7 +90,6 @@ public class TutorialController : MonoBehaviour {
 		trashFacility.gameObject.SetActive(true);
 		homeFacility.gameObject.SetActive(true);
 		SlumWorld.GetInstance().ActivateAllFacilities();
-		
 		hero.SetMovementActive(true);
 		
 		
