@@ -529,7 +529,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dayNightAnim: {fileID: 1308237548}
-  hour: 9
+  hour: 0
 --- !u!1001 &24469743
 Prefab:
   m_ObjectHideFlags: 0
@@ -74752,6 +74752,16 @@ MonoBehaviour:
   dayChannel: {fileID: 1226853279}
   nightChannel: {fileID: 1254621948}
   morningChannel: {fileID: 1938502472}
+  eatBanana: {fileID: 0}
+  eatBiscuit: {fileID: 0}
+  drinkCoffee: {fileID: 0}
+  sleeping: {fileID: 0}
+  stepL: {fileID: 0}
+  stepR: {fileID: 0}
+  backgroundActiveSnapshot: {fileID: 0}
+  performActionSnapshot: {fileID: 0}
+  sleepSnapshot: {fileID: 0}
+  ambientGroup: {fileID: 0}
 --- !u!1001 &1934940486
 Prefab:
   m_ObjectHideFlags: 0

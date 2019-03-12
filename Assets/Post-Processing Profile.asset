@@ -29,7 +29,7 @@ MonoBehaviour:
     m_Settings:
       excludeSkybox: 1
   antialiasing:
-    m_Enabled: 1
+    m_Enabled: 0
     m_Settings:
       method: 0
       fxaaSettings:
@@ -40,11 +40,11 @@ MonoBehaviour:
         stationaryBlending: 0.95
         motionBlending: 0.85
   ambientOcclusion:
-    m_Enabled: 0
+    m_Enabled: 1
     m_Settings:
-      intensity: 1.2
-      radius: 0.08
-      sampleCount: 10
+      intensity: 1.13
+      radius: 0.92
+      sampleCount: 6
       downsampling: 1
       forceForwardCompatibility: 1
       ambientOnly: 0
@@ -83,7 +83,7 @@ MonoBehaviour:
       sampleCount: 9
       frameBlending: 0
   eyeAdaptation:
-    m_Enabled: 1
+    m_Enabled: 0
     m_Settings:
       lowPercent: 45
       highPercent: 95
@@ -121,15 +121,15 @@ MonoBehaviour:
         neutralWhiteClip: 10
       basic:
         postExposure: 2
-        temperature: 9
-        tint: -9
-        hueShift: -4
-        saturation: 0.97
-        contrast: 0.93
+        temperature: -10
+        tint: 0
+        hueShift: 2
+        saturation: 0.869
+        contrast: 1.186
       channelMixer:
-        red: {x: 0.76, y: 0, z: 0}
-        green: {x: 0, y: 1, z: 0}
-        blue: {x: 0, y: 0, z: 0.92}
+        red: {x: 0.5, y: 0, z: 0}
+        green: {x: 0, y: 0.5, z: 0}
+        blue: {x: 0, y: 0, z: 0.3}
         currentEditingChannel: 0
       colorWheels:
         mode: 0
