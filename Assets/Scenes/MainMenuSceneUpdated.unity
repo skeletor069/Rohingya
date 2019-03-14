@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2389,6 +2389,7 @@ GameObject:
   - component: {fileID: 1642331745}
   - component: {fileID: 1642331747}
   - component: {fileID: 1642331746}
+  - component: {fileID: 1642331748}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -2456,6 +2457,18 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
+--- !u!114 &1642331748
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1642331744}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff26db721962cdf4a8edcdfa9a767d2a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  profile: {fileID: 11400000, guid: 3eeca8f4a66eb426ab0f417c0f39c32c, type: 2}
 --- !u!1 &1790197236
 GameObject:
   m_ObjectHideFlags: 0
@@ -2719,6 +2732,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mainMenu: {fileID: 839286213}
+  newGameWarning: {fileID: 0}
+  mainPanel: {fileID: 0}
 --- !u!4 &1978211041
 Transform:
   m_ObjectHideFlags: 0
