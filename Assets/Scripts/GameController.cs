@@ -6,9 +6,11 @@ public class GameController : MonoBehaviour {
 	private World world;
 	private bool worldRunning = false;
 	private bool isTutorialRunning = false;
+	DataManager dataManager;
 	
 	void Awake () {
 		instance = this;
+		dataManager = GetComponent<DataManager>();
 	}
 
 	void Start() {
@@ -61,11 +63,28 @@ public class GameController : MonoBehaviour {
 		SceneManager.LoadScene(Scenes.SLUM_SCENE);
 	}
 
+	public void SaveGame() {
+		dataManager.SaveWorld(world);
+	}
 
-	public void NewGame() {
-		world = new World();
+	public void LoadGame() {
+		world = dataManager.LoadWorld();
+		isTutorialRunning = false;
 		worldRunning = false;
 		GoToSlumScene();
+	}
+
+
+	public void NewGame() {
+		// if load data found, show prompt
+		world = new World();
+		worldRunning = false;
+		isTutorialRunning = true;
+		GoToSlumScene();
+	}
+
+	public bool HasSavedData() {
+		return dataManager.HasSavedData();
 	}
 
 	public void StartSurvival() {

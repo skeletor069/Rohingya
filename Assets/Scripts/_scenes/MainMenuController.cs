@@ -4,7 +4,10 @@ using UnityEngine;
 
 public class MainMenuController : MonoBehaviour, ITabMenuListener {
 
-	public TabbedMenu mainMenu; 
+	public TabbedMenu mainMenu;
+	public NewGameWarning newGameWarning;
+	public GameObject mainPanel;
+	
 	// Use this for initialization
 	void Start () {
 		mainMenu.Initiate(this, 0);
@@ -30,15 +33,27 @@ public class MainMenuController : MonoBehaviour, ITabMenuListener {
 				Settings();
 				break;
 		}
-		mainMenu.InteractionActive = false;
+		//mainMenu.InteractionActive = false;
 	}
+	
 
 	void NewGame() {
-		GameController.GetInstance().NewGame();
+		if (GameController.GetInstance().HasSavedData()) {
+			// show ui
+			mainPanel.SetActive(false);
+			newGameWarning.ShowNewGameWarning();
+		}else
+			GameController.GetInstance().NewGame();
 	}
 
 	void LoadGame() {
-		
+		if (GameController.GetInstance().HasSavedData()) {
+			GameController.GetInstance().LoadGame();
+		}
+		else {
+			// show ui
+		}
+
 	}
 
 	void Credits() {
@@ -48,4 +63,11 @@ public class MainMenuController : MonoBehaviour, ITabMenuListener {
 	void Settings() {
 		
 	}
+
+	public void ShowMainPanel() {
+		mainPanel.SetActive(true);
+		mainMenu.Initiate(this, 0);
+		mainMenu.InteractionActive = true;
+	}
+
 }

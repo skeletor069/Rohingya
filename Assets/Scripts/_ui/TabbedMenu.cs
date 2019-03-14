@@ -6,7 +6,7 @@ public class TabbedMenu : MonoBehaviour {
 	
 	private List<Animator> itemAnims;
 	private int selectedIndex;
-	private int ITEM_COUNT = 4;
+	public int ITEM_COUNT = 4;
 	private ITabMenuListener listener;
 	private bool interactionActive = false;
 

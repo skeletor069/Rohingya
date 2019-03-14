@@ -67,7 +67,13 @@ public class PauseMenu : MonoBehaviour {
 			}
 
 			if (Input.GetKeyDown(KeyCode.Return)) {
-				if(selectedIndex == 1)
+				if (selectedIndex == 0) {
+					Vector3 heroPosition = SlumWorld.GetInstance().player.transform.position;
+					GameController.GetInstance().World.SetHeroPositionAtSave(heroPosition.x, heroPosition.y, heroPosition.z);
+					GameController.GetInstance().SaveGame();
+				}
+					
+				else if(selectedIndex == 1)
 					ClosePauseMenu();
 			}
 

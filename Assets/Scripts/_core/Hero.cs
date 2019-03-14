@@ -11,6 +11,7 @@ public enum HeroAttributes {
 	HEALTH, ENERGY, FOOD, MONEY
 }
 
+[System.Serializable]
 public class AttributeToken {
 	public HeroAttributes attribute;
 	public float amount;
@@ -21,11 +22,13 @@ public class AttributeToken {
 	}
 }
 
+[System.Serializable]
 public struct HeroConfig {
 	public float foodPerMinute;
 	public float energyPerMinute;
 }
 
+[System.Serializable]
 public class Hero {
 	private HeroConfig heroConfig;
 	private HeroSkills heroSkill = HeroSkills.ENTRY_LEVEL;

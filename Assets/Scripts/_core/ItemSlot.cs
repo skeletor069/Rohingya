@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+[System.Serializable]
 public class ItemSlot {
 	public Item item;
 	private int MAX_COUNT = 30;

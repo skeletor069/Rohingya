@@ -245,9 +245,11 @@
           <e p="_ui" t="Include">
             <e p="AttributeUI.cs" t="Include" />
             <e p="ITabMenuListener.cs" t="Include" />
+            <e p="NewGameWarning.cs" t="Include" />
             <e p="TabbedMenu.cs" t="Include" />
           </e>
           <e p="CityMapController.cs" t="Include" />
+          <e p="DataManager.cs" t="Include" />
           <e p="FollowPlayer.cs" t="Include" />
           <e p="GameController.cs" t="Include" />
           <e p="Hero3d.cs" t="Include" />

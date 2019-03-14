@@ -1,8 +1,25 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
+public class SerializableVector {
+	public float x,y,z;
+
+	public SerializableVector(float x, float y, float z) {
+		this.x = x;
+		this.y = y;
+		this.z = z;
+	}
+
+	public SerializableVector() {
+		x = y = z = 0;
+	}
+}
+
+[System.Serializable]
 public class World
 {
+	
 	private int daysGone = 0;
 	private float minutesGone = 0;
 
@@ -10,16 +27,18 @@ public class World
 
 	private Hero hero;
 	private Inventory inventory;
-	List<ITickerSubscriber> sceneTickerSubscribers;
+//	List<ITickerSubscriber> sceneTickerSubscribers;
 	private DataHUD dataHud;
+	private SerializableVector heroPositionAtSave;
 	
 	
 	public World () {
 		hero = new Hero();
 		inventory = new Inventory();
-		sceneTickerSubscribers = new List<ITickerSubscriber>();
+//		sceneTickerSubscribers = new List<ITickerSubscriber>();
 		dataHud = new DataHUD();
 		minutesGone = 0;
+		heroPositionAtSave = new SerializableVector();
 	}
 
 	public Inventory Inventory {
@@ -29,6 +48,15 @@ public class World
 
 	public Hero Hero {
 		get { return hero; }
+	}
+
+	public void SetHeroPositionAtSave(float x, float y, float z) {
+		Debug.LogError(x + " " + y + " " + z);
+		heroPositionAtSave = new SerializableVector(x,y,z);
+	}
+
+	public SerializableVector GetHeroPositionAtSave() {
+		return heroPositionAtSave;
 	}
 
 	public void Update (float deltaTime)

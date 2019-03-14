@@ -28,6 +28,7 @@ public class SlumWorld : MonoBehaviour {
 
 	public Campfire[] campfires;
 	public SoundManager soundManager;
+	public TutorialController tutorialController;
 	
 	
 	
@@ -37,8 +38,47 @@ public class SlumWorld : MonoBehaviour {
 		gameController = GameController.GetInstance();
 	}
 
-	private void Start() {
-		
+	IEnumerator Start() {
+		if (gameController.IsTutorialRunning) {
+			StartCoroutine(tutorialController.TutorialRoutine());
+		}
+		else {
+			// load data
+			
+			SerializableVector heroPositionAtSave = gameController.World.GetHeroPositionAtSave();
+			//player.transform.position = new Vector3(heroPositionAtSave.x, heroPositionAtSave.y, heroPositionAtSave.z);
+			Debug.LogError(heroPositionAtSave.x + " " + heroPositionAtSave.y + " " + heroPositionAtSave.z);
+			Debug.LogError(player.transform.position);
+			ResetSceneWithCurrentWorldData();
+			gameController.WorldRunning = true;
+			facilityDescriptionPanel.NormalMode();
+			tutorialController.trashFacility.FacilityActive = true;
+			tutorialController.trashFacility.gameObject.SetActive(true);
+			home.gameObject.SetActive(true);
+			ActivateAllFacilities();
+			player.SetMovementActive(true);
+			yield return new WaitForSeconds(2f);
+			player.transform.position.Set(3,0,0);
+			Debug.LogError("done");
+			//player.transform.localPosition = new Vector3(heroPositionAtSave.x, heroPositionAtSave.y, heroPositionAtSave.z);
+		}
+	}
+
+	void ResetSceneWithCurrentWorldData() {
+		dayNightAnim.SetFloat(animTime, gameController.World.GetHour());
+		soundManager.UpdateAmbientSound((int)gameController.World.GetMinutesGone());
+		if(gameController.WorldRunning)
+			FacilityActivateCheck();
+
+		if (gameController.World.GetHour() > 21 && !campfireStarted && gameController.World.GetHour() < 23) {
+			campfireStarted = true;
+			StartCampfire();
+		}
+
+		if (campfireStarted && (gameController.World.GetHour() > 23 || gameController.World.GetHour() < 21)) {
+			campfireStarted = false;
+			StopCampfire();
+		}
 	}
 
 	public static SlumWorld GetInstance() {

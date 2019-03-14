@@ -35,56 +35,57 @@ public class TutorialController : MonoBehaviour {
 	}
 
 	void Start () {
+//		if(GameController.GetInstance().IsTutorialRunning)
+//			StartCoroutine(TutorialRoutine());
+	}
+
+//	IEnumerator TutorialRoutine() {
+//		hero.SetMovementActive(false);
+//		yield return new WaitForSeconds(3);
+//		facilityPanel.TutorialMode(this);
+//		yield return StartCoroutine(InitialTexts());
+//		yield return StartCoroutine(ConversationWithPedestrian());
+//		hero.SetMovementActive(true);
+//		HUD.GetInstance().ShowHud();
+//		yield return TrashLocateRoutine();
+//		yield return TrashSearchroutine();
+////		yield return StartCoroutine(energyExplainRoutine());
+//		yield return LocatePaperDealerRoutine();
+//		yield return PaperSellRoutine();
+//		facilityPanel.NormalMode();
+//		
+//		SlumWorld.GetInstance().ActivateAllFacilities();
+//
+//
+//		// show objective
+//		// activate facility highlight : trash area
+//		// activate hero movement
+//	}
+
+	public IEnumerator TutorialRoutine() {
 		for (int i = 0; i < facilityNames.Count; i++) {
 			facilityNames[i].SetActive(false);
 		}
-		StartCoroutine(TutorialRoutine2());
-	}
-
-	IEnumerator TutorialRoutine() {
+		HUD.GetInstance().HideHud();
+		GameController.GetInstance().IsTutorialRunning = true;
+		SlumWorld.GetInstance().DectivateAllFacilities();
+		homeFacility.gameObject.SetActive(false);
+		trashFacility.gameObject.SetActive(false);
+		
 		hero.SetMovementActive(false);
-		yield return new WaitForSeconds(3);
+		yield return new WaitForSeconds(1);
+		CallPedestrianNearby();
 		facilityPanel.TutorialMode(this);
 		yield return StartCoroutine(InitialTexts());
-		yield return StartCoroutine(ConversationWithPedestrian());
-		hero.SetMovementActive(true);
-		HUD.GetInstance().ShowHud();
-		yield return TrashLocateRoutine();
-		yield return TrashSearchroutine();
-//		yield return StartCoroutine(energyExplainRoutine());
-		yield return LocatePaperDealerRoutine();
-		yield return PaperSellRoutine();
-		facilityPanel.NormalMode();
-		
-		SlumWorld.GetInstance().ActivateAllFacilities();
-
-
-		// show objective
-		// activate facility highlight : trash area
-		// activate hero movement
-	}
-
-	IEnumerator TutorialRoutine2() {
-//		HUD.GetInstance().HideHud();
-//		GameController.GetInstance().IsTutorialRunning = true;
-//		SlumWorld.GetInstance().DectivateAllFacilities();
-//		homeFacility.gameObject.SetActive(false);
-//		trashFacility.gameObject.SetActive(false);
-//		
-//		hero.SetMovementActive(false);
-//		yield return new WaitForSeconds(1);
-//		CallPedestrianNearby();
-//		facilityPanel.TutorialMode(this);
-//		yield return StartCoroutine(InitialTexts());
-//		yield return StartCoroutine(ConversationWithPedestrian2());
-//		yield return StartCoroutine(EnergyBarShowRoutine());
-//		homeIcon.SetActive(false);
-//		yield return FoodBarShowRoutine();
+		yield return StartCoroutine(ConversationWithPedestrian2());
+		yield return StartCoroutine(EnergyBarShowRoutine());
+		homeIcon.SetActive(false);
+		yield return FoodBarShowRoutine();
 		StartSimulation();
 		yield return 0;
 	}
 
-	private void StartSimulation() {
+	public void StartSimulation() {
 		facilityPanel.NormalMode();
 		trashFacility.FacilityActive = true;
 		trashFacility.gameObject.SetActive(true);
