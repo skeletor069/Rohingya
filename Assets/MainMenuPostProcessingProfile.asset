@@ -40,10 +40,10 @@ MonoBehaviour:
         stationaryBlending: 0.95
         motionBlending: 0.85
   ambientOcclusion:
-    m_Enabled: 0
+    m_Enabled: 1
     m_Settings:
-      intensity: 1
-      radius: 0.3
+      intensity: 2.43
+      radius: 2.07
       sampleCount: 10
       downsampling: 1
       forceForwardCompatibility: 0
@@ -55,24 +55,24 @@ MonoBehaviour:
       reflection:
         blendType: 0
         reflectionQuality: 2
-        maxDistance: 100
+        maxDistance: 94
         iterationCount: 256
         stepSize: 3
         widthModifier: 0.5
         reflectionBlur: 1
         reflectBackfaces: 0
       intensity:
-        reflectionMultiplier: 1
-        fadeDistance: 100
-        fresnelFade: 1
-        fresnelFadePower: 1
+        reflectionMultiplier: 1.023
+        fadeDistance: 318
+        fresnelFade: 0.632
+        fresnelFadePower: 3.31
       screenEdgeMask:
         intensity: 0.03
   depthOfField:
-    m_Enabled: 0
+    m_Enabled: 1
     m_Settings:
-      focusDistance: 10
-      aperture: 5.6
+      focusDistance: 4.14
+      aperture: 1.8
       focalLength: 50
       useCameraFov: 0
       kernelSize: 1
@@ -109,7 +109,7 @@ MonoBehaviour:
         texture: {fileID: 0}
         intensity: 3
   colorGrading:
-    m_Enabled: 0
+    m_Enabled: 1
     m_Settings:
       tonemapping:
         tonemapper: 2
@@ -121,16 +121,16 @@ MonoBehaviour:
         neutralWhiteClip: 10
       basic:
         postExposure: 0
-        temperature: 0
+        temperature: -8.4
         tint: 0
-        hueShift: 0
-        saturation: 1
-        contrast: 1
+        hueShift: 6
+        saturation: 0.87
+        contrast: 1.092
       channelMixer:
-        red: {x: 1, y: 0, z: 0}
-        green: {x: 0, y: 1, z: 0}
-        blue: {x: 0, y: 0, z: 1}
-        currentEditingChannel: 0
+        red: {x: 0.3, y: 0, z: 0}
+        green: {x: 0, y: 0.3, z: 0}
+        blue: {x: 0, y: 0, z: 0.36}
+        currentEditingChannel: 2
       colorWheels:
         mode: 1
         log:
@@ -317,13 +317,13 @@ MonoBehaviour:
       size: 1
       luminanceContribution: 0.8
   vignette:
-    m_Enabled: 0
+    m_Enabled: 1
     m_Settings:
       mode: 0
       color: {r: 0, g: 0, b: 0, a: 1}
       center: {x: 0.5, y: 0.5}
-      intensity: 0.45
-      smoothness: 0.2
+      intensity: 0.401
+      smoothness: 1
       roundness: 1
       mask: {fileID: 0}
       opacity: 1
