@@ -46,7 +46,7 @@ public class Hero {
 		heroSkillsName.Add(HeroSkills.PROFESSIONAL, "Professional");
 		
 		heroAttributes = new Dictionary<HeroAttributes, float>();
-		heroAttributes.Add(HeroAttributes.HEALTH, 100);
+		heroAttributes.Add(HeroAttributes.HEALTH, 10);
 		heroAttributes.Add(HeroAttributes.ENERGY, 0);
 		heroAttributes.Add(HeroAttributes.FOOD, 0);
 		heroAttributes.Add(HeroAttributes.MONEY, 0);
@@ -93,6 +93,10 @@ public class Hero {
 	public string GetHeroSkillName()
 	{
 		return heroSkillsName[heroSkill];
+	}
+
+	public bool IsDead() {
+		return heroAttributes[HeroAttributes.HEALTH] <= 0;
 	}
 
 	public void Update(float deltaTime)

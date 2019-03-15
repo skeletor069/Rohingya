@@ -31,12 +31,12 @@ public class Hero3d : MonoBehaviour {
 		right = Quaternion.Euler(0, 90, 0) * forward;
 		narrator = new Narrator(canvas.GetChild(0).gameObject, canvas.GetChild(0).GetChild(0).GetComponent<TextMeshProUGUI>());
 		Debug.LogError(transform.position + " from hero");
-		if (!GameController.GetInstance().IsTutorialRunning)
-			transform.position = Vector3.zero;
+//		if (!GameController.GetInstance().IsTutorialRunning)
+//			transform.position = Vector3.zero;
 	}
 	
 	void Update () {
-		Debug.Log(transform.position);
+		
 		if (movementActive && IsMovementKeyPressed()){
 			Move();
 			animator.SetFloat(animWalk,1);
@@ -51,6 +51,10 @@ public class Hero3d : MonoBehaviour {
 		canvas.forward =  canvas.position - Camera.main.transform.position;
 	}
 
+	public void ActivateAgent() {
+		agent.enabled = true;
+	}
+
 	public bool IsMovementActive() {
 		return movementActive;
 	}
@@ -61,7 +65,7 @@ public class Hero3d : MonoBehaviour {
 	}
 
 	void Move(){
-		Debug.Log("In Move");
+//		Debug.Log("In Move");
 		Vector3 rightMovement = right * moveSpeed * Time.deltaTime * Input.GetAxis("Horizontal");
 		Vector3 upMovement = forward * moveSpeed * Time.deltaTime * Input.GetAxis("Vertical");
 		transform.forward = Vector3.Normalize(rightMovement + upMovement);

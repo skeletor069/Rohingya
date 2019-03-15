@@ -13,6 +13,10 @@ public class FollowPlayer : MonoBehaviour {
 		offset = new Vector3(-14.4f, 21.8f, -14.9f);
 	}
 
+	public void Initiate() {
+		transform.position = targetTransform.position + offset;
+	}
+
 	public void SetTarget(Transform targetTransform) {
 		this.targetTransform = targetTransform;
 	}
