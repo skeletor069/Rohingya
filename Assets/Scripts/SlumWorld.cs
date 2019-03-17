@@ -11,6 +11,7 @@ public class SlumWorld : MonoBehaviour {
 	private bool heroMovementActive = true;
 	private int animTime = Animator.StringToHash("time");
 	private bool campfireStarted = false;
+	private bool gameOver = false;
 	
 	public Facility[] facilities;
 	public Facility home;
@@ -38,7 +39,7 @@ public class SlumWorld : MonoBehaviour {
 		gameController = GameController.GetInstance();
 	}
 
-	IEnumerator Start() {
+	void Start() {
 		if (gameController.IsTutorialRunning) {
 			StartCoroutine(tutorialController.TutorialRoutine());
 		}
@@ -46,7 +47,7 @@ public class SlumWorld : MonoBehaviour {
 			// load data
 			
 			SerializableVector heroPositionAtSave = gameController.World.GetHeroPositionAtSave();
-			//player.transform.position = new Vector3(heroPositionAtSave.x, heroPositionAtSave.y, heroPositionAtSave.z);
+			player.transform.position = new Vector3(heroPositionAtSave.x, heroPositionAtSave.y, heroPositionAtSave.z);
 			Debug.LogError(heroPositionAtSave.x + " " + heroPositionAtSave.y + " " + heroPositionAtSave.z);
 			Debug.LogError(player.transform.position);
 			ResetSceneWithCurrentWorldData();
@@ -57,10 +58,12 @@ public class SlumWorld : MonoBehaviour {
 			home.gameObject.SetActive(true);
 			ActivateAllFacilities();
 			player.SetMovementActive(true);
-			yield return new WaitForSeconds(2f);
-			player.transform.position.Set(3,0,0);
-			Debug.LogError("done");
-			//player.transform.localPosition = new Vector3(heroPositionAtSave.x, heroPositionAtSave.y, heroPositionAtSave.z);
+			player.ActivateAgent();
+			cameraController.Initiate();
+//			yield return new WaitForSeconds(2f);
+//			player.transform.position.Set(3,0,0);
+//			Debug.LogError("done");
+
 		}
 	}
 
@@ -144,7 +147,13 @@ public class SlumWorld : MonoBehaviour {
 			StopCampfire();
 		}
 
-
+		if (!gameOver && gameController.World.Hero.IsDead()) {
+			// hero die animation
+			// gameovercontroller routine
+			// 		show message
+			//		show stat
+			gameOver = true;
+		}
 	}
 
 	void StartCampfire() {
