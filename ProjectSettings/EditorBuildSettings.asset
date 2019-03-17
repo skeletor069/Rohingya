@@ -26,4 +26,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/SlumScene2.unity
     guid: a6df3ebfa59fb4e1886c295498269803
+  - enabled: 1
+    path: Assets/Scenes/MainMenuSceneUpdated.unity
+    guid: 47e5fb272d3bd4bc0b9abc61c3cbcefb
   m_configObjects: {}

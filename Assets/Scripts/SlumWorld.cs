@@ -30,6 +30,7 @@ public class SlumWorld : MonoBehaviour {
 	public Campfire[] campfires;
 	public SoundManager soundManager;
 	public TutorialController tutorialController;
+	public GameObject gameOverPanel;
 	
 	
 	
@@ -48,8 +49,6 @@ public class SlumWorld : MonoBehaviour {
 			
 			SerializableVector heroPositionAtSave = gameController.World.GetHeroPositionAtSave();
 			player.transform.position = new Vector3(heroPositionAtSave.x, heroPositionAtSave.y, heroPositionAtSave.z);
-			Debug.LogError(heroPositionAtSave.x + " " + heroPositionAtSave.y + " " + heroPositionAtSave.z);
-			Debug.LogError(player.transform.position);
 			ResetSceneWithCurrentWorldData();
 			gameController.WorldRunning = true;
 			facilityDescriptionPanel.NormalMode();
@@ -153,7 +152,18 @@ public class SlumWorld : MonoBehaviour {
 			// 		show message
 			//		show stat
 			gameOver = true;
+			StopAllCoroutines();
+			StartCoroutine(GameOver());
 		}
+	}
+
+	IEnumerator GameOver() {
+		player.enabled = false;
+		gameController.WorldRunning = false;
+		simulationPanel.StartOverlay();
+		Debug.LogError("Game Over");
+		yield return new WaitForSeconds(2);
+		gameOverPanel.SetActive(true);
 	}
 
 	void StartCampfire() {
@@ -235,7 +245,7 @@ public class SlumWorld : MonoBehaviour {
 		soundManager.PlaySound(SoundTypes.SLEEP);
 		yield return new WaitForSeconds(4);
 		soundManager.SwitchToNormalMode();
-		gameController.World.Update(minutes);
+		gameController.World.Update(minutes * 3);
 		gameController.World.UpdateHeroAttribute(tokens);
 		simulationPanel.DissolveOverlay();
 		gameController.WorldRunning = true;

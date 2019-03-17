@@ -1,6 +1,6 @@
 ﻿public class Scenes {
     public static string SPLASH = "SplashScene";
-    public static string MAIN_MENU = "MainMenuScene";
+    public static string MAIN_MENU = "MainMenuSceneUpdated";
     public static string HOME_L1 = "HomeL1";
     public static string HOME_L2 = "HomeL2";
     public static string HOME_L3 = "HomeL3";

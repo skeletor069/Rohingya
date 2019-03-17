@@ -99,18 +99,20 @@ public class Hero {
 		return heroAttributes[HeroAttributes.HEALTH] <= 0;
 	}
 
-	public void Update(float deltaTime)
+	public void Update(float deltaTime, bool reduceHealth = true)
 	{
 		heroAttributes[HeroAttributes.FOOD] -= heroConfig.foodPerMinute * deltaTime;
 		heroAttributes[HeroAttributes.ENERGY] -= heroConfig.energyPerMinute * deltaTime;
 		if (heroAttributes[HeroAttributes.FOOD] < 0)
 		{
-			ReduceHealth(-heroAttributes[HeroAttributes.FOOD]/(heroConfig.foodPerMinute * 2));
+			if(reduceHealth)
+				ReduceHealth(-heroAttributes[HeroAttributes.FOOD]/(heroConfig.foodPerMinute * 2));
 			heroAttributes[HeroAttributes.FOOD] = 0;
 		}
 
 		if (heroAttributes[HeroAttributes.ENERGY] <= 0) {
-			ReduceHealth(-heroAttributes[HeroAttributes.ENERGY]/(heroConfig.energyPerMinute * 2));
+			if(reduceHealth)
+				ReduceHealth(-heroAttributes[HeroAttributes.ENERGY]/(heroConfig.energyPerMinute * 2));
 			heroAttributes[HeroAttributes.ENERGY] = 0;
 		}
 	}

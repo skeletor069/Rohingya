@@ -59,10 +59,10 @@ public class World
 		return heroPositionAtSave;
 	}
 
-	public void Update (float deltaTime)
+	public void Update (float deltaTime, bool reduceHealth = true)
 	{
 		UpdateClock(deltaTime);
-		hero.Update(deltaTime);
+		hero.Update(deltaTime, reduceHealth);
 	}
 
 	public string GetDaysText()
