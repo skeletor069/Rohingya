@@ -15,11 +15,13 @@ public class Campfire : MonoBehaviour {
 	List<Transform> freeSeats = new List<Transform>();
 	List<Transform> occupiedSeats = new List<Transform>();
 	private Animator animator;
+	private AudioSource sound;
 	private readonly int animStart = Animator.StringToHash("start");
 	private readonly int animStop = Animator.StringToHash("stop");
 
 	private void Awake() {
 		animator = GetComponent<Animator>();
+		sound = GetComponent<AudioSource>();
 		for(int i = 0 ; i < seats.Length; i++)
 			freeSeats.Add(seats[i]);
 	}
@@ -28,12 +30,14 @@ public class Campfire : MonoBehaviour {
 		for (int i = 0; i < fireParticles.Length; i++)
 			fireParticles[i].Play();
 		animator.SetTrigger(animStart);
+		sound.Play();
 	}
 
 	public void StopFire() {
 		for (int i = 0; i < fireParticles.Length; i++)
 			fireParticles[i].Stop();
 		animator.SetTrigger(animStop);
+		sound.Stop();
 	}
 
 	public Transform GetAFreeSeat() {
