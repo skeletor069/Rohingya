@@ -214,6 +214,7 @@
             <e p="_pedestrians" t="Include">
               <e p="Campfire.cs" t="Include" />
               <e p="Pedestrian.cs" t="Include" />
+              <e p="PedestrianHomes.cs" t="Include" />
               <e p="PublicPlaces.cs" t="Include" />
             </e>
             <e p="_ui" t="Include">

@@ -189,6 +189,12 @@ public class SlumWorld : MonoBehaviour {
 		return freeSeat;
 	}
 
+	public void MakeSeatFree(Transform seat) {
+		for (int i = 0; i < campfires.Length; i++) {
+			campfires[i].MakeFree(seat);
+		}
+	}
+
 	void FacilityActivateCheck() {
 
 		float minutesGone = gameController.World.GetMinutesGone();
@@ -245,7 +251,7 @@ public class SlumWorld : MonoBehaviour {
 		soundManager.PlaySound(SoundTypes.SLEEP);
 		yield return new WaitForSeconds(4);
 		soundManager.SwitchToNormalMode();
-		gameController.World.Update(minutes * 3);
+		gameController.World.Update(minutes);
 		gameController.World.UpdateHeroAttribute(tokens);
 		simulationPanel.DissolveOverlay();
 		gameController.WorldRunning = true;
