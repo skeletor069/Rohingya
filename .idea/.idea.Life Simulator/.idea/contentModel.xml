@@ -251,6 +251,7 @@
           </e>
           <e p="CityMapController.cs" t="Include" />
           <e p="DataManager.cs" t="Include" />
+          <e p="DidYouKnow.cs" t="Include" />
           <e p="FollowPlayer.cs" t="Include" />
           <e p="GameController.cs" t="Include" />
           <e p="Hero3d.cs" t="Include" />

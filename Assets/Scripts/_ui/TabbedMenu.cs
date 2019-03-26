@@ -39,10 +39,10 @@ public class TabbedMenu : MonoBehaviour {
 
 	void Update () {
 		if (Input.anyKey && interactionActive) {
-			if (selectedIndex > 0 && Input.GetKeyDown(KeyCode.LeftArrow)) {
+			if (selectedIndex > 0 && Input.GetKeyDown(KeyCode.UpArrow)) {
 				SetSelectedItemIndex(selectedIndex-1);
 			}
-			else if (selectedIndex < ITEM_COUNT - 1 && Input.GetKeyDown(KeyCode.RightArrow)) {
+			else if (selectedIndex < ITEM_COUNT - 1 && Input.GetKeyDown(KeyCode.DownArrow)) {
 				SetSelectedItemIndex(selectedIndex+1);
 			}
 
