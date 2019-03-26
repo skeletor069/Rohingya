@@ -183,7 +183,7 @@ public class TutorialController : MonoBehaviour {
 		yield return StartCoroutine(speechPartner.SpeakRoutine("You have to work hard and survive", false));
 		yield return StartCoroutine(hero.SpeakRoutine("I don't have any money...", false));
 		yield return StartCoroutine(speechPartner.SpeakRoutine("Go find the trash yard. Search for something you can sell to the local dealers.", false));
-		StartCoroutine(speechPartner.StartRandomWalk());
+		StartCoroutine(speechPartner.FindALocationAndGoThere());
 	}
 	
 	IEnumerator ConversationWithPedestrian2() {

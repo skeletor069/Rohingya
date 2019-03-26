@@ -52,8 +52,9 @@ public class Campfire : MonoBehaviour {
 	}
 
 	public void MakeFree(Transform seat) {
-		if(occupiedSeats.Contains(seat))
+		if (occupiedSeats.Contains(seat)) {
 			occupiedSeats.Remove(seat);
-		freeSeats.Add(seat);
+			freeSeats.Add(seat);
+		}
 	}
 }

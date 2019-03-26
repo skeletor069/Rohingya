@@ -22,13 +22,14 @@ public class FacilityDescriptionPanel : MonoBehaviour {
 	public TextMeshProUGUI activeHoursText;
 	public Color greenColor;
 	public Color redColor;
+	public Color food_color, energy_color, money_color;
 
 	private FacilityDescriptionBtn currentBtn;
 
 	void Awake() {
-		foodColor = new Color(11f/255, 173f/255, 63f/255);
-		energyColor = new Color(137f/255, 184f/255, 185f/255);
-		moneyColor = new Color(241f/255, 219f/255, 0f);
+		foodColor = food_color;
+		energyColor = energy_color;
+		moneyColor = money_color;
 		for(int i = 0 ; i < 5; i++)
 			actionBtns.Add(transform.GetChild(0).GetChild(i).GetComponent<FacilityDescriptionBtn>());
 		jobBtn = transform.GetChild(0).GetChild(1).GetComponent<JobBtn>();
