@@ -208,6 +208,7 @@
               <e p="FacilityIcon.cs" t="Include" />
               <e p="PaperSellShop.cs" t="Include" />
               <e p="SellShop.cs" t="Include" />
+              <e p="SleepingArea.cs" t="Include" />
               <e p="TeaStall.cs" t="Include" />
               <e p="TrashCan.cs" t="Include" />
             </e>
@@ -236,7 +237,6 @@
             <e p="HeroFootstep.cs" t="Include" />
             <e p="PickupItem.cs" t="Include" />
             <e p="PickupItemController.cs" t="Include" />
-            <e p="SleepingArea.cs" t="Include" />
             <e p="SlumUIController.cs" t="Include" />
             <e p="SoundManager.cs" t="Include" />
             <e p="SpeechPartner.cs" t="Include" />

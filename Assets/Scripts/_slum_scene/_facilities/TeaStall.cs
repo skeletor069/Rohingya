@@ -48,37 +48,51 @@ public class TeaStall : Facility {
 	}
 
 	public override void Action1() {
-		InteractionDone();
-		List<AttributeToken> tokens = new List<AttributeToken>();
-		tokens.Add(new AttributeToken(HeroAttributes.FOOD, Balancer.GetInstance().GetFoodWithMoney(3)));
-		tokens.Add(new AttributeToken(HeroAttributes.MONEY, -3));
-		SlumWorld.GetInstance().ActionPerformed(tokens, 8);
-		SoundManager.GetInstance().PlaySound(SoundTypes.EAT_CRUNCHY);
+		if (GameController.GetInstance().World.Hero.Money >= 3) {
+			InteractionDone();
+			List<AttributeToken> tokens = new List<AttributeToken>();
+			tokens.Add(new AttributeToken(HeroAttributes.FOOD, Balancer.GetInstance().GetFoodWithMoney(3)));
+			tokens.Add(new AttributeToken(HeroAttributes.MONEY, -3));
+			SlumWorld.GetInstance().ActionPerformed(tokens, 4);
+			SoundManager.GetInstance().PlaySound(SoundTypes.EAT_CRUNCHY);
+		}
+		else {
+			// play fail sound
+		}
 	}
 
 	public override void Action2() {
-		InteractionDone();
-		List<AttributeToken> tokens = new List<AttributeToken>();
-		tokens.Add(new AttributeToken(HeroAttributes.FOOD, Balancer.GetInstance().GetFoodWithMoney(6)));
-		tokens.Add(new AttributeToken(HeroAttributes.MONEY, -6));
-		SlumWorld.GetInstance().ActionPerformed(tokens, 4);
-		SoundManager.GetInstance().PlaySound(SoundTypes.DRINK);
+		if (GameController.GetInstance().World.Hero.Money >= 6) {
+			InteractionDone();
+			List<AttributeToken> tokens = new List<AttributeToken>();
+			tokens.Add(new AttributeToken(HeroAttributes.FOOD, Balancer.GetInstance().GetFoodWithMoney(6)));
+			tokens.Add(new AttributeToken(HeroAttributes.MONEY, -6));
+			SlumWorld.GetInstance().ActionPerformed(tokens, 8);
+			SoundManager.GetInstance().PlaySound(SoundTypes.DRINK);
+		}
+		else {
+			// play fail sound
+		}
 	}
 
 	public override void Action3() {
-		InteractionDone();
-		List<AttributeToken> tokens = new List<AttributeToken>();
-		tokens.Add(new AttributeToken(HeroAttributes.FOOD, Balancer.GetInstance().GetFoodWithMoney(12)));
-		tokens.Add(new AttributeToken(HeroAttributes.MONEY, -12));
-		SlumWorld.GetInstance().ActionPerformed(tokens, 4);
-		SoundManager.GetInstance().PlaySound(SoundTypes.EAT_JUICY);
+		if (GameController.GetInstance().World.Hero.Money >= 12) {
+			InteractionDone();
+			List<AttributeToken> tokens = new List<AttributeToken>();
+			tokens.Add(new AttributeToken(HeroAttributes.FOOD, Balancer.GetInstance().GetFoodWithMoney(12)));
+			tokens.Add(new AttributeToken(HeroAttributes.MONEY, -12));
+			SlumWorld.GetInstance().ActionPerformed(tokens, 4);
+			SoundManager.GetInstance().PlaySound(SoundTypes.EAT_JUICY);
+		}
+		else {
+			// play fail sound
+		}
 	}
 
 	public override void DoJob() {
 		InteractionDone();
 		List<AttributeToken> tokens = new List<AttributeToken>();
-//		tokens.Add(new AttributeToken(HeroAttributes.MONEY, 3));
-//		tokens.Add(new AttributeToken(HeroAttributes.ENERGY, -30));
+		tokens.Add(new AttributeToken(HeroAttributes.MONEY, Balancer.GetInstance().GetJobEarning(60)));
 		SlumWorld.GetInstance().ActionPerformed(tokens, 60);
 	}
 }

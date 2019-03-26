@@ -79,4 +79,8 @@ public class Balancer : MonoBehaviour{
 		return canPrice * count;
 	}
 
+	public float GetJobEarning(int minutes) {
+		return minutes * jobIncomePerMinute;
+	}
+
 }

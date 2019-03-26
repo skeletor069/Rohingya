@@ -78,8 +78,7 @@ public class BottleSellShop : Facility {
 	public override void DoJob() {
 		InteractionDone();
 		List<AttributeToken> tokens = new List<AttributeToken>();
-//		tokens.Add(new AttributeToken(HeroAttributes.MONEY, 7));
-//		tokens.Add(new AttributeToken(HeroAttributes.ENERGY, -30));
+		tokens.Add(new AttributeToken(HeroAttributes.MONEY, Balancer.GetInstance().GetJobEarning(60)));
 		SlumWorld.GetInstance().ActionPerformed(tokens, 60);
 	}
 }
