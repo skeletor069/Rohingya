@@ -27,7 +27,7 @@ public class MainMenuController : MonoBehaviour, ITabMenuListener {
 				LoadGame();
 				break;
 			case 2:
-				Credits();
+				Settings();
 				break;
 			case 3:
 				Settings();
