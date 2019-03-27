@@ -236,6 +236,7 @@
             <e p="Balancer.cs" t="Include" />
             <e p="Facility.cs" t="Include" />
             <e p="HeroFootstep.cs" t="Include" />
+            <e p="PickupEffect.cs" t="Include" />
             <e p="PickupItem.cs" t="Include" />
             <e p="PickupItemController.cs" t="Include" />
             <e p="SlumUIController.cs" t="Include" />

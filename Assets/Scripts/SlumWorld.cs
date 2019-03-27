@@ -327,8 +327,8 @@ public class SlumWorld : MonoBehaviour {
 		facilityDescriptionPanel.ClosePanel();
 	}
 
-	public void ItemPicked(PickupItem pickItem) {
-		Item item = pickupItemController.ProcessPickupGetItem(pickItem);
+	public void ItemPicked(PickupItem pickItem, Vector3 position) {
+		Item item = pickupItemController.ProcessPickupGetItem(pickItem, position);
 		gameController.World.Inventory.AddItem(item);
 	}
 }
