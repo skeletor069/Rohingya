@@ -196,13 +196,17 @@ public class SlumWorld : MonoBehaviour {
 	}
 
 	IEnumerator GameOver() {
+		player.AnimDie();
 		player.enabled = false;
 		gameController.WorldRunning = false;
 		simulationPanel.StartOverlay();
 		Debug.LogError("Game Over");
-		soundManager.SwitchToSleepMode();
+		soundManager.SwitchToEndingMode();
 		yield return new WaitForSeconds(2);
+		soundManager.PlaySound(SoundTypes.ENDING_MUSIC);
+		yield return new WaitForSeconds(1);
 		gameOverPanel.SetActive(true);
+		// animator show
 	}
 
 	void StartCampfire() {
@@ -244,6 +248,8 @@ public class SlumWorld : MonoBehaviour {
 	}
 
 	void ShowPauseMenu() {
+		soundManager.SwitchToMenuMode(0);
+		soundManager.PlaySound(SoundTypes.MENU_BG);
 		gameController.WorldRunning = false;
 		player.SetMovementActive(false);
 		Time.timeScale = 0;
@@ -254,6 +260,8 @@ public class SlumWorld : MonoBehaviour {
 		gameController.WorldRunning = true;
 		player.SetMovementActive(true);
 		Time.timeScale = 1;
+		soundManager.StopSound(SoundTypes.MENU_BG);
+		soundManager.SwitchToNormalMode();
 	}
 
 	public IEnumerator DescriptionPanelClosed(bool tutorialMode, bool showInventory) {
@@ -399,6 +407,7 @@ public class SlumWorld : MonoBehaviour {
 	IEnumerator ItemsFoundRoutine(List<Item> trashItems, float minutes) {
 		facilityDescriptionPanel.InteractionActive = false;
 		soundManager.PlaySound(SoundTypes.SEARCH);
+		player.AnimSearch();
 		Time.timeScale = 8;
 		float accum = 0;
 		while (accum < minutes) {
@@ -413,6 +422,7 @@ public class SlumWorld : MonoBehaviour {
 			GameController.GetInstance().World.Inventory.AddItem(trashItems[i]);	
 		}
 		soundManager.StopSound(SoundTypes.SEARCH);
+		player.AnimMove();
 		facilityDescriptionPanel.ClosePanel();
 	}
 

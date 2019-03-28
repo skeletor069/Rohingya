@@ -128,6 +128,8 @@ public class FacilityDescriptionPanel : MonoBehaviour {
 	void Update() {
 		if (Input.anyKey && interactionActive) {
 			if (Input.GetKeyDown(KeyCode.Return)) {
+				
+				SoundManager.GetInstance().PlaySound(SoundTypes.BTN_SELECT);
 				switch (selectedIndex) {
 					case 0:
 						if(!tutorialMode)
@@ -220,10 +222,14 @@ public class FacilityDescriptionPanel : MonoBehaviour {
 			ResetSelection();
 			return;
 		}
-			
+		
+		if(selectedIndex != 0)
+			SoundManager.GetInstance().PlaySound(SoundTypes.BTN_CHOOSE);
+		
 		actionBtns[selectedIndex].SetBtnStateAtive(false);
 		selectedIndex = Mathf.Max((selectedIndex - 1), 0);
 		actionBtns[selectedIndex].SetBtnStateAtive(true);
+		
 	}
 
 	private void ButtonSelectionUp() {
@@ -231,6 +237,10 @@ public class FacilityDescriptionPanel : MonoBehaviour {
 			ResetSelection();
 			return;
 		}
+		
+		if(selectedIndex != actionBtns.Count - 1)
+			SoundManager.GetInstance().PlaySound(SoundTypes.BTN_CHOOSE);
+		
 		actionBtns[selectedIndex].SetBtnStateAtive(false);
 		selectedIndex = Mathf.Min((selectedIndex + 1), (actionBtns.Count - 1));
 		actionBtns[selectedIndex].SetBtnStateAtive(true);

@@ -61,6 +61,7 @@ public class PauseMenu : MonoBehaviour, ITabMenuListener {
 	}
 
 	void ClosePauseMenu() {
+		SoundManager.GetInstance().PlaySound(SoundTypes.BTN_SELECT);
 		SlumWorld.GetInstance().PauseMenuClosed();
 		gameObject.SetActive(false);
 	}
@@ -85,6 +86,7 @@ public class PauseMenu : MonoBehaviour, ITabMenuListener {
 			if (isMainSelection) {
 				if (Input.GetKeyDown(KeyCode.UpArrow)) {
 					if (selectedIndex != 0) {
+						SoundManager.GetInstance().PlaySound(SoundTypes.BTN_CHOOSE);
 						optionBtns[selectedIndex].SetTrigger(animInactive);
 						selectedIndex--;
 						optionBtns[selectedIndex].SetTrigger(animActive);
@@ -93,6 +95,7 @@ public class PauseMenu : MonoBehaviour, ITabMenuListener {
 		
 				if (Input.GetKeyDown(KeyCode.DownArrow)) {
 					if (selectedIndex != 3) {
+						SoundManager.GetInstance().PlaySound(SoundTypes.BTN_CHOOSE);
 						optionBtns[selectedIndex].SetTrigger(animInactive);
 						selectedIndex++;
 						optionBtns[selectedIndex].SetTrigger(animActive);
@@ -102,6 +105,7 @@ public class PauseMenu : MonoBehaviour, ITabMenuListener {
 				if (Input.GetKeyDown(KeyCode.Return)) {
 					optionBtns[selectedIndex].SetTrigger(animInteract);
 					if (selectedIndex == 0) {
+						SoundManager.GetInstance().PlaySound(SoundTypes.BTN_SELECT);
 						Vector3 heroPosition = SlumWorld.GetInstance().player.transform.position;
 						GameController.GetInstance().World.SetHeroPositionAtSave(heroPosition.x, heroPosition.y, heroPosition.z);
 						GameController.GetInstance().SaveGame();
@@ -110,17 +114,18 @@ public class PauseMenu : MonoBehaviour, ITabMenuListener {
 					else if(selectedIndex == 1)
 						ClosePauseMenu();
 					else if (selectedIndex == 2) {
-						
+						SoundManager.GetInstance().PlaySound(SoundTypes.BTN_SELECT);
 						isMainSelection = false;
 						isControllerSelection = true;
 //						StartCoroutine(SetControlSelection());
 						Debug.Log("show Controller");
 						
 					}else if (selectedIndex == 3) {
+						SoundManager.GetInstance().PlaySound(SoundTypes.BTN_SELECT);
 						mainPanel.SetActive(false);
 						quitGamePanel.SetActive(true);
 						isMainSelection = false;
-						quitWarningMenu.SetSelectedItemIndex(0);
+						quitWarningMenu.Initiate(this,0);
 					}
 				}
 				
@@ -165,7 +170,7 @@ public class PauseMenu : MonoBehaviour, ITabMenuListener {
 //	}
 
 	public void ChangedMenu(int index) {
-		
+		SoundManager.GetInstance().PlaySound(SoundTypes.BTN_CHOOSE);
 	}
 
 	public void SelectedMenu(int index) {
@@ -180,5 +185,6 @@ public class PauseMenu : MonoBehaviour, ITabMenuListener {
 			Time.timeScale = 1;
 			GameController.GetInstance().GoToMainMenu();
 		}
+		SoundManager.GetInstance().PlaySound(SoundTypes.BTN_SELECT);
 	}
 }

@@ -24,7 +24,7 @@ public class NewGameWarning : MonoBehaviour, ITabMenuListener {
 	}
 
 	public void ChangedMenu(int index) {
-		
+		SoundManager.GetInstance().PlaySound(SoundTypes.BTN_CHOOSE);
 	}
 
 	public void SelectedMenu(int index) {
@@ -37,5 +37,6 @@ public class NewGameWarning : MonoBehaviour, ITabMenuListener {
 				GameController.GetInstance().NewGame();
 				break;
 		}
+		SoundManager.GetInstance().PlaySound(SoundTypes.BTN_SELECT);
 	}
 }

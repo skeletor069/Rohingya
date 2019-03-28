@@ -20,6 +20,10 @@ public class Hero3d : MonoBehaviour {
 	private bool waitForSkippingNarration = false;
 	private int animIdle = Animator.StringToHash("idle");
 	private int animWalk = Animator.StringToHash("walk");
+	private int animMove = Animator.StringToHash("move");
+	private int animDie = Animator.StringToHash("die");
+	private int animSearch = Animator.StringToHash("search");
+	
 
 	void Start ()
 	{
@@ -116,5 +120,18 @@ public class Hero3d : MonoBehaviour {
 		agent.velocity = Vector3.zero;
 	}
 
-	
+	public void AnimDie() {
+		animator.SetTrigger(animDie);
+		SetMovementActive(false);
+	}
+
+	public void AnimSearch() {
+		animator.SetTrigger(animSearch);
+	}
+
+	public void AnimMove() {
+		animator.SetTrigger(animMove);
+	}
+
+
 }

@@ -22,7 +22,9 @@ public class TabbedMenu : MonoBehaviour {
 
 	public void Initiate(ITabMenuListener listener, int initialIndex = 0) {
 		this.listener = listener;
-		SetSelectedItemIndex(initialIndex);
+		itemAnims[selectedIndex].SetTrigger(animDeselect);
+		selectedIndex = initialIndex;
+		itemAnims[selectedIndex].SetTrigger(animSelect);
 	}
 
 	public void SetSelectedItemIndex(int index) {

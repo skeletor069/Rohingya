@@ -199,6 +199,7 @@
             <e p="ControllerPanel.cs" t="Include" />
             <e p="HomeL1.cs" t="Include" />
             <e p="MainMenuController.cs" t="Include" />
+            <e p="SoundLoad.cs" t="Include" />
             <e p="SplashSceneController.cs" t="Include" />
           </e>
           <e p="_slum_scene" t="Include">

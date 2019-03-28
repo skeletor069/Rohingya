@@ -16,12 +16,13 @@ public class MainMenuController : MonoBehaviour, ITabMenuListener {
 		mainMenu.Initiate(this, 0);
 		mainMenu.InteractionActive = true;
 		yield return new WaitForSeconds(1);
-		SoundManager.GetInstance().PlaySound(SoundTypes.MENU_BG);
+		if(!SoundManager.GetInstance().IsPlaying(SoundTypes.MENU_BG))
+			SoundManager.GetInstance().PlaySound(SoundTypes.MENU_BG);
 		Debug.Log("hi");
 	}
 
 	public void ChangedMenu(int index) {
-		
+		SoundManager.GetInstance().PlaySound(SoundTypes.BTN_CHOOSE);
 	}
 
 	public void SelectedMenu(int index) {
@@ -39,6 +40,7 @@ public class MainMenuController : MonoBehaviour, ITabMenuListener {
 				Settings();
 				break;
 		}
+		SoundManager.GetInstance().PlaySound(SoundTypes.BTN_SELECT);
 		//mainMenu.InteractionActive = false;
 	}
 	

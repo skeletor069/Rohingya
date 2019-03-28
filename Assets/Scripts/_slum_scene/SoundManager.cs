@@ -5,7 +5,8 @@ using UnityEngine.Audio;
 
 public enum SoundTypes {
 	EAT_JUICY, EAT_CRUNCHY, DRINK, SLEEP, EAT_MEAL, SEARCH, SELL, WORK_FOOD, WORK_WORKSHOP, DOOR_OPEN, DOOR_CLOSE, BUTTON_SELECT,
-	MENU_BTN_SELECT, MENU_BG, DAY_BG, NIGHT_BG, MORNING_BG, WORK_BOTTLE, WORK_CAN, WORK_PAPER, BREATH, HUNGRY, HEART_BEAT, PICK_UP
+	MENU_BTN_SELECT, MENU_BG, DAY_BG, NIGHT_BG, MORNING_BG, WORK_BOTTLE, WORK_CAN, WORK_PAPER, BREATH, 
+	HUNGRY, HEART_BEAT, PICK_UP, ENDING_MUSIC, BTN_CHOOSE, BTN_SELECT
 }
 
 public class SoundManager : MonoBehaviour {
@@ -38,12 +39,17 @@ public class SoundManager : MonoBehaviour {
 	public AudioSource pickUp;
 	public AudioSource search;
 	public AudioSource sell;
+	public AudioSource endingMusic;
+	public AudioSource btnChoose;
+	public AudioSource btnSelect;
 	
 	
 	private AudioMixer mixer;
 	public AudioMixerSnapshot backgroundActiveSnapshot;
 	public AudioMixerSnapshot performActionSnapshot;
 	public AudioMixerSnapshot sleepSnapshot;
+	public AudioMixerSnapshot menuSnapshot;
+	public AudioMixerSnapshot endingMusicSnapshot;
 	private Dictionary<SoundTypes, AudioSource> audioSources;
 	public AudioMixerGroup ambientGroup;
 
@@ -65,6 +71,7 @@ public class SoundManager : MonoBehaviour {
 		audioSources.Add(SoundTypes.BUTTON_SELECT, buttonSelect);
 		audioSources.Add(SoundTypes.MENU_BTN_SELECT, menuButtonSelect);
 		audioSources.Add(SoundTypes.MENU_BG, menuBG);
+		audioSources.Add(SoundTypes.ENDING_MUSIC, endingMusic);
 		audioSources.Add(SoundTypes.DAY_BG, dayBG);
 		audioSources.Add(SoundTypes.NIGHT_BG, nightBG);
 		audioSources.Add(SoundTypes.MORNING_BG, morningBG);
@@ -76,6 +83,8 @@ public class SoundManager : MonoBehaviour {
 		audioSources.Add(SoundTypes.HUNGRY, hungry);
 		audioSources.Add(SoundTypes.HEART_BEAT, heartBeat);
 		audioSources.Add(SoundTypes.PICK_UP, pickUp);
+		audioSources.Add(SoundTypes.BTN_CHOOSE, btnChoose);
+		audioSources.Add(SoundTypes.BTN_SELECT, btnSelect);
 		
 	}
 
@@ -133,6 +142,14 @@ public class SoundManager : MonoBehaviour {
 
 	public void SwitchToSleepMode() {
 		sleepSnapshot.TransitionTo(2);
+	}
+
+	public void SwitchToMenuMode(float time = 2) {
+		menuSnapshot.TransitionTo(time);
+	}
+	
+	public void SwitchToEndingMode() {
+		endingMusicSnapshot.TransitionTo(2);
 	}
 
 	public void WarningMode() {

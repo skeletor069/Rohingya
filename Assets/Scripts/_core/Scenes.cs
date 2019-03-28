@@ -7,4 +7,5 @@
     public static string HOME_L4 = "HomeL4";
     public static string CITY_MAP = "CityMap";
     public static string SLUM_SCENE = "SlumScene2";
+    public static string SOUND_LOAD = "SoundLoad";
 }

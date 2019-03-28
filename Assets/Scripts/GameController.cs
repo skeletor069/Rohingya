@@ -16,7 +16,8 @@ public class GameController : MonoBehaviour {
 	void Start() {
 		DontDestroyOnLoad(gameObject);
 		//GoToSplashScene();
-		GoToMainMenu();
+		//GoToMainMenu();
+		SceneManager.LoadScene(Scenes.SOUND_LOAD);
 	}
 
 	private void Update() {
