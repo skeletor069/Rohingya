@@ -93,6 +93,7 @@ public class TeaStall : Facility {
 		InteractionDone();
 		List<AttributeToken> tokens = new List<AttributeToken>();
 		tokens.Add(new AttributeToken(HeroAttributes.MONEY, Balancer.GetInstance().GetJobEarning(60)));
-		SlumWorld.GetInstance().ActionPerformed(tokens, 60);
+		SlumWorld.GetInstance().JobDone(tokens, 60, SoundTypes.WORK_FOOD);
+		SoundManager.GetInstance().PlaySound(SoundTypes.WORK_FOOD);
 	}
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Audio;
 
 public class SlumWorld : MonoBehaviour {
 	private GameController gameController;
@@ -12,6 +13,7 @@ public class SlumWorld : MonoBehaviour {
 	private int animTime = Animator.StringToHash("time");
 	private bool campfireStarted = false;
 	private bool gameOver = false;
+	private SoundManager soundManager;
 	
 	public Facility[] facilities;
 	public Facility home;
@@ -28,16 +30,16 @@ public class SlumWorld : MonoBehaviour {
 	public Animator dayNightAnim;
 
 	public Campfire[] campfires;
-	public SoundManager soundManager;
+	
 	public TutorialController tutorialController;
 	public GameObject gameOverPanel;
-	
 	
 	
 	void Awake () {
 		instance = this;
 		facilities = facilityHolder.GetComponentsInChildren<Facility>();
 		gameController = GameController.GetInstance();
+		soundManager = SoundManager.GetInstance();
 	}
 
 	void Start() {
@@ -64,6 +66,12 @@ public class SlumWorld : MonoBehaviour {
 //			Debug.LogError("done");
 
 		}
+		
+		soundManager.PlaySound(SoundTypes.DAY_BG);
+		soundManager.PlaySound(SoundTypes.NIGHT_BG);
+		soundManager.PlaySound(SoundTypes.MORNING_BG);
+		soundManager.StopSound(SoundTypes.MENU_BG);
+		soundManager.SwitchToNormalMode();
 	}
 
 	void ResetSceneWithCurrentWorldData() {
@@ -133,6 +141,7 @@ public class SlumWorld : MonoBehaviour {
 		}
 		dayNightAnim.SetFloat(animTime, gameController.World.GetHour());
 		soundManager.UpdateAmbientSound((int)gameController.World.GetMinutesGone());
+		HeroStateSoundCheck();
 		if(gameController.WorldRunning)
 			FacilityActivateCheck();
 
@@ -157,11 +166,41 @@ public class SlumWorld : MonoBehaviour {
 		}
 	}
 
+	void HeroStateSoundCheck() {
+		if (gameController.World.Hero.Health < 15) {
+			if(!soundManager.IsPlaying(SoundTypes.HEART_BEAT))
+				soundManager.PlaySound(SoundTypes.HEART_BEAT);
+		}
+		else {
+			if(soundManager.IsPlaying(SoundTypes.HEART_BEAT))
+				soundManager.StopSound(SoundTypes.HEART_BEAT);
+		}
+		
+		if (gameController.World.Hero.Energy < 15) {
+			if(!soundManager.IsPlaying(SoundTypes.BREATH))
+				soundManager.PlaySound(SoundTypes.BREATH);
+		}
+		else {
+			if(soundManager.IsPlaying(SoundTypes.BREATH))
+				soundManager.StopSound(SoundTypes.BREATH);
+		}
+		
+		if (gameController.World.Hero.Food < 15) {
+			if(!soundManager.IsPlaying(SoundTypes.HUNGRY))
+				soundManager.PlaySound(SoundTypes.HUNGRY);
+		}
+		else {
+			if(soundManager.IsPlaying(SoundTypes.HUNGRY))
+				soundManager.StopSound(SoundTypes.HUNGRY);
+		}
+	}
+
 	IEnumerator GameOver() {
 		player.enabled = false;
 		gameController.WorldRunning = false;
 		simulationPanel.StartOverlay();
 		Debug.LogError("Game Over");
+		soundManager.SwitchToSleepMode();
 		yield return new WaitForSeconds(2);
 		gameOverPanel.SetActive(true);
 	}
@@ -257,6 +296,54 @@ public class SlumWorld : MonoBehaviour {
 		gameController.WorldRunning = true;
 		facilityDescriptionPanel.ClosePanel();
 	}
+	
+	public void JobDone(List<AttributeToken> tokens, float minutes, SoundTypes soundType) {
+		StartCoroutine(JobDoneRoutine(tokens, minutes, soundType));
+	}
+
+	IEnumerator JobDoneRoutine(List<AttributeToken> tokens, float minutes, SoundTypes soundType) {
+//		AttributeToken foodToken = new AttributeToken(HeroAttributes.FOOD, 0);
+//		HeroConfig initialHeroConfig = gameController.World.Hero.GetHeroConfig();
+//		for (int i = 0; i < tokens.Count; i++) {
+//			if (tokens[i].attribute == HeroAttributes.FOOD) {
+//				foodToken = tokens[i];
+//				tokens.Remove(foodToken);
+//				break;	
+//			}
+//		}
+//		Debug.LogError("Initial food " + gameController.World.Hero.Food);
+//		if (foodToken.amount > 0) {
+//			float targetFood = foodToken.amount / minutes;
+//			Debug.Log("Target food " + targetFood + ", total food " + foodToken.amount);
+//			HeroConfig heroConfig = gameController.World.Hero.GetHeroConfig();
+//			heroConfig.foodPerMinute = -targetFood;
+//			gameController.World.Hero.SetHeroConfig(heroConfig);
+//			
+//		}
+		if(!gameController.IsTutorialRunning)
+			player.gameObject.SetActive(false);
+		facilityDescriptionPanel.InteractionActive = false;
+		soundManager.SwitchToActionMode();
+
+		Time.timeScale = (minutes > 30)?16:8;
+		float accum = 0;
+		while (accum < minutes) {
+			accum += Time.deltaTime;
+			facilityDescriptionPanel.SetCurrentActionProgress(accum/minutes);
+			yield return new WaitForEndOfFrame();
+		}
+		Debug.LogError("Final food " + gameController.World.Hero.Food);
+		soundManager.SwitchToNormalMode();
+		player.gameObject.SetActive(true);
+		facilityDescriptionPanel.SetCurrentActionProgress(0);
+		facilityDescriptionPanel.InteractionActive = true;
+		//gameController.World.Hero.SetHeroConfig(initialHeroConfig);
+		Time.timeScale = 1;
+		soundManager.StopSound(soundType);
+		soundManager.PlaySound(SoundTypes.SELL);
+		gameController.World.UpdateHeroAttribute(tokens);
+		facilityDescriptionPanel.ClosePanel();
+	}
 
 	public void ActionPerformed(List<AttributeToken> tokens, float minutes) {
 		StartCoroutine(ActionPerformedRoutine(tokens, minutes));
@@ -311,6 +398,7 @@ public class SlumWorld : MonoBehaviour {
 
 	IEnumerator ItemsFoundRoutine(List<Item> trashItems, float minutes) {
 		facilityDescriptionPanel.InteractionActive = false;
+		soundManager.PlaySound(SoundTypes.SEARCH);
 		Time.timeScale = 8;
 		float accum = 0;
 		while (accum < minutes) {
@@ -324,10 +412,12 @@ public class SlumWorld : MonoBehaviour {
 		for (int i = 0; i < trashItems.Count; i++) {
 			GameController.GetInstance().World.Inventory.AddItem(trashItems[i]);	
 		}
+		soundManager.StopSound(SoundTypes.SEARCH);
 		facilityDescriptionPanel.ClosePanel();
 	}
 
 	public void ItemPicked(PickupItem pickItem, Vector3 position) {
+		soundManager.PlaySound(SoundTypes.PICK_UP);
 		Item item = pickupItemController.ProcessPickupGetItem(pickItem, position);
 		gameController.World.Inventory.AddItem(item);
 	}

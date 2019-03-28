@@ -6,6 +6,7 @@ public class NewGameWarning : MonoBehaviour, ITabMenuListener {
 
 	public MainMenuController mainMenuController;
 	public TabbedMenu warningMenu;
+	
 
 	void Awake() {
 		warningMenu.Initiate(this, 0);

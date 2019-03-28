@@ -92,7 +92,7 @@ public class TutorialController : MonoBehaviour {
 		homeFacility.gameObject.SetActive(true);
 		SlumWorld.GetInstance().ActivateAllFacilities();
 		hero.SetMovementActive(true);
-		
+		hero.ActivateAgent();
 		
 		GameController.GetInstance().StartSurvival();
 		for (int i = 0; i < facilityNames.Count; i++) {

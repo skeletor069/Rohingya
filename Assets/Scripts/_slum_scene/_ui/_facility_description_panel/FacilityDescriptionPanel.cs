@@ -58,6 +58,7 @@ public class FacilityDescriptionPanel : MonoBehaviour {
 			statusText.enabled = true;
 
 			if (facility.FacilityActive) {
+				SoundManager.GetInstance().PlaySound(SoundTypes.DOOR_OPEN);
 				statusText.text = "Open";
 				int hour = (facility.closingMinute / 60);
 				int minute = facility.closingMinute % 60;
@@ -198,12 +199,18 @@ public class FacilityDescriptionPanel : MonoBehaviour {
 		
 		if(!sleeping)
 			StartCoroutine(SlumWorld.GetInstance().DescriptionPanelClosed(tutorialMode, (facility != null)?facility.ShowInventory:false));
+		
+//		if(facility.JobActive && facility.FacilityActive)
+//			SoundManager.GetInstance().PlaySound(SoundTypes.DOOR_CLOSE);
+		
 		interactionActive = false;
 		facility = null;
 		panel.SetActive(false);
 		
 		if(tutorialMode && !sleeping)
 			tutorialController.FacilityPanelClosed();
+		
+		
 	}
 	
 	

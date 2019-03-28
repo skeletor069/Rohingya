@@ -43,6 +43,7 @@ public class CanSellShop : Facility {
 			InteractionDone();
 			List<AttributeToken> temp = new List<AttributeToken>();
 			temp.Add(new AttributeToken(HeroAttributes.MONEY, Balancer.GetInstance().GetCanPrice(10)));
+			SoundManager.GetInstance().PlaySound(SoundTypes.SELL);
 			SlumWorld.GetInstance().ActionPerformed(temp, 3);
 		}
 		else {
@@ -55,6 +56,7 @@ public class CanSellShop : Facility {
 			InteractionDone();
 			List<AttributeToken> temp = new List<AttributeToken>();
 			temp.Add(new AttributeToken(HeroAttributes.MONEY, Balancer.GetInstance().GetCanPrice(20)));
+			SoundManager.GetInstance().PlaySound(SoundTypes.SELL);
 			SlumWorld.GetInstance().ActionPerformed(temp, 5);
 		}
 		else {
@@ -67,6 +69,7 @@ public class CanSellShop : Facility {
 			InteractionDone();
 			List<AttributeToken> temp = new List<AttributeToken>();
 			temp.Add(new AttributeToken(HeroAttributes.MONEY, Balancer.GetInstance().GetCanPrice(40)));
+			SoundManager.GetInstance().PlaySound(SoundTypes.SELL);
 			SlumWorld.GetInstance().ActionPerformed(temp, 7);
 		}
 		else {
@@ -78,6 +81,7 @@ public class CanSellShop : Facility {
 		InteractionDone();
 		List<AttributeToken> tokens = new List<AttributeToken>();
 		tokens.Add(new AttributeToken(HeroAttributes.MONEY, Balancer.GetInstance().GetJobEarning(60)));
-		SlumWorld.GetInstance().ActionPerformed(tokens, 60);
+		SlumWorld.GetInstance().JobDone(tokens, 60, SoundTypes.WORK_CAN);
+		SoundManager.GetInstance().PlaySound(SoundTypes.WORK_CAN);
 	}
 }

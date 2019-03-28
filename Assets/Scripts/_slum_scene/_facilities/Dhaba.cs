@@ -49,6 +49,7 @@ public class Dhaba : Facility {
 			tokens.Add(new AttributeToken(HeroAttributes.FOOD, Balancer.GetInstance().GetFoodWithMoney(30)));
 			tokens.Add(new AttributeToken(HeroAttributes.MONEY, -30));
 			SlumWorld.GetInstance().ActionPerformed(tokens, 15);
+			SoundManager.GetInstance().PlaySound(SoundTypes.EAT_MEAL);
 		}
 		else {
 			// play fail sound
@@ -63,6 +64,7 @@ public class Dhaba : Facility {
 			tokens.Add(new AttributeToken(HeroAttributes.FOOD, Balancer.GetInstance().GetFoodWithMoney(35)));
 			tokens.Add(new AttributeToken(HeroAttributes.MONEY, -35));
 			SlumWorld.GetInstance().ActionPerformed(tokens, 15);
+			SoundManager.GetInstance().PlaySound(SoundTypes.EAT_MEAL);
 		}
 		else {
 			// play fail sound
@@ -77,6 +79,7 @@ public class Dhaba : Facility {
 			tokens.Add(new AttributeToken(HeroAttributes.FOOD, 100));
 			tokens.Add(new AttributeToken(HeroAttributes.MONEY, -60));
 			SlumWorld.GetInstance().ActionPerformed(tokens, 20);
+			SoundManager.GetInstance().PlaySound(SoundTypes.EAT_MEAL);
 		}
 		else {
 			// play fail sound
@@ -87,6 +90,7 @@ public class Dhaba : Facility {
 		InteractionDone();
 		List<AttributeToken> tokens = new List<AttributeToken>();
 		tokens.Add(new AttributeToken(HeroAttributes.MONEY, Balancer.GetInstance().GetJobEarning(60)));
-		SlumWorld.GetInstance().ActionPerformed(tokens, 60);
+		SlumWorld.GetInstance().JobDone(tokens, 60, SoundTypes.WORK_FOOD);
+		SoundManager.GetInstance().PlaySound(SoundTypes.WORK_FOOD);
 	}
 }

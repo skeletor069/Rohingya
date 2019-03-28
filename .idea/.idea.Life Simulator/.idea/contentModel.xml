@@ -251,6 +251,7 @@
             <e p="NewGameWarning.cs" t="Include" />
             <e p="TabbedMenu.cs" t="Include" />
           </e>
+          <e p="CheatCodeController.cs" t="Include" />
           <e p="CityMapController.cs" t="Include" />
           <e p="DataManager.cs" t="Include" />
           <e p="DidYouKnow.cs" t="Include" />

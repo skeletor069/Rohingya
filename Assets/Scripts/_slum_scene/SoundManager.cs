@@ -4,7 +4,8 @@ using UnityEngine;
 using UnityEngine.Audio;
 
 public enum SoundTypes {
-	EAT_JUICY, EAT_CRUNCHY, DRINK, SLEEP, EAT_MEAL, SEARCH, SELL, WORK_FOOD, WORK_WORKSHOP
+	EAT_JUICY, EAT_CRUNCHY, DRINK, SLEEP, EAT_MEAL, SEARCH, SELL, WORK_FOOD, WORK_WORKSHOP, DOOR_OPEN, DOOR_CLOSE, BUTTON_SELECT,
+	MENU_BTN_SELECT, MENU_BG, DAY_BG, NIGHT_BG, MORNING_BG, WORK_BOTTLE, WORK_CAN, WORK_PAPER, BREATH, HUNGRY, HEART_BEAT, PICK_UP
 }
 
 public class SoundManager : MonoBehaviour {
@@ -12,12 +13,32 @@ public class SoundManager : MonoBehaviour {
 	public AudioSource dayChannel;
 	public AudioSource nightChannel;
 	public AudioSource morningChannel;
+	public AudioSource eatMeal;
 	public AudioSource eatBanana;
 	public AudioSource eatBiscuit;
 	public AudioSource drinkCoffee;
 	public AudioSource sleeping;
 	public AudioSource stepL;
 	public AudioSource stepR;
+	public AudioSource doorOpen;
+	public AudioSource doorClose;
+	public AudioSource buttonSelect;
+	public AudioSource menuButtonSelect;
+	public AudioSource menuBG;
+	public AudioSource dayBG;
+	public AudioSource nightBG;
+	public AudioSource morningBG;
+	public AudioSource workBottle;
+	public AudioSource workCan;
+	public AudioSource workPaper;
+	public AudioSource workFood;
+	public AudioSource breath;
+	public AudioSource hungry;
+	public AudioSource heartBeat;
+	public AudioSource pickUp;
+	public AudioSource search;
+	public AudioSource sell;
+	
 	
 	private AudioMixer mixer;
 	public AudioMixerSnapshot backgroundActiveSnapshot;
@@ -35,12 +56,32 @@ public class SoundManager : MonoBehaviour {
 		audioSources.Add(SoundTypes.EAT_CRUNCHY, eatBiscuit);
 		audioSources.Add(SoundTypes.DRINK, drinkCoffee);
 		audioSources.Add(SoundTypes.SLEEP, sleeping);
-		audioSources.Add(SoundTypes.EAT_MEAL, eatBanana);
-		audioSources.Add(SoundTypes.SEARCH, eatBanana);
-		audioSources.Add(SoundTypes.SELL, eatBanana);
-		audioSources.Add(SoundTypes.WORK_FOOD, eatBanana);
-		audioSources.Add(SoundTypes.WORK_WORKSHOP, eatBanana);
+		audioSources.Add(SoundTypes.EAT_MEAL, eatMeal);
+		audioSources.Add(SoundTypes.SEARCH, search);
+		audioSources.Add(SoundTypes.SELL, sell);
 		
+		audioSources.Add(SoundTypes.DOOR_OPEN, doorOpen);
+		audioSources.Add(SoundTypes.DOOR_CLOSE, doorClose);
+		audioSources.Add(SoundTypes.BUTTON_SELECT, buttonSelect);
+		audioSources.Add(SoundTypes.MENU_BTN_SELECT, menuButtonSelect);
+		audioSources.Add(SoundTypes.MENU_BG, menuBG);
+		audioSources.Add(SoundTypes.DAY_BG, dayBG);
+		audioSources.Add(SoundTypes.NIGHT_BG, nightBG);
+		audioSources.Add(SoundTypes.MORNING_BG, morningBG);
+		audioSources.Add(SoundTypes.WORK_BOTTLE, workBottle);
+		audioSources.Add(SoundTypes.WORK_CAN, workCan);
+		audioSources.Add(SoundTypes.WORK_PAPER, workPaper);
+		audioSources.Add(SoundTypes.WORK_FOOD, workFood);
+		audioSources.Add(SoundTypes.BREATH, breath);
+		audioSources.Add(SoundTypes.HUNGRY, hungry);
+		audioSources.Add(SoundTypes.HEART_BEAT, heartBeat);
+		audioSources.Add(SoundTypes.PICK_UP, pickUp);
+		
+	}
+
+	private void Start() {
+		//backgroundActiveSnapshot.TransitionTo(2);
+		DontDestroyOnLoad(gameObject);
 	}
 
 	public static SoundManager GetInstance() {
@@ -62,6 +103,17 @@ public class SoundManager : MonoBehaviour {
 	public void PlaySound(SoundTypes soundType) {
 		if(audioSources.ContainsKey(soundType))
 			audioSources[soundType].Play();
+	}
+
+	public void StopSound(SoundTypes soundType) {
+		if(audioSources.ContainsKey(soundType))
+			audioSources[soundType].Stop();
+	}
+
+	public bool IsPlaying(SoundTypes soundType) {
+		if(audioSources.ContainsKey(soundType))
+			return audioSources[soundType].isPlaying;
+		return false;
 	}
 
 	public void PlayFootStep(bool leftFoot) {
