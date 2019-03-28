@@ -58,7 +58,7 @@ public class FacilityDescriptionPanel : MonoBehaviour {
 			statusText.enabled = true;
 
 			if (facility.FacilityActive) {
-				SoundManager.GetInstance().PlaySound(SoundTypes.DOOR_OPEN);
+				SoundManager.GetInstance().PlaySound(SoundTypes.BTN_SELECT);
 				statusText.text = "Open";
 				int hour = (facility.closingMinute / 60);
 				int minute = facility.closingMinute % 60;

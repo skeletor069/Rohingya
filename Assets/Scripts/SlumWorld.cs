@@ -35,6 +35,7 @@ public class SlumWorld : MonoBehaviour {
 	public GameObject gameOverPanel;
 	
 	
+	
 	void Awake () {
 		instance = this;
 		facilities = facilityHolder.GetComponentsInChildren<Facility>();
@@ -61,6 +62,9 @@ public class SlumWorld : MonoBehaviour {
 			player.SetMovementActive(true);
 			player.ActivateAgent();
 			cameraController.Initiate();
+			simulationPanel.DissolveOverlay();
+			soundManager.SwitchToNormalMode();
+			
 //			yield return new WaitForSeconds(2f);
 //			player.transform.position.Set(3,0,0);
 //			Debug.LogError("done");
@@ -71,7 +75,7 @@ public class SlumWorld : MonoBehaviour {
 		soundManager.PlaySound(SoundTypes.NIGHT_BG);
 		soundManager.PlaySound(SoundTypes.MORNING_BG);
 		soundManager.StopSound(SoundTypes.MENU_BG);
-		soundManager.SwitchToNormalMode();
+		
 	}
 
 	void ResetSceneWithCurrentWorldData() {
@@ -202,6 +206,7 @@ public class SlumWorld : MonoBehaviour {
 		simulationPanel.StartOverlay();
 		Debug.LogError("Game Over");
 		soundManager.SwitchToEndingMode();
+		soundManager.PlaySound(SoundTypes.ENDING_MUSIC);
 		yield return new WaitForSeconds(2);
 		soundManager.PlaySound(SoundTypes.ENDING_MUSIC);
 		yield return new WaitForSeconds(1);

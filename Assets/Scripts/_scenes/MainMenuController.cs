@@ -11,14 +11,13 @@ public class MainMenuController : MonoBehaviour, ITabMenuListener {
 	public SimulationPanel overlayPanel;
 	public AudioMixerSnapshot sceneEndSnapshot;
 	
-	// Use this for initialization
 	IEnumerator Start () {
 		mainMenu.Initiate(this, 0);
 		mainMenu.InteractionActive = true;
 		yield return new WaitForSeconds(1);
 		if(!SoundManager.GetInstance().IsPlaying(SoundTypes.MENU_BG))
 			SoundManager.GetInstance().PlaySound(SoundTypes.MENU_BG);
-		Debug.Log("hi");
+		overlayPanel.DissolveOverlay();
 	}
 
 	public void ChangedMenu(int index) {
@@ -28,7 +27,7 @@ public class MainMenuController : MonoBehaviour, ITabMenuListener {
 	public void SelectedMenu(int index) {
 		switch (index) {
 			case 0:
-				NewGame();
+				StartCoroutine(NewGame());
 				break;
 			case 1:
 				StartCoroutine(LoadGame());
@@ -45,13 +44,25 @@ public class MainMenuController : MonoBehaviour, ITabMenuListener {
 	}
 	
 
-	void NewGame() {
+	IEnumerator NewGame() {
 		if (GameController.GetInstance().HasSavedData()) {
-			// show ui
 			mainPanel.SetActive(false);
 			newGameWarning.ShowNewGameWarning();
-		}else
+		}
+		else {
+			overlayPanel.StartOverlay();
+			sceneEndSnapshot.TransitionTo(4);
+			yield return new WaitForSeconds(2);
 			GameController.GetInstance().NewGame();
+		}
+			
+	}
+
+	public IEnumerator NewGameAfterWarning() {
+		overlayPanel.StartOverlay();
+		sceneEndSnapshot.TransitionTo(4);
+		yield return new WaitForSeconds(2);
+		GameController.GetInstance().NewGame();
 	}
 
 	IEnumerator LoadGame() {

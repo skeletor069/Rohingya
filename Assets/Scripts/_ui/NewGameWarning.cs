@@ -34,7 +34,7 @@ public class NewGameWarning : MonoBehaviour, ITabMenuListener {
 				gameObject.SetActive(false);
 				break;
 			case 1:
-				GameController.GetInstance().NewGame();
+				StartCoroutine(mainMenuController.NewGameAfterWarning());
 				break;
 		}
 		SoundManager.GetInstance().PlaySound(SoundTypes.BTN_SELECT);
