@@ -5,8 +5,8 @@ using UnityEngine;
 
 public class TrashCan : Facility {
 	public override void InitiateData() {
-		facilityName = "Trash Can";
-		facilityDescription = "People throw waste here. However it is a good place to find some bottles, cans or even food.";
+		facilityName = "Trash Yard";
+		facilityDescription = "People throw waste here. However it is a good place to find some bottles, cans and papers.";
 //		optionNames[0] = "Search for 10 mins";
 //		optionNames[1] = "Search for 20 mins";
 //		optionNames[2] = "Search for 30 mins";
