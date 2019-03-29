@@ -36,10 +36,12 @@ public class SpeechPartner : Pedestrian {
 			narrator.Hide();
 		else {
 			// enable btn hint
+			NotificationController.GetInstance().ShowText("Press Enter");
 			waitForSkippingNarration = true;
 			while (waitForSkippingNarration)
 				yield return endOfFrame;
 			narrator.Hide();
+			NotificationController.GetInstance().HideText();
 		}
 
 		yield return waitOne;

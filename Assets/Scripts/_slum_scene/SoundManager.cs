@@ -5,7 +5,7 @@ using UnityEngine.Audio;
 public enum SoundTypes {
 	EAT_JUICY, EAT_CRUNCHY, DRINK, SLEEP, EAT_MEAL, SEARCH, SELL, WORK_FOOD, WORK_WORKSHOP, DOOR_OPEN, DOOR_CLOSE, BUTTON_SELECT,
 	MENU_BTN_SELECT, MENU_BG, DAY_BG, NIGHT_BG, MORNING_BG, WORK_BOTTLE, WORK_CAN, WORK_PAPER, BREATH, 
-	HUNGRY, HEART_BEAT, PICK_UP, ENDING_MUSIC, BTN_CHOOSE, BTN_SELECT
+	HUNGRY, HEART_BEAT, PICK_UP, ENDING_MUSIC, BTN_CHOOSE, BTN_SELECT, FOOT_LEFT, FOOT_RIGHT
 }
 
 public class SoundManager : MonoBehaviour {
@@ -84,11 +84,13 @@ public class SoundManager : MonoBehaviour {
 		audioSources.Add(SoundTypes.PICK_UP, pickUp);
 		audioSources.Add(SoundTypes.BTN_CHOOSE, btnChoose);
 		audioSources.Add(SoundTypes.BTN_SELECT, btnSelect);
+		audioSources.Add(SoundTypes.FOOT_LEFT, stepL);
+		audioSources.Add(SoundTypes.FOOT_RIGHT, stepR);
 		
 	}
 
 	private void Start() {
-		//backgroundActiveSnapshot.TransitionTo(2);
+//		backgroundActiveSnapshot.TransitionTo(2);
 		DontDestroyOnLoad(gameObject);
 	}
 

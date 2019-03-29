@@ -140,7 +140,8 @@ public class FacilityDescriptionPanel : MonoBehaviour {
 							if (!jobLocked) {
 								currentBtn = jobBtn;
 								facility.DoJob();
-							}
+							}else
+								NotificationController.GetInstance().ShowToolTip("No Vacancy");
 								
 						}
 						else {

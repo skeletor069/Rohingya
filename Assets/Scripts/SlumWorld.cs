@@ -64,7 +64,7 @@ public class SlumWorld : MonoBehaviour {
 			cameraController.Initiate();
 			simulationPanel.DissolveOverlay();
 			soundManager.SwitchToNormalMode();
-			
+			StartCoroutine(tutorialController.speechPartner.FindALocationAndGoThere());
 //			yield return new WaitForSeconds(2f);
 //			player.transform.position.Set(3,0,0);
 //			Debug.LogError("done");

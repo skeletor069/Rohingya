@@ -105,13 +105,16 @@ public class TutorialController : MonoBehaviour {
 		GameController.GetInstance().World.SetMinutesGone(600);
 		homeFacility.gameObject.SetActive(false);
 		hero.SetMovementActive(false);
-		yield return StartCoroutine(speechPartner.SpeakRoutine("Did you have a good sleep, kiddo?", true));
-		yield return StartCoroutine(hero.SpeakRoutine("Yes, thanks.", false));
+//		hero.transform.forward = (speechPartner.transform.position - hero.transform.position).normalized;
+		hero.transform.LookAt(speechPartner.transform);
+		speechPartner.transform.LookAt(hero.transform);
+		yield return StartCoroutine(speechPartner.SpeakRoutine("Did you have a good sleep, kiddo?", false));
+		yield return StartCoroutine(hero.SpeakRoutine("Yes, thanks.", true));
 		HUD.GetInstance().foodBar.Show();
 		SoundManager.GetInstance().PlaySound(SoundTypes.HUNGRY);
 		foodSnapshot.TransitionTo(1);
-		yield return StartCoroutine(hero.SpeakRoutine("But I am so hungry now.", false));
-		yield return StartCoroutine(speechPartner.SpeakRoutine("You should be. Eat these food for the time being.", true));
+		yield return StartCoroutine(hero.SpeakRoutine("But I am so hungry now.", true));
+		yield return StartCoroutine(speechPartner.SpeakRoutine("You should be. Eat these food for the time being.", false));
 		List<AttributeToken> tokens = new List<AttributeToken>();
 		tokens.Add(new AttributeToken(HeroAttributes.FOOD, 100));
 		SlumWorld.GetInstance().ActionPerformed(tokens, 10);
@@ -132,7 +135,7 @@ public class TutorialController : MonoBehaviour {
 		SoundManager.GetInstance().PlaySound(SoundTypes.BREATH);
 		HUD.GetInstance().energyBar.Show();
 		energySnapshot.TransitionTo(1);
-		yield return StartCoroutine(hero.SpeakRoutine("I feel very tired now", false));
+		yield return StartCoroutine(hero.SpeakRoutine("I feel very tired now", true));
 		yield return StartCoroutine(speechPartner.SpeakRoutine("I can understand. Follow me. Lets find a place for you to sleep", false));
 		hero.SetMovementActive(true);
 		Vector3 targetPosition = homeFacility.transform.position + homeFacility.transform.forward * -2;
@@ -159,8 +162,8 @@ public class TutorialController : MonoBehaviour {
 	}
 
 	IEnumerator InitialTexts() {
-		yield return StartCoroutine(hero.SpeakRoutine("Mom!!...Dad!!!......", false));
-		yield return StartCoroutine(hero.SpeakRoutine("mmmm mmmm (crying)...", false));
+		yield return StartCoroutine(hero.SpeakRoutine("Help! Is somebody around?", false));
+		yield return StartCoroutine(hero.SpeakRoutine("I feel dizzy...", false));
 	}
 
 	void CallPedestrianNearby() {
@@ -172,11 +175,11 @@ public class TutorialController : MonoBehaviour {
 	
 	IEnumerator ConversationWithPedestrian2() {
 		yield return 0;
-		yield return StartCoroutine(speechPartner.SpeakRoutine("Why are you crying kid?", false));
-		yield return StartCoroutine(hero.SpeakRoutine("I have lost my parents while the journey....mmmmmm....mmmmm...", false));
-		yield return StartCoroutine(speechPartner.SpeakRoutine("BE STRONG FOOL!!!", true));
-		yield return StartCoroutine(speechPartner.SpeakRoutine("There are hundreds of kids in this area just like you", true));
-		yield return StartCoroutine(speechPartner.SpeakRoutine("You better keep on surviving.", false));
+		yield return StartCoroutine(speechPartner.SpeakRoutine("You ok kid?", false));
+		yield return StartCoroutine(hero.SpeakRoutine("I am looking for the Rohingya Camp", true));
+		yield return StartCoroutine(speechPartner.SpeakRoutine("You came to the right place.", true));
+		yield return StartCoroutine(speechPartner.SpeakRoutine("You can live here. But life is very hard here", false));
+//		yield return StartCoroutine(speechPartner.SpeakRoutine("You better keep on surviving.", false));
 	}
 
 	

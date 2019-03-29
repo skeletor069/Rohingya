@@ -5,7 +5,7 @@ using UnityEngine.UI;
 public class JobBtn : MonoBehaviour, FacilityDescriptionBtn {
 	private Image highlight;
 	public Slider relationSlider;
-	public TextMeshProUGUI alertText;
+//	public TextMeshProUGUI alertText;
 	public Image progressImage;
 	
 	void Awake () {
@@ -31,10 +31,10 @@ public class JobBtn : MonoBehaviour, FacilityDescriptionBtn {
 
 	public void SetRelationData(int relation) {
 		relationSlider.value = relation;
-		if (relation != relationSlider.maxValue)
-			alertText.enabled = true;
-		else
-			alertText.enabled = false;
+//		if (relation != relationSlider.maxValue)
+//			alertText.enabled = true;
+//		else
+//			alertText.enabled = false;
 	}
 
 	public void SetVisible(bool active) {

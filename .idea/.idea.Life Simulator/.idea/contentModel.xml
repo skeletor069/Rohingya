@@ -230,6 +230,7 @@
               </e>
               <e p="InventoryUI.cs" t="Include" />
               <e p="NewBehaviourScript.cs" t="Include" />
+              <e p="NotificationController.cs" t="Include" />
               <e p="PauseMenu.cs" t="Include" />
               <e p="SimulationPanel.cs" t="Include" />
               <e p="SlotUI.cs" t="Include" />
@@ -260,6 +261,7 @@
           <e p="GameController.cs" t="Include" />
           <e p="Hero3d.cs" t="Include" />
           <e p="HUD.cs" t="Include" />
+          <e p="Mastering.cs" t="Include" />
           <e p="Narrator.cs" t="Include" />
           <e p="SlumWorld.cs" t="Include" />
           <e p="TimeSimulate.cs" t="Include" />

@@ -105,6 +105,11 @@ public abstract class Facility : MonoBehaviour {
 		lastInteractionDay = GameController.GetInstance().World.GetDaysGone();
 	}
 
+	protected void JobDone() {
+		interactionCount++;
+		lastInteractionDay = GameController.GetInstance().World.GetDaysGone();
+	}
+
 	public int GetRelationStatus() {
 		int diff = GameController.GetInstance().World.GetDaysGone() - lastInteractionDay;
 		if (diff > 1)

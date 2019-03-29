@@ -58,6 +58,7 @@ public class TeaStall : Facility {
 		}
 		else {
 			// play fail sound
+			NotificationController.GetInstance().ShowToolTip("Not enough money");
 		}
 	}
 
@@ -72,6 +73,7 @@ public class TeaStall : Facility {
 		}
 		else {
 			// play fail sound
+			NotificationController.GetInstance().ShowToolTip("Not enough money");
 		}
 	}
 
@@ -86,11 +88,12 @@ public class TeaStall : Facility {
 		}
 		else {
 			// play fail sound
+			NotificationController.GetInstance().ShowToolTip("Not enough money");
 		}
 	}
 
 	public override void DoJob() {
-		InteractionDone();
+		JobDone();
 		List<AttributeToken> tokens = new List<AttributeToken>();
 		tokens.Add(new AttributeToken(HeroAttributes.MONEY, Balancer.GetInstance().GetJobEarning(60)));
 		SlumWorld.GetInstance().JobDone(tokens, 60, SoundTypes.WORK_FOOD);

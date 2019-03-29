@@ -42,7 +42,7 @@ public class Balancer : MonoBehaviour{
 
 	public int GetFoodWithMoney(float money) {
 		float foodValue = money / moneyPerFood;
-		return (int)Mathf.Ceil(foodValue);
+		return Mathf.Min((int)Mathf.Ceil(foodValue), 100);
 	}
 	
 	
