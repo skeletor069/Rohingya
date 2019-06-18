@@ -11,6 +11,7 @@ public enum HeroAttributes {
 	HEALTH, ENERGY, FOOD, MONEY
 }
 
+[System.Serializable]
 public class AttributeToken {
 	public HeroAttributes attribute;
 	public float amount;
@@ -21,11 +22,15 @@ public class AttributeToken {
 	}
 }
 
-public class Hero
-{
-//	private float health = 100;
-//	private float energy = 100;
-//	private float food = 100;
+[System.Serializable]
+public struct HeroConfig {
+	public float foodPerMinute;
+	public float energyPerMinute;
+}
+
+[System.Serializable]
+public class Hero {
+	private HeroConfig heroConfig;
 	private HeroSkills heroSkill = HeroSkills.ENTRY_LEVEL;
 	private float hungerPerTick = 100f / 360;
 	private float healthReducePerTick = 100f / 3000;
@@ -41,9 +46,9 @@ public class Hero
 		heroSkillsName.Add(HeroSkills.PROFESSIONAL, "Professional");
 		
 		heroAttributes = new Dictionary<HeroAttributes, float>();
-		heroAttributes.Add(HeroAttributes.HEALTH, 100);
-		heroAttributes.Add(HeroAttributes.ENERGY, 100);
-		heroAttributes.Add(HeroAttributes.FOOD, 100);
+		heroAttributes.Add(HeroAttributes.HEALTH, 10);
+		heroAttributes.Add(HeroAttributes.ENERGY, 0);
+		heroAttributes.Add(HeroAttributes.FOOD, 0);
 		heroAttributes.Add(HeroAttributes.MONEY, 0);
 	}
 
@@ -71,6 +76,14 @@ public class Hero
 		set { heroAttributes[HeroAttributes.MONEY] = value; }
 	}
 
+	public void SetHeroConfig(HeroConfig heroConfig) {
+		this.heroConfig = heroConfig;
+	}
+
+	public HeroConfig GetHeroConfig() {
+		return heroConfig;
+	}
+
 	public HeroSkills HeroSkill
 	{
 		get { return heroSkill; }
@@ -82,17 +95,28 @@ public class Hero
 		return heroSkillsName[heroSkill];
 	}
 
-	public void Update(float deltaTime)
+	public bool IsDead() {
+		return heroAttributes[HeroAttributes.HEALTH] <= 0;
+	}
+
+	public void Update(float deltaTime, bool reduceHealth = true)
 	{
-		heroAttributes[HeroAttributes.FOOD] -= hungerPerTick * deltaTime;
+		heroAttributes[HeroAttributes.FOOD] -= heroConfig.foodPerMinute * deltaTime;
+		heroAttributes[HeroAttributes.ENERGY] -= heroConfig.energyPerMinute * deltaTime;
+
+		heroAttributes[HeroAttributes.FOOD] = Mathf.Min(heroAttributes[HeroAttributes.FOOD], 100);
+		heroAttributes[HeroAttributes.ENERGY] = Mathf.Min(heroAttributes[HeroAttributes.ENERGY], 100);
+		
 		if (heroAttributes[HeroAttributes.FOOD] < 0)
 		{
-			ReduceHealth(-heroAttributes[HeroAttributes.FOOD] / hungerPerTick);
+			if(reduceHealth)
+				ReduceHealth(-heroAttributes[HeroAttributes.FOOD]/(heroConfig.foodPerMinute * 2));
 			heroAttributes[HeroAttributes.FOOD] = 0;
 		}
 
 		if (heroAttributes[HeroAttributes.ENERGY] <= 0) {
-			ReduceHealth(-heroAttributes[HeroAttributes.ENERGY] / hungerPerTick);
+			if(reduceHealth)
+				ReduceHealth(-heroAttributes[HeroAttributes.ENERGY]/(heroConfig.energyPerMinute * 2));
 			heroAttributes[HeroAttributes.ENERGY] = 0;
 		}
 	}

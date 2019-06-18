@@ -5,11 +5,15 @@ using UnityEngine.AI;
 
 public class PickupItemController : MonoBehaviour {
 	private float paperProbability = 40f;
-	private float foodProbability = 70f;
-	private float canProbability = 85f;
+	//private float foodProbability = 70f;
+	private float canProbability = 80f;
 
 	private List<PickupItem> itemPool;
 	private List<PickupItem> activeItems;
+
+	public Sprite bottleSprite, canSprite, paperSprite;
+	public PickupEffect pickupEffect;
+	public List<Transform> centers;
 
 	void Awake() {
 		activeItems = new List<PickupItem>();
@@ -22,26 +26,35 @@ public class PickupItemController : MonoBehaviour {
 		StartCoroutine(GenerationRoutine());
 	}
 
-	public Item ProcessPickupGetItem(PickupItem pickItem) {
+	public Item ProcessPickupGetItem(PickupItem pickItem, Vector3 position) {
 		if (activeItems.Contains(pickItem)) {
 			activeItems.Remove(pickItem);
 			itemPool.Add(pickItem);
 			pickItem.gameObject.SetActive(false);
 			// particle
 		}
-
+		Item item = new Item(ItemType.BOTTLE, 1);
+		Sprite sprite = bottleSprite;
 		float rand = Random.Range(0, 100f);
-		if(rand < paperProbability)
-			return new Item(ItemType.PAPER, 1);
-		else if(rand < foodProbability)
-			return new Item(ItemType.LEFTOVER, 1);
-		else if(rand < canProbability)
-			return new Item(ItemType.CANS, 1);
-		else 
-			return new Item(ItemType.BOTTLE, 1);
+		if (rand < paperProbability) {
+			item =  new Item(ItemType.PAPER, 1);
+			sprite = paperSprite;
+		}
+		else if (rand < canProbability) {
+			item = new Item(ItemType.CANS, 1);
+			sprite = canSprite;
+		}
+
+		pickupEffect.ShowEffect(position, sprite);
+		return item;
+
+
+
+
 	}
 
 	public void GeneratePickupItem(Vector3 position) {
+		position = centers[Random.Range(0, centers.Count)].position;
 		float maxWalkDistance = 20f;
 		Vector3 direction = Random.insideUnitSphere * maxWalkDistance;
 		direction += position;
@@ -72,7 +85,7 @@ public class PickupItemController : MonoBehaviour {
 
 		while (true) {
 			yield return delay;
-			GeneratePickupItem(Vector3.zero);
+			GeneratePickupItem(SlumWorld.GetInstance().player.transform.position);
 		}
 	}
 }

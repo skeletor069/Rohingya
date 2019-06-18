@@ -1,8 +1,25 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
+public class SerializableVector {
+	public float x,y,z;
+
+	public SerializableVector(float x, float y, float z) {
+		this.x = x;
+		this.y = y;
+		this.z = z;
+	}
+
+	public SerializableVector() {
+		x = y = z = 0;
+	}
+}
+
+[System.Serializable]
 public class World
 {
+	
 	private int daysGone = 0;
 	private float minutesGone = 0;
 
@@ -10,16 +27,18 @@ public class World
 
 	private Hero hero;
 	private Inventory inventory;
-	List<ITickerSubscriber> sceneTickerSubscribers;
+//	List<ITickerSubscriber> sceneTickerSubscribers;
 	private DataHUD dataHud;
+	private SerializableVector heroPositionAtSave;
 	
 	
 	public World () {
 		hero = new Hero();
 		inventory = new Inventory();
-		sceneTickerSubscribers = new List<ITickerSubscriber>();
+//		sceneTickerSubscribers = new List<ITickerSubscriber>();
 		dataHud = new DataHUD();
 		minutesGone = 0;
+		heroPositionAtSave = new SerializableVector();
 	}
 
 	public Inventory Inventory {
@@ -27,10 +46,23 @@ public class World
 		set { inventory = value; }
 	}
 
-	public void Update (float deltaTime)
+	public Hero Hero {
+		get { return hero; }
+	}
+
+	public void SetHeroPositionAtSave(float x, float y, float z) {
+		Debug.LogError(x + " " + y + " " + z);
+		heroPositionAtSave = new SerializableVector(x,y,z);
+	}
+
+	public SerializableVector GetHeroPositionAtSave() {
+		return heroPositionAtSave;
+	}
+
+	public void Update (float deltaTime, bool reduceHealth = true)
 	{
 		UpdateClock(deltaTime);
-		hero.Update(deltaTime);
+		hero.Update(deltaTime, reduceHealth);
 	}
 
 	public string GetDaysText()
@@ -49,11 +81,20 @@ public class World
 		int tempMinutesGone = (int)minutesGone;
 		int hour = tempMinutesGone / 60;
 		int minute = tempMinutesGone % 60;
-		return ((hour%12 < 10)?"0":"")+(hour%12) + ":" +((minute < 10)?"0":"")+ minute + " " + ((hour < 12) ? "am" : "pm");
+//		return ((hour%12 < 10)?"0":"")+(hour%12) + ":" +((minute < 10)?"0":"")+ minute + " " + ((hour < 12) ? "am" : "pm");
+		return ((hour < 10)?"0":"")+hour + ":" +((minute < 10)?"0":"")+ minute;
+	}
+
+	public float GetMinutesGone() {
+		return minutesGone;
 	}
 
 	public float GetHour() {
 		return minutesGone / 60;
+	}
+
+	public int GetDaysGone() {
+		return daysGone;
 	}
 
 	public void SetMinutesGone(float minutesGone) {
@@ -88,8 +129,7 @@ public class World
 		return dataHud;
 	}
 
-	public void ActionPerformed(List<AttributeToken> tokens, float minutes) {
-		Update(minutes);
+	public void UpdateHeroAttribute(List<AttributeToken> tokens) {
 		hero.UpdateAttributes(tokens);
 	}
 }

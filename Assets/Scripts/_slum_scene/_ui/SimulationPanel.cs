@@ -16,21 +16,31 @@ public class SimulationPanel : MonoBehaviour {
 		animator = GetComponent<Animator>();
 		displayText = transform.GetChild(0).GetComponent<TextMeshProUGUI>();
 		animationDelay = new WaitForSeconds(.5f);
-		dotDelay = new WaitForSeconds(.5f);
+		dotDelay = new WaitForSeconds(2f);
 	}
 
 	public IEnumerator ShowSimulationDisplay(string text) {
 		displayText.text = "";
 		animator.SetTrigger(animShow);
 		yield return animationDelay;
-		displayText.text = text;
-		for (int i = 0; i < 3; i++) {
-			yield return dotDelay;
-			displayText.text += " .";
-		}
+//		displayText.text = text;
+//		for (int i = 0; i < 3; i++) {
+//			yield return dotDelay;
+//			displayText.text += " .";
+//		}
+		yield return dotDelay;
+		
 		animator.SetTrigger(animHide);
 		yield return animationDelay;
 		// callback
+	}
+
+	public void StartOverlay() {
+		animator.SetTrigger(animShow);
+	}
+
+	public void DissolveOverlay() {
+		animator.SetTrigger(animHide);
 	}
 
 

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
 public class Inventory {
 
 	
@@ -20,7 +21,7 @@ public class Inventory {
 		for(int i = 0 ; i < 9; i++)
 			itemSlots[i] = new ItemSlot();
 		
-		PopulateSlots();
+		//PopulateSlots();
 	}
 
 	public int GetItemCount(ItemType type) {

@@ -5,7 +5,9 @@ using UnityEngine;
 public abstract class Facility : MonoBehaviour {
 	protected string facilityName;
 	protected string facilityDescription;
-	protected string[] optionNames = new string[3];
+//	protected string[] optionNames = new string[3];
+	public int openningMinute = 0;
+	public int closingMinute = 0;
 
 	private bool facilityActive;
 	private bool jobActive;
@@ -13,11 +15,15 @@ public abstract class Facility : MonoBehaviour {
 
 	private BoxCollider collider;
 
-	private GameObject facilityIcon;
+	private int interactionCount = 0;
+	private int lastInteractionDay = 0;
+
+	//private GameObject facilityIcon;
+	protected FacilityBtnData[] btnDatas = new FacilityBtnData[3];
 	// Use this for initialization
 	void Start () {
 		collider = GetComponent<BoxCollider>();
-		facilityIcon = transform.GetChild(0).gameObject;
+		//facilityIcon = transform.GetChild(0).gameObject;
 		InitiateData();
 	}
 
@@ -35,13 +41,18 @@ public abstract class Facility : MonoBehaviour {
 		get { return facilityActive; }
 		set {
 			facilityActive = value;
-			facilityIcon.SetActive(value);
+			//facilityIcon.SetActive(value);
 		}
 	}
 
+	public void CheckFacilityActive(int minutesGone) {
+		facilityActive = (minutesGone >= openningMinute && minutesGone < closingMinute);
+	}
+
 	private void OnTriggerEnter(Collider other) {
-		if (facilityActive && other.tag == "Player") {
-			Debug.Log("enter");
+		//Debug.Log(facilityActive);
+		if (other.tag == "Player") {
+//			Debug.Log("enter");
 			SlumWorld.GetInstance().ShowInteractionIcon(this);
 		}
 	}
@@ -66,8 +77,12 @@ public abstract class Facility : MonoBehaviour {
 		return facilityDescription;
 	}
 
-	public string[] GetOptionNames() {
-		return optionNames;
+//	public string[] GetOptionNames() {
+//		return optionNames;
+//	}
+
+	public FacilityBtnData[] GetActionBtnsData() {
+		return btnDatas;
 	}
 
 	public void ExecuteAction(int index) {
@@ -82,5 +97,28 @@ public abstract class Facility : MonoBehaviour {
 				Action3();
 				break;
 		}
+	}
+
+	protected void InteractionDone() {
+		interactionCount++;
+		interactionCount = Mathf.Min(interactionCount, 15);
+		lastInteractionDay = GameController.GetInstance().World.GetDaysGone();
+	}
+
+	protected void JobDone() {
+		interactionCount++;
+		lastInteractionDay = GameController.GetInstance().World.GetDaysGone();
+	}
+
+	public int GetRelationStatus() {
+		int diff = GameController.GetInstance().World.GetDaysGone() - lastInteractionDay;
+		if (diff > 1)
+			return Mathf.Min(Mathf.Max(0, interactionCount - diff + 1), 15);
+		else
+			return interactionCount;
+	}
+
+	public bool IsRelationMax() {
+		return interactionCount == 15;
 	}
 }

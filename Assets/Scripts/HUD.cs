@@ -4,6 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
+[System.Serializable]
 public struct DataHUD
 {
 	public int health;
@@ -45,7 +46,7 @@ public class HUD : MonoBehaviour {
 		healthBar.SetValue(dataHud.health);
 		energyBar.SetValue(dataHud.energy);
 		foodBar.SetValue(dataHud.food);
-		walletText.text = "$"+dataHud.wallet;
+		walletText.text = ""+dataHud.wallet;
 	}
 
 	public void HideHud() {

@@ -20,6 +20,10 @@ public class Hero3d : MonoBehaviour {
 	private bool waitForSkippingNarration = false;
 	private int animIdle = Animator.StringToHash("idle");
 	private int animWalk = Animator.StringToHash("walk");
+	private int animMove = Animator.StringToHash("move");
+	private int animDie = Animator.StringToHash("die");
+	private int animSearch = Animator.StringToHash("search");
+	
 
 	void Start ()
 	{
@@ -33,6 +37,7 @@ public class Hero3d : MonoBehaviour {
 	}
 	
 	void Update () {
+		
 		if (movementActive && IsMovementKeyPressed()){
 			Move();
 			animator.SetFloat(animWalk,1);
@@ -45,6 +50,14 @@ public class Hero3d : MonoBehaviour {
 			waitForSkippingNarration = false;
 
 		canvas.forward =  canvas.position - Camera.main.transform.position;
+	}
+
+	public void ActivateAgent() {
+		agent.enabled = true;
+	}
+
+	public bool IsMovementActive() {
+		return movementActive;
 	}
 
 	bool IsMovementKeyPressed() {
@@ -82,10 +95,12 @@ public class Hero3d : MonoBehaviour {
 			narrator.Hide();
 		else {
 			// enable btn hint
+			NotificationController.GetInstance().ShowText("Press Enter");
 			waitForSkippingNarration = true;
 			while (waitForSkippingNarration)
 				yield return endOfFrame;
 			narrator.Hide();
+			NotificationController.GetInstance().HideText();
 		}
 
 		yield return waitOne;
@@ -102,4 +117,19 @@ public class Hero3d : MonoBehaviour {
 		agent.SetDestination(transform.position);
 		agent.velocity = Vector3.zero;
 	}
+
+	public void AnimDie() {
+		animator.SetTrigger(animDie);
+		SetMovementActive(false);
+	}
+
+	public void AnimSearch() {
+		animator.SetTrigger(animSearch);
+	}
+
+	public void AnimMove() {
+		animator.SetTrigger(animMove);
+	}
+
+
 }

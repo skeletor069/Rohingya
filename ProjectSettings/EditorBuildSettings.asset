@@ -8,22 +8,28 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/GameFirstScene.unity
     guid: 78dd0ec0922e84c3baa4adc521e86aa7
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/SplashScene.unity
     guid: ec12a0979566449428b523d7915244d0
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/MainMenuScene.unity
     guid: f22e7c86687e6417ca351e723c77af21
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/HomeL1.unity
     guid: 9f837c1e6fe1841a1b3e2d22759cedc4
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/CityMap.unity
     guid: c2d97a9505efc4981b04b8e57588f215
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/SlumScene.unity
     guid: cd0c15d3ed0004b2d814dee334a903d3
   - enabled: 1
     path: Assets/Scenes/SlumScene2.unity
     guid: a6df3ebfa59fb4e1886c295498269803
+  - enabled: 1
+    path: Assets/Scenes/MainMenuSceneUpdated.unity
+    guid: 47e5fb272d3bd4bc0b9abc61c3cbcefb
+  - enabled: 1
+    path: Assets/Scenes/SoundLoad.unity
+    guid: 24f07d6d29c054abc9a48fa2fff83bbf
   m_configObjects: {}

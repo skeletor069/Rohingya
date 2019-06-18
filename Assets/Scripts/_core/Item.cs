@@ -4,7 +4,7 @@ using UnityEngine;
 public enum ItemType {
 	PAPER, BOTTLE, CANS, LEFTOVER
 }
-
+[System.Serializable]
 public class Item {
 	private ItemType typeName;
 	private int count;

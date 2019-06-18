@@ -6,7 +6,7 @@ public class TabbedMenu : MonoBehaviour {
 	
 	private List<Animator> itemAnims;
 	private int selectedIndex;
-	private int ITEM_COUNT = 4;
+	public int ITEM_COUNT = 4;
 	private ITabMenuListener listener;
 	private bool interactionActive = false;
 
@@ -22,7 +22,9 @@ public class TabbedMenu : MonoBehaviour {
 
 	public void Initiate(ITabMenuListener listener, int initialIndex = 0) {
 		this.listener = listener;
-		SetSelectedItemIndex(initialIndex);
+		itemAnims[selectedIndex].SetTrigger(animDeselect);
+		selectedIndex = initialIndex;
+		itemAnims[selectedIndex].SetTrigger(animSelect);
 	}
 
 	public void SetSelectedItemIndex(int index) {
@@ -39,10 +41,10 @@ public class TabbedMenu : MonoBehaviour {
 
 	void Update () {
 		if (Input.anyKey && interactionActive) {
-			if (selectedIndex > 0 && Input.GetKeyDown(KeyCode.LeftArrow)) {
+			if (selectedIndex > 0 && Input.GetKeyDown(KeyCode.UpArrow)) {
 				SetSelectedItemIndex(selectedIndex-1);
 			}
-			else if (selectedIndex < ITEM_COUNT - 1 && Input.GetKeyDown(KeyCode.RightArrow)) {
+			else if (selectedIndex < ITEM_COUNT - 1 && Input.GetKeyDown(KeyCode.DownArrow)) {
 				SetSelectedItemIndex(selectedIndex+1);
 			}
 

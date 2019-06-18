@@ -3,17 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Balancer : MonoBehaviour{
-	public float timeToFinishFood = 360;
-	public float timeToFinishEnergy = 720;
-	public float moneyToRefillFood = 60;
-	public float bottlePrice = .02f;
-	public float paperPrice = .005f;
-	public float canPrice = .03f;
+	float timeToFinishFood = 360;
+	float timeToFinishEnergy = 1080;
+	float moneyToRefillFood = 50;
+	float bottlePrice = 2f;
+	float paperPrice = .2f;
+	float canPrice = 1;
 	
 	float foodReductionPerMinute;
 	float energyReductionPerMinute;
 	float moneyPerFood;
 	float moneyToSurvivePerMinute;
+	private float searchIncomePerMinute = 1 / 3f;
+	private float jobIncomePerMinute = 1;
 
 	private static Balancer instance;
 
@@ -30,20 +32,28 @@ public class Balancer : MonoBehaviour{
 		return instance;
 	}
 
+	public float FoodPerMinute {
+		get { return foodReductionPerMinute; }
+	}
+
+	public float EnergyPerMinute {
+		get { return energyReductionPerMinute; }
+	}
+
 	public int GetFoodWithMoney(float money) {
 		float foodValue = money / moneyPerFood;
-		return (int)Mathf.Ceil(foodValue);
+		return Mathf.Min((int)Mathf.Ceil(foodValue), 100);
 	}
 	
 	
 	public List<Item> GetTrashItems(float searchTime) {
 		List<Item> trashItems = new List<Item>();
-		float moneyGiven = moneyToSurvivePerMinute * searchTime;
+		float moneyGiven = searchIncomePerMinute * searchTime;
 		int rand = Random.Range(0, 100);
-		if (rand < searchTime) {
-			moneyGiven = moneyGiven * 1.2f;
-			trashItems.Add(new Item(ItemType.LEFTOVER, 2));
-		}
+//		if (rand < searchTime) {
+//			moneyGiven = moneyGiven * 1.2f;
+//			trashItems.Add(new Item(ItemType.LEFTOVER, 2));
+//		}
 			
 
 		int papersCount = (int)(moneyGiven * .3f / paperPrice);
@@ -58,11 +68,19 @@ public class Balancer : MonoBehaviour{
 	}
 
 	public float GetBottlePrice(int count) {
-		return bottlePrice * count * (1 + count * .01f);
+		return bottlePrice * count;
 	}
 
 	public float GetPaperPrice(int count) {
-		return paperPrice * count * (1 + count * .01f);
+		return paperPrice * count;
+	}
+
+	public float GetCanPrice(int count) {
+		return canPrice * count;
+	}
+
+	public float GetJobEarning(int minutes) {
+		return minutes * jobIncomePerMinute;
 	}
 
 }
