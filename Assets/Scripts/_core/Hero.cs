@@ -103,6 +103,10 @@ public class Hero {
 	{
 		heroAttributes[HeroAttributes.FOOD] -= heroConfig.foodPerMinute * deltaTime;
 		heroAttributes[HeroAttributes.ENERGY] -= heroConfig.energyPerMinute * deltaTime;
+
+		heroAttributes[HeroAttributes.FOOD] = Mathf.Min(heroAttributes[HeroAttributes.FOOD], 100);
+		heroAttributes[HeroAttributes.ENERGY] = Mathf.Min(heroAttributes[HeroAttributes.ENERGY], 100);
+		
 		if (heroAttributes[HeroAttributes.FOOD] < 0)
 		{
 			if(reduceHealth)

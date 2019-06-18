@@ -372,10 +372,10 @@ public class SlumWorld : MonoBehaviour {
 				break;	
 			}
 		}
-		Debug.LogError("Initial food " + gameController.World.Hero.Food);
+//		Debug.LogError("Initial food " + gameController.World.Hero.Food);
 		if (foodToken.amount > 0) {
 			float targetFood = foodToken.amount / minutes;
-			Debug.Log("Target food " + targetFood + ", total food " + foodToken.amount);
+//			Debug.Log("Target food " + targetFood + ", total food " + foodToken.amount);
 			HeroConfig heroConfig = gameController.World.Hero.GetHeroConfig();
 			heroConfig.foodPerMinute = -targetFood;
 			gameController.World.Hero.SetHeroConfig(heroConfig);
@@ -393,7 +393,7 @@ public class SlumWorld : MonoBehaviour {
 			facilityDescriptionPanel.SetCurrentActionProgress(accum/minutes);
 			yield return new WaitForEndOfFrame();
 		}
-		Debug.LogError("Final food " + gameController.World.Hero.Food);
+//		Debug.LogError("Final food " + gameController.World.Hero.Food);
 		soundManager.SwitchToNormalMode();
 		player.gameObject.SetActive(true);
 		facilityDescriptionPanel.SetCurrentActionProgress(0);
